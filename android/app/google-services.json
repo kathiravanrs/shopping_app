@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "381749259117",
+    "firebase_url": "https://shoppingapplicatio-default-rtdb.firebaseio.com",
+    "project_id": "shoppingapplicatio",
+    "storage_bucket": "shoppingapplicatio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381749259117:android:2ed23ddc69002673abc864",
+        "android_client_info": {
+          "package_name": "com.example.shopping_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381749259117-qllbd2sq5iec467fs0e6ps4eljn0csrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCytoDFhTEW9KbFN32tD5ShaO1qlMn6pA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381749259117-qllbd2sq5iec467fs0e6ps4eljn0csrk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381749259117-qkd8bquqdcnjlv7n1qgl03e492956gim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mdc100Series"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381749259117:android:8d5b0fcef7691bceabc864",
+        "android_client_info": {
+          "package_name": "com.example.shrine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381749259117-qllbd2sq5iec467fs0e6ps4eljn0csrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCytoDFhTEW9KbFN32tD5ShaO1qlMn6pA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381749259117-qllbd2sq5iec467fs0e6ps4eljn0csrk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381749259117-qkd8bquqdcnjlv7n1qgl03e492956gim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mdc100Series"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
