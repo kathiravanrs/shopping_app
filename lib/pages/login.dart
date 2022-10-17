@@ -25,6 +25,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   loginCheck() async {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        if (kDebugMode) {
+          print(user.uid);
+        }
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      }
+    });
+
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (kDebugMode) {
       print(sharedPreferences.getKeys());
@@ -57,7 +66,9 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
         Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
       }).catchError((err) {
-        print(err.message);
+        if (kDebugMode) {
+          print(err.message);
+        }
         showDialog(
             context: context,
             builder: (BuildContext context) {

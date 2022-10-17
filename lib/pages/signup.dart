@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -14,6 +16,44 @@ class _SignupPageState extends State<SignupPage> {
   final phoneController = TextEditingController();
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
+
+  register() async {
+    String email = emailController.text;
+    String password = passController.text;
+    String confirmPass = confirmPassController.text;
+    if (confirmPass.compareTo(password) != 0) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Passwords doesn't match! Check again.")));
+    } else {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("New User Registered!")));
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      }).catchError((err) {
+        if (kDebugMode) {
+          print(err.message);
+        }
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Something went wrong!"),
+                content: Text(err.message),
+                actions: [
+                  TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +130,10 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 ElevatedButton(
-                  child: const Text('CONTINUE'),
+                  child: const Text('SIGNUP'),
                   onPressed: () {
                     // Navigator.pushNamed(context, '/signupSecond');
+                    register();
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 8.0,

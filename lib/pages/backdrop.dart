@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/product.dart';
 import 'login.dart';
@@ -239,9 +239,11 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     logout() async {
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.setBool("LoggedIn", false);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged Out!")));
+      FirebaseAuth.instance.signOut();
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      // sharedPreferences.setBool("LoggedIn", false);
+      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged Out!")));
     }
 
     var appBar = AppBar(
