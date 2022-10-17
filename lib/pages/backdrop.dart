@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/product.dart';
 import 'login.dart';
@@ -237,6 +238,12 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    logout() async {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setBool("LoggedIn", false);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged Out!")));
+    }
+
     var appBar = AppBar(
       elevation: 0.0,
       titleSpacing: 0.0,
@@ -253,30 +260,31 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
             padding: EdgeInsets.fromLTRB(2, 8, 2, 8),
             child: TextField(
               // controller: ,
-              decoration: InputDecoration(labelText: "Search"),
+              decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: "Search"),
             ),
           ),
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.search,
-            semanticLabel: 'search',
-          ),
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Showing results matching the search term")));
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
-            );
-          },
-        ),
+        // IconButton(
+        //   icon: const Icon(
+        //     Icons.search,
+        //     semanticLabel: 'search',
+        //   ),
+        //   onPressed: () {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //         const SnackBar(content: Text("Showing results matching the search term")));
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
+        //     );
+        //   },
+        // ),
         IconButton(
           icon: const Icon(
             Icons.shopping_cart,
             semanticLabel: 'shopping cart',
           ),
           onPressed: () {
+            logout();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),

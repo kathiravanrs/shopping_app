@@ -11,18 +11,22 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool isLoggedIn = false;
 
   loginCheck() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    isLoggedIn = sharedPreferences.getBool("LoggedIn")!;
+    print(sharedPreferences.getKeys());
+    if (sharedPreferences.containsKey("LoggedIn") &&
+        sharedPreferences.getBool("LoggedIn") == true) {
+      print(sharedPreferences.getBool("LoggedIn"));
+      // Navigator.pop(context);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
+    }
   }
 
   login() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool("LoggedIn", true);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
-    print(sharedPreferences.get("LoggedIn"));
   }
 
   logout() async {
@@ -33,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    loginCheck();
     return Scaffold(
       body: SafeArea(
         child: ListView(
