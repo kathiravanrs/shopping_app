@@ -8,8 +8,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passController = TextEditingController();
+  final confirmPassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +35,42 @@ class _SignupPageState extends State<SignupPage> {
             ),
             const SizedBox(height: 120.0),
             TextField(
-              controller: _usernameController,
+              controller: firstNameController,
               decoration: const InputDecoration(
-                labelText: 'Choose your username',
+                labelText: 'First Name',
+              ),
+            ),
+            TextField(
+              controller: lastNameController,
+              decoration: const InputDecoration(
+                labelText: 'Last Name',
               ),
             ),
             const SizedBox(height: 12.0),
             TextField(
-              controller: _passwordController,
+              controller: emailController,
               decoration: const InputDecoration(
-                labelText: 'Password',
+                labelText: 'Email Address',
+              ),
+            ),
+            TextField(
+              controller: phoneController,
+              decoration: const InputDecoration(
+                labelText: 'Phone Number',
+              ),
+            ),
+            const SizedBox(height: 12.0),
+            TextField(
+              controller: passController,
+              decoration: const InputDecoration(
+                labelText: 'Choose a strong password',
+              ),
+              obscureText: true,
+            ),
+            TextField(
+              controller: confirmPassController,
+              decoration: const InputDecoration(
+                labelText: 'Confirm password',
               ),
               obscureText: true,
             ),
@@ -48,8 +78,10 @@ class _SignupPageState extends State<SignupPage> {
               alignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(
-                  child: const Text('SIGN UP'),
-                  onPressed: () {},
+                  child: const Text('Back to login'),
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                  },
                   style: TextButton.styleFrom(
                     primary: Theme.of(context).colorScheme.secondary,
                     shape: const BeveledRectangleBorder(
@@ -58,9 +90,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 ElevatedButton(
-                  child: const Text('LOGIN'),
+                  child: const Text('CONTINUE'),
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pushNamed(context, '/signupSecond');
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 8.0,

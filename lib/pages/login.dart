@@ -74,7 +74,9 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 TextButton(
                   child: const Text('SIGN UP'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(context, '/signup', (route) => false);
+                  },
                   style: TextButton.styleFrom(
                     primary: Theme.of(context).colorScheme.secondary,
                     shape: const BeveledRectangleBorder(
@@ -86,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('LOGIN'),
                   onPressed: () {
                     login();
-                    Navigator.pop(context);
+                    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 8.0,
