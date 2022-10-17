@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +11,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  register() async {
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((value) => {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text("Registered")))
+            });
+  }
 
   loginCheck() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -24,14 +35,47 @@ class _LoginPageState extends State<LoginPage> {
         print(sharedPreferences.getBool("LoggedIn"));
       }
       // Navigator.pop(context);
-      Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     }
   }
 
   login() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool("LoggedIn", true);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // sharedPreferences.setBool("LoggedIn", true);
+    String email = emailController.text;
+    String password = passwordController.text;
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Email can't be blank")));
+    } else if (password.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Password can't be blank")));
+    } else {
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      }).catchError((err) {
+        print(err.message);
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Something went wrong!"),
+                content: Text(err.message),
+                actions: [
+                  TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      });
+    }
   }
 
   logout() async {
@@ -61,14 +105,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 120.0),
             TextField(
-              controller: _usernameController,
+              controller: emailController,
               decoration: const InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
               ),
             ),
             const SizedBox(height: 12.0),
             TextField(
-              controller: _passwordController,
+              controller: passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
               ),
@@ -92,8 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   child: const Text('LOGIN'),
                   onPressed: () {
+                    // register();
                     login();
-                    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 8.0,
