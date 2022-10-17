@@ -83,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
                     Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                   },
                   style: TextButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: Theme.of(context).colorScheme.secondary,
                     shape: const BeveledRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
                     ),

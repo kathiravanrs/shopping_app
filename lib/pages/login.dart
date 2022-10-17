@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,10 +15,14 @@ class _LoginPageState extends State<LoginPage> {
 
   loginCheck() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    print(sharedPreferences.getKeys());
+    if (kDebugMode) {
+      print(sharedPreferences.getKeys());
+    }
     if (sharedPreferences.containsKey("LoggedIn") &&
         sharedPreferences.getBool("LoggedIn") == true) {
-      print(sharedPreferences.getBool("LoggedIn"));
+      if (kDebugMode) {
+        print(sharedPreferences.getBool("LoggedIn"));
+      }
       // Navigator.pop(context);
       Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
     }
@@ -78,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushNamedAndRemoveUntil(context, '/signup', (route) => false);
                   },
                   style: TextButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: Theme.of(context).colorScheme.secondary,
                     shape: const BeveledRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
                     ),

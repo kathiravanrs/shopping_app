@@ -22,11 +22,11 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ShrineApp());
+  runApp(const ShrineApp());
 }
 
 class ShrineApp extends StatefulWidget {
-  ShrineApp({Key? key}) : super(key: key);
+  const ShrineApp({Key? key}) : super(key: key);
   @override
   _ShrineAppState createState() => _ShrineAppState();
 }
