@@ -27,6 +27,7 @@ Future<void> main() async {
 
 class ShrineApp extends StatefulWidget {
   const ShrineApp({Key? key}) : super(key: key);
+
   @override
   _ShrineAppState createState() => _ShrineAppState();
 }
@@ -58,7 +59,6 @@ class _ShrineAppState extends State<ShrineApp> {
     );
   }
 
-  /// Function to call when a [Category] is tapped.
   void _onCategoryTap(Category category) {
     setState(() {
       _currentCategory = category;

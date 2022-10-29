@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,11 @@ class _SignupPageState extends State<SignupPage> {
     String email = emailController.text;
     String password = passController.text;
     String confirmPass = confirmPassController.text;
+
+    String firstName = firstNameController.text;
+    String lastName = lastNameController.text;
+    String phone = phoneController.text;
+
     if (confirmPass.compareTo(password) != 0) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Passwords doesn't match! Check again.")));
@@ -28,9 +34,18 @@ class _SignupPageState extends State<SignupPage> {
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("New User Registered!")));
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        DatabaseReference ref = FirebaseDatabase.instance.ref("users");
+        // DatabaseReference ref = r.push();
+        ref.child(value.user!.uid).set({
+          "firstName": firstName,
+          "lastName": lastName,
+          "phone": phone,
+          "email": email
+        }).then((value) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text("New User Registered!")));
+          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        });
       }).catchError((err) {
         if (kDebugMode) {
           print(err.message);
