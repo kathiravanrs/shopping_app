@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
 
 import 'colors.dart';
@@ -8,7 +9,6 @@ import 'firebase_options.dart';
 import 'model/product.dart';
 import 'pages/backdrop.dart';
 import 'pages/category_menu_page.dart';
-import 'pages/home.dart';
 import 'pages/login.dart';
 import 'supplemental/cut_corners_border.dart';
 
