@@ -30,27 +30,12 @@ class _LoginPageState extends State<LoginPage> {
         if (kDebugMode) {
           print(user.uid);
         }
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/start', (route) => false);
       }
     });
-
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if (kDebugMode) {
-      print(sharedPreferences.getKeys());
-    }
-    if (sharedPreferences.containsKey("LoggedIn") &&
-        sharedPreferences.getBool("LoggedIn") == true) {
-      if (kDebugMode) {
-        print(sharedPreferences.getBool("LoggedIn"));
-      }
-      // Navigator.pop(context);
-      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-    }
   }
 
   login() async {
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.setBool("LoggedIn", true);
     String email = emailController.text;
     String password = passwordController.text;
     if (email.isEmpty) {
@@ -64,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/start', (route) => false);
       }).catchError((err) {
         if (kDebugMode) {
           print(err.message);
@@ -77,11 +62,10 @@ class _LoginPageState extends State<LoginPage> {
                 content: Text(err.message),
                 actions: [
                   TextButton(
-                    child: const Text("Ok"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
+                      child: const Text("Ok"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
                 ],
               );
             });

@@ -1,14 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
+import 'package:shrine/pages/startpage.dart';
 
 import 'colors.dart';
 import 'firebase_options.dart';
-import 'model/product.dart';
-import 'pages/backdrop.dart';
-import 'pages/category_menu_page.dart';
 import 'pages/login.dart';
 import 'supplemental/cut_corners_border.dart';
 
@@ -33,7 +30,7 @@ class ShrineApp extends StatefulWidget {
 }
 
 class _ShrineAppState extends State<ShrineApp> {
-  Category _currentCategory = Category.all;
+  // Category _currentCategory = Category.all;
 
   @override
   Widget build(BuildContext context) {
@@ -44,26 +41,27 @@ class _ShrineAppState extends State<ShrineApp> {
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
         '/signup': (BuildContext context) => const SignupPage(),
-        '/': (BuildContext context) => Backdrop(
-              currentCategory: _currentCategory,
-              frontLayer: HomePage(category: _currentCategory),
-              backLayer: CategoryMenuPage(
-                currentCategory: _currentCategory,
-                onCategoryTap: _onCategoryTap,
-              ),
-              frontTitle: const Text('SHRINE'),
-              backTitle: const Text('MENU'),
-            ),
+        '/start': (BuildContext context) => const StartPage(),
+        // '/': (BuildContext context) => Backdrop(
+        //       currentCategory: _currentCategory,
+        //       frontLayer: HomePage(category: _currentCategory),
+        //       backLayer: CategoryMenuPage(
+        //         currentCategory: _currentCategory,
+        //         onCategoryTap: _onCategoryTap,
+        //       ),
+        //       frontTitle: const Text('SHRINE'),
+        //       backTitle: const Text('MENU'),
+        //     ),
       },
       theme: _kShrineTheme,
     );
   }
 
-  void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
-  }
+  // void _onCategoryTap(Category category) {
+  //   setState(() {
+  //     _currentCategory = category;
+  //   });
+  // }
 }
 
 final ThemeData _kShrineTheme = _buildShrineTheme();
