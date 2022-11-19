@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:shrine/pages/signup.dart';
 import 'package:shrine/pages/startpage.dart';
 
-import 'colors.dart';
-import 'firebase_options.dart';
 import 'pages/login.dart';
+import 'supplemental/constants.dart';
 import 'supplemental/cut_corners_border.dart';
+import 'supplemental/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,26 +42,10 @@ class _ShrineAppState extends State<ShrineApp> {
         '/login': (BuildContext context) => const LoginPage(),
         '/signup': (BuildContext context) => const SignupPage(),
         '/start': (BuildContext context) => const StartPage(),
-        // '/': (BuildContext context) => Backdrop(
-        //       currentCategory: _currentCategory,
-        //       frontLayer: HomePage(category: _currentCategory),
-        //       backLayer: CategoryMenuPage(
-        //         currentCategory: _currentCategory,
-        //         onCategoryTap: _onCategoryTap,
-        //       ),
-        //       frontTitle: const Text('SHRINE'),
-        //       backTitle: const Text('MENU'),
-        //     ),
       },
       theme: _kShrineTheme,
     );
   }
-
-  // void _onCategoryTap(Category category) {
-  //   setState(() {
-  //     _currentCategory = category;
-  //   });
-  // }
 }
 
 final ThemeData _kShrineTheme = _buildShrineTheme();

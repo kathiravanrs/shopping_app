@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shrine/model/product.dart';
 
-import 'constants.dart';
-import 'product.dart';
+import '../supplemental/constants.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
@@ -43,35 +43,5 @@ class ProductTile extends StatelessWidget {
         ],
       ),
     );
-
-    // return Container(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Image.network(
-    //         product.imageUrl,
-    //         fit: BoxFit.scaleDown,
-    //       ),
-    //       GridTileBar(
-    //         backgroundColor: Colors.black87,
-    //         leading: IconButton(
-    //           icon: Icon(product.isFavourite ? Icons.favorite : Icons.favorite_border),
-    //           color: Theme.of(context).colorScheme.secondary,
-    //           onPressed: () {
-    //             product.toggleFavorite();
-    //           },
-    //         ),
-    //         title: Text(
-    //           product.title,
-    //           textAlign: TextAlign.center,
-    //         ),
-    //         trailing: IconButton(
-    //           icon: const Icon(Icons.shopping_cart),
-    //           onPressed: () {},
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
