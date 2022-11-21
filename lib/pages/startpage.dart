@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/constants.dart';
 
@@ -42,7 +43,6 @@ class _StartPageState extends State<StartPage> {
       ],
     );
 
-    // Widget grid = Text(products.toString());
     return Scaffold(
       drawer: const Drawer(),
       appBar: appBar,
@@ -54,6 +54,7 @@ class _StartPageState extends State<StartPage> {
             Widget widget;
             if (snapshot.connectionState == ConnectionState.done) {
               var snaps = snapshot.data?.children;
+              products.clear();
               for (DataSnapshot snap in snaps!) {
                 String key = snap.key!;
                 double price = double.parse(snap.child("price").value!.toString());
@@ -64,7 +65,9 @@ class _StartPageState extends State<StartPage> {
                     id: key, title: title, description: desc, price: price, imageUrl: image);
                 products.add(p);
               }
-              print(products.toString());
+              if (kDebugMode) {
+                print(products.toString());
+              }
               Widget grid = GridView.builder(
                 itemCount: products.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -97,18 +100,6 @@ class _StartPageState extends State<StartPage> {
               );
             }
             return widget;
-
-            // for (DataSnapshot snap in data.data.children) {
-            //   String key = snap.key!;
-            //   double price = double.parse(snap.child("price").value!.toString());
-            //   String desc = snap.child("desc").value!.toString();
-            //   final title = snap.child("title").value!.toString();
-            //   final image = snap.child("imageURL").value!.toString();
-            //   Product p =
-            //       Product(id: key, title: title, description: desc, price: price, imageUrl: image);
-            //   products.add(p);
-            // }
-            // print(products.toString());
           },
         ),
       ),
