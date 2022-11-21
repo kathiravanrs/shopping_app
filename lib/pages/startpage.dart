@@ -1,9 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/model/product_tile.dart';
 import 'package:shrine/supplemental/constants.dart';
 
 import '../model/product.dart';
+import '../model/product_tile.dart';
 import 'details_page.dart';
 import 'login.dart';
 
@@ -42,32 +42,7 @@ class _StartPageState extends State<StartPage> {
       ],
     );
 
-    Widget grid = GridView.builder(
-      itemCount: products.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: kDefaultPaddin,
-        crossAxisSpacing: kDefaultPaddin,
-        childAspectRatio: 0.75,
-      ),
-      itemBuilder: (context, index) {
-        return Text("h");
-        return ProductTile(
-          product: products[index],
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailsScreen(
-                  product: products[index],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-
+    // Widget grid = Text(products.toString());
     return Scaffold(
       drawer: const Drawer(),
       appBar: appBar,
@@ -90,7 +65,31 @@ class _StartPageState extends State<StartPage> {
                 products.add(p);
               }
               print(products.toString());
-              // widget = Text(products.toString());
+              Widget grid = GridView.builder(
+                itemCount: products.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: kDefaultPaddin,
+                  crossAxisSpacing: kDefaultPaddin,
+                  childAspectRatio: 0.75,
+                ),
+                itemBuilder: (context, index) {
+                  // return Text("h");
+                  return ProductTile(
+                    product: products[index],
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            product: products[index],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
               widget = grid;
             } else {
               widget = const Center(
