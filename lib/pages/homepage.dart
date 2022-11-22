@@ -20,10 +20,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var appBar = AppBar(
+    var homeAppBar = AppBar(
       elevation: 0.0,
       titleSpacing: 0.0,
-      title: const Center(child: Text("SHRINE")),
+      title: const Center(
+        child: Text("SHRINE"),
+      ),
       actions: <Widget>[
         IconButton(
           icon: const Icon(
@@ -40,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       drawer: const SideDrawer(),
-      appBar: appBar,
+      appBar: homeAppBar,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
         child: FutureBuilder(

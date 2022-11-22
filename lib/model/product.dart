@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Product {
   final String id;
   final String title;
@@ -22,6 +24,8 @@ class Product {
 
   void toggleFavorite() {
     isFavourite = !isFavourite;
-    print("this item is favorite - $isFavourite");
+    if (kDebugMode) {
+      print("this item is favorite - $isFavourite");
+    }
   }
 }
