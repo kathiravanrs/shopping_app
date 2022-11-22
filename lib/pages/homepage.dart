@@ -1,13 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/auth_methods.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/widgets/side_drawer.dart';
 
 import '../model/product.dart';
-import '../model/product_tile.dart';
+import '../widgets/product_tile.dart';
 import 'details_page.dart';
-import 'login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,8 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Product> products = [];
-
-  loadProducts(DataSnapshot data) {}
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +32,7 @@ class _HomePageState extends State<HomePage> {
           ),
           onPressed: () {
             // logout();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
-            );
+            Navigator.pushNamed(context, '/cart');
           },
         ),
       ],
@@ -78,43 +72,6 @@ class _HomePageState extends State<HomePage> {
             return widget;
           },
         ),
-      ),
-    );
-  }
-}
-
-class SideDrawer extends StatelessWidget {
-  const SideDrawer({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: kShrinePink50,
-            ),
-            child: Center(child: Text('Drawer Header')),
-          ),
-          ListTile(
-            title: const Text('Item 1'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: const Text('SIGN OUT'),
-            onTap: () {
-              logout(context);
-            },
-          ),
-        ],
       ),
     );
   }

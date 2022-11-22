@@ -7,7 +7,7 @@ register(String email, String pass, BuildContext context) async {
   FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pass).then((value) {
     return {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Registered")),
+        const SnackBar(content: Text("New User registered")),
       )
     };
   });

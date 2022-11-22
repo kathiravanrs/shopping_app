@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
 
@@ -42,6 +43,7 @@ class _ShrineAppState extends State<ShrineApp> {
         '/login': (BuildContext context) => const LoginPage(),
         '/signup': (BuildContext context) => const SignupPage(),
         '/start': (BuildContext context) => const HomePage(),
+        '/cart': (BuildContext context) => const CartPage(),
       },
       theme: _kShrineTheme,
     );
