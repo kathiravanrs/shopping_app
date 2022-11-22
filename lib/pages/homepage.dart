@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shrine/auth_methods.dart';
 import 'package:shrine/supplemental/constants.dart';
 
 import '../model/product.dart';
@@ -8,14 +9,14 @@ import '../model/product_tile.dart';
 import 'details_page.dart';
 import 'login.dart';
 
-class StartPage extends StatefulWidget {
-  const StartPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _HomePageState extends State<HomePage> {
   List<Product> products = [];
 
   loadProducts(DataSnapshot data) {}
@@ -44,7 +45,7 @@ class _StartPageState extends State<StartPage> {
     );
 
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const SideDrawer(),
       appBar: appBar,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
@@ -68,32 +69,7 @@ class _StartPageState extends State<StartPage> {
               if (kDebugMode) {
                 print(products.toString());
               }
-              Widget grid = GridView.builder(
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: kDefaultPaddin,
-                  crossAxisSpacing: kDefaultPaddin,
-                  childAspectRatio: 0.75,
-                ),
-                itemBuilder: (context, index) {
-                  // return Text("h");
-                  return ProductTile(
-                    product: products[index],
-                    press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                            product: products[index],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              );
-              widget = grid;
+              widget = ProductGrid(products: products);
             } else {
               widget = const Center(
                 child: CircularProgressIndicator(),
@@ -103,6 +79,81 @@ class _StartPageState extends State<StartPage> {
           },
         ),
       ),
+    );
+  }
+}
+
+class SideDrawer extends StatelessWidget {
+  const SideDrawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: kShrinePink50,
+            ),
+            child: Center(child: Text('Drawer Header')),
+          ),
+          ListTile(
+            title: const Text('Item 1'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+            },
+          ),
+          ListTile(
+            title: const Text('SIGN OUT'),
+            onTap: () {
+              logout(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductGrid extends StatelessWidget {
+  const ProductGrid({
+    Key? key,
+    required this.products,
+  }) : super(key: key);
+
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: products.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: kDefaultPaddin,
+        crossAxisSpacing: kDefaultPaddin,
+        childAspectRatio: 0.75,
+      ),
+      itemBuilder: (context, index) {
+        // return Text("h");
+        return ProductTile(
+          product: products[index],
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsScreen(
+                  product: products[index],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
