@@ -52,16 +52,45 @@ class _CartPageState extends State<CartPage> {
         ),
       ],
     );
+    var cartItems = [];
+
+    Widget body = Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Your cart is currently empty!",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(context, '/start', (route) => false);
+              },
+              style: TextButton.styleFrom(
+                  foregroundColor: kShrineBrown900, backgroundColor: kShrinePink100),
+              child: const Text("Find products to shop!")),
+        ],
+      ),
+    );
+
+    if (cartItems.isNotEmpty) {
+      body = Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [
+            Text(
+              "Your cart is currently not empty!",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       drawer: const SideDrawer(),
       appBar: cartAppBar,
-      body: const Center(
-        child: Text(
-          "Your cart is currently empty!",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        ),
-      ),
+      body: body,
     );
   }
 }
