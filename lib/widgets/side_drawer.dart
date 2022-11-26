@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../auth_methods.dart';
+import '../supplemental/auth_methods.dart';
 import '../supplemental/constants.dart';
 
 class SideDrawer extends StatelessWidget {

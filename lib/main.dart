@@ -4,10 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
+import 'package:shrine/supplemental/theme.dart';
 
 import 'pages/login.dart';
-import 'supplemental/constants.dart';
-import 'supplemental/cut_corners_border.dart';
 import 'supplemental/firebase_options.dart';
 
 Future<void> main() async {
@@ -31,8 +30,6 @@ class ShrineApp extends StatefulWidget {
 }
 
 class _ShrineAppState extends State<ShrineApp> {
-  // Category _currentCategory = Category.all;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,62 +42,7 @@ class _ShrineAppState extends State<ShrineApp> {
         '/start': (BuildContext context) => const HomePage(),
         '/cart': (BuildContext context) => const CartPage(),
       },
-      theme: _kShrineTheme,
+      theme: buildShrineTheme(),
     );
   }
-}
-
-final ThemeData _kShrineTheme = _buildShrineTheme();
-
-ThemeData _buildShrineTheme() {
-  final ThemeData base = ThemeData.light();
-  return base.copyWith(
-    colorScheme: base.colorScheme.copyWith(
-      primary: kShrinePink100,
-      onPrimary: kShrineBrown900,
-      secondary: kShrineBrown900,
-      error: kShrineErrorRed,
-    ),
-    textTheme: _buildShrineTextTheme(base.textTheme),
-    textSelectionTheme: const TextSelectionThemeData(
-      selectionColor: kShrinePink100,
-    ),
-    inputDecorationTheme: const InputDecorationTheme(
-      border: CutCornersBorder(),
-      focusedBorder: CutCornersBorder(
-        borderSide: BorderSide(
-          width: 2.0,
-          color: kShrineBrown900,
-        ),
-      ),
-      floatingLabelStyle: TextStyle(
-        color: kShrineBrown900,
-      ),
-    ),
-  );
-}
-
-TextTheme _buildShrineTextTheme(TextTheme base) {
-  return base
-      .copyWith(
-        headline5: base.headline5!.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
-        headline6: base.headline6!.copyWith(
-          fontSize: 18.0,
-        ),
-        caption: base.caption!.copyWith(
-          fontWeight: FontWeight.w400,
-          fontSize: 14.0,
-        ),
-        bodyText1: base.bodyText1!.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 16.0,
-        ),
-      )
-      .apply(
-        fontFamily: 'Rubik',
-        displayColor: kShrineBrown900,
-        bodyColor: kShrineBrown900,
-      );
 }
