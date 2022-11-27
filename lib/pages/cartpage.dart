@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/widgets/side_drawer.dart';
+import 'package:shrine/widgets/cart_item.dart';
+
+import '../model/product.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -38,12 +40,12 @@ class _CartPageState extends State<CartPage> {
     var cartAppBar = AppBar(
       elevation: 0.0,
       titleSpacing: 0.0,
-      title: const Center(child: Text("Shopping Cart")),
+      title: const Center(child: Text("CART")),
       actions: <Widget>[
         IconButton(
           icon: const Icon(
             Icons.delete,
-            semanticLabel: 'Empty Cart',
+            semanticLabel: 'Clear Cart',
           ),
           onPressed: () {
             // logout();
@@ -52,43 +54,54 @@ class _CartPageState extends State<CartPage> {
         ),
       ],
     );
-    var cartItems = [];
+    var cartItems = [
+      Product(
+          id: "p1",
+          title: "Red Shirt",
+          description: "A red shirt - it is pretty red!",
+          price: 29.99,
+          imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+      Product(
+          id: "p1",
+          title: "Red Shirt",
+          description: "A red shirt - it is pretty red!",
+          price: 29.99,
+          imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    ];
+    var line = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPaddin / 2),
+      child: Container(color: kShrineBrown900, height: 1),
+    );
 
-    Widget body = Center(
+    String numberOfItemText = "Your cart contains ${cartItems.length} items";
+    Widget body = Padding(
+      padding: const EdgeInsets.all(kDefaultPaddin),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Text(
-            "Your cart is currently empty!",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          Text(numberOfItemText, style: const TextStyle(fontSize: 30)),
+          line,
+          Container(
+            height: MediaQuery.of(context).size.height / 2,
+            color: kShrinePink100,
+            child: Padding(
+              padding: const EdgeInsets.all(kDefaultPaddin),
+              child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) {
+                    return CartItem(product: cartItems[index], quantity: 1);
+                  }),
+            ),
           ),
-          TextButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/start', (route) => false);
-              },
-              style: TextButton.styleFrom(
-                  foregroundColor: kShrineBrown900, backgroundColor: kShrinePink100),
-              child: const Text("Find products to shop!")),
+          line,
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Total:", style: const TextStyle(fontSize: 30))),
         ],
       ),
     );
 
-    if (cartItems.isNotEmpty) {
-      body = Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Text(
-              "Your cart is currently not empty!",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
-    }
-
     return Scaffold(
-      drawer: const SideDrawer(),
       appBar: cartAppBar,
       body: body,
     );

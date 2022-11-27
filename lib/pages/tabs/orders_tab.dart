@@ -10,9 +10,9 @@ class OrdersTab extends StatelessWidget {
     var orders = Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
       child: Column(
-        children: [
-          const TextField(),
-          const Center(child: Text("Orders")),
+        children: const [
+          TextField(),
+          Center(child: Text("Orders")),
         ],
       ),
     );

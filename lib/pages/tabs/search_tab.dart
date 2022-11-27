@@ -13,8 +13,13 @@ class SearchTab extends StatelessWidget {
       "PC",
       "Accessories",
       "Smartphones",
-      "Cameras"
+      "Cameras",
+      "Smart Home",
+      "Speakers",
+      "Wearables",
+      "TV"
     ];
+    categories.sort();
 
     var search = Padding(
       padding: const EdgeInsets.all(kDefaultPaddin),

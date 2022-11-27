@@ -81,7 +81,7 @@ class CounterWithFavBtn extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        CartCounter(),
+        const CartCounter(),
         Container(
           padding: const EdgeInsets.all(8),
           height: 32,
@@ -313,7 +313,7 @@ class AddToCart extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(right: kDefaultPaddin),
+            margin: const EdgeInsets.only(right: kDefaultPaddin),
             height: 50,
             width: 58,
             decoration: BoxDecoration(

@@ -29,9 +29,15 @@ class HomeTab extends StatelessWidget {
               final desc = snap.child("desc").value!.toString();
               final title = snap.child("title").value!.toString();
               final image = snap.child("imageURL").value!.toString();
-              Product p =
-                  Product(id: key, title: title, description: desc, price: price, imageUrl: image);
-              products.add(p);
+              products.add(
+                Product(
+                  id: key,
+                  title: title,
+                  description: desc,
+                  price: price,
+                  imageUrl: image,
+                ),
+              );
             }
             if (kDebugMode) {
               print(products.toString());

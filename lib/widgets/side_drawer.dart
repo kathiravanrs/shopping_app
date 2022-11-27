@@ -19,13 +19,16 @@ class SideDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: kShrinePink50,
             ),
-            child: Center(child: Text('Header')),
+            child: Center(child: Text('Greetings User')),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text('Account'),
             onTap: () {},
           ),
-          // Spacer(flex: ),
+          ListTile(
+            title: const Text('Favourites'),
+            onTap: () {},
+          ),
           ListTile(
             title: const Text('SIGN OUT'),
             onTap: () {
