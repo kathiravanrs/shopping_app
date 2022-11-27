@@ -3,6 +3,7 @@ import 'package:shrine/supplemental/constants.dart';
 import 'package:shrine/widgets/cart_item.dart';
 
 import '../model/product.dart';
+import '../supplemental/theme.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -26,11 +27,6 @@ class _CartPageState extends State<CartPage> {
         price: 29.99,
         imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
   ];
-
-  var line = Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPaddin / 2),
-    child: Container(color: kShrineBrown900, height: 1),
-  );
 
   double getSubTotal() {
     return 100;
@@ -98,7 +94,7 @@ class _CartPageState extends State<CartPage> {
         children: [
           Text("Your cart contains ${cartItems.length} items",
               style: const TextStyle(fontSize: 24)),
-          line,
+          const Line(),
           Container(
             height: MediaQuery.of(context).size.height / 2,
             color: kShrinePink50,
@@ -111,24 +107,24 @@ class _CartPageState extends State<CartPage> {
                   }),
             ),
           ),
-          line,
+          const Line(),
           Align(
             alignment: Alignment.centerRight,
             child: Text("Total: \$ ${getTotal()}", style: const TextStyle(fontSize: 30)),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Subtotal: \$ ${getSubTotal()}", style: const TextStyle(fontSize: 20)),
+            child: Text("Subtotal: \$ ${getSubTotal()}", style: const TextStyle(fontSize: 16)),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Shipping: \$ ${getShipping()}", style: const TextStyle(fontSize: 20)),
+            child: Text("Shipping: \$ ${getShipping()}", style: const TextStyle(fontSize: 16)),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Tax: \$ ${getTax()}", style: const TextStyle(fontSize: 20)),
+            child: Text("Tax: \$ ${getTax()}", style: const TextStyle(fontSize: 16)),
           ),
-          line,
+          const Line(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

@@ -172,3 +172,15 @@ class CutCornersBorder extends OutlineInputBorder {
     }
   }
 }
+
+class Line extends StatelessWidget {
+  const Line({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPaddin / 2),
+      child: Container(color: kShrineBrown900, height: 1),
+    );
+  }
+}
