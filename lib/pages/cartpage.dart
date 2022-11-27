@@ -12,6 +12,42 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  var cartItems = [
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+  ];
+
+  var line = Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPaddin / 2),
+    child: Container(color: kShrineBrown900, height: 1),
+  );
+
+  double getSubTotal() {
+    return 100;
+  }
+
+  double getShipping() {
+    return 21;
+  }
+
+  double getTax() {
+    return getSubTotal() * 0.08875;
+  }
+
+  double getTotal() {
+    return getShipping() + getSubTotal() + getTax();
+  }
+
   @override
   Widget build(BuildContext context) {
     var showClearCartDialog = AlertDialog(
@@ -54,36 +90,18 @@ class _CartPageState extends State<CartPage> {
         ),
       ],
     );
-    var cartItems = [
-      Product(
-          id: "p1",
-          title: "Red Shirt",
-          description: "A red shirt - it is pretty red!",
-          price: 29.99,
-          imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-      Product(
-          id: "p1",
-          title: "Red Shirt",
-          description: "A red shirt - it is pretty red!",
-          price: 29.99,
-          imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    ];
-    var line = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPaddin / 2),
-      child: Container(color: kShrineBrown900, height: 1),
-    );
 
-    String numberOfItemText = "Your cart contains ${cartItems.length} items";
     Widget body = Padding(
       padding: const EdgeInsets.all(kDefaultPaddin),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(numberOfItemText, style: const TextStyle(fontSize: 30)),
+          Text("Your cart contains ${cartItems.length} items",
+              style: const TextStyle(fontSize: 24)),
           line,
           Container(
             height: MediaQuery.of(context).size.height / 2,
-            color: kShrinePink100,
+            color: kShrinePink50,
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPaddin),
               child: ListView.builder(
@@ -95,8 +113,47 @@ class _CartPageState extends State<CartPage> {
           ),
           line,
           Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Total:", style: const TextStyle(fontSize: 30))),
+            alignment: Alignment.centerRight,
+            child: Text("Total: \$ ${getTotal()}", style: const TextStyle(fontSize: 30)),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text("Subtotal: \$ ${getSubTotal()}", style: const TextStyle(fontSize: 20)),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text("Shipping: \$ ${getShipping()}", style: const TextStyle(fontSize: 20)),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text("Tax: \$ ${getTax()}", style: const TextStyle(fontSize: 20)),
+          ),
+          line,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: 150,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: kShrinePink50, foregroundColor: kShrineBrown900),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Add More"),
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
+                  onPressed: () {},
+                  child: const Text("Checkout"),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
