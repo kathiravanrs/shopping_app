@@ -114,15 +114,15 @@ class _CartPageState extends State<CartPage> {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Subtotal: \$ ${getSubTotal()}", style: const TextStyle(fontSize: 16)),
+            child: Text("Subtotal: ${getSubTotal()}", style: const TextStyle(fontSize: 16)),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Shipping: \$ ${getShipping()}", style: const TextStyle(fontSize: 16)),
+            child: Text("Shipping: ${getShipping()}", style: const TextStyle(fontSize: 16)),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Tax: \$ ${getTax()}", style: const TextStyle(fontSize: 16)),
+            child: Text("Tax: ${getTax()}", style: const TextStyle(fontSize: 16)),
           ),
           const Line(),
           Row(
