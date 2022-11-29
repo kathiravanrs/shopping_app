@@ -1,7 +1,7 @@
+import 'package:checkout_screen_ui/checkout_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../supplemental/constants.dart';
-import '../supplemental/theme.dart';
 import '../supplemental/user_details.dart';
 
 class CheckOutPage extends StatelessWidget {
@@ -9,41 +9,26 @@ class CheckOutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var shippingInfo = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          firstName,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Text(addLine + ", \n" + city + ", " + state),
-      ],
-    );
-
-    var paymentInfo = Container(
-      child: const Text("CARD"),
-    );
+    final List<PriceItem> _priceItems = [
+      PriceItem(name: 'Subtotal', quantity: 1, totalPriceCents: 5200),
+      PriceItem(name: 'Shipping', quantity: 1, totalPriceCents: 8599),
+      PriceItem(name: 'Tax', quantity: 1, totalPriceCents: 2499),
+    ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("CHECK OUT"),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(kDefaultPaddin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: kDefaultPaddin / 8),
-              child: Text("Your Information"),
-            ),
-            shippingInfo,
-            const Line(),
-            const Text("Payment Information"),
-            paymentInfo,
-          ],
-        ),
+      body: CheckoutPage(
+        priceItems: _priceItems,
+        payToName: '',
+        displayNativePay: false,
+        onCardPay: (results) {
+          if (kDebugMode) {
+            print('Credit card form submitted with results: $results');
+          }
+        },
+        onBack: () => Navigator.of(context).pop(),
+        initEmail: email,
+        initBuyerName: firstName + " " + lastName,
+        initPhone: phone,
       ),
     );
   }

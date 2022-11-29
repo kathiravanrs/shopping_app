@@ -108,7 +108,6 @@ class _CartPageState extends State<CartPage> {
             semanticLabel: 'Clear Cart',
           ),
           onPressed: () {
-            // logout();
             showDialog(context: context, builder: (_) => showClearCartDialog);
           },
         ),

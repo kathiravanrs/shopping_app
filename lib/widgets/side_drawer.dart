@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../supplemental/auth_methods.dart';
 import '../supplemental/constants.dart';
+import '../supplemental/user_details.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({
@@ -12,14 +13,13 @@ class SideDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               color: kShrinePink50,
             ),
-            child: Center(child: Text('Greetings User')),
+            child: Center(child: Text('Greetings $firstName')),
           ),
           ListTile(
             title: const Text('Account'),

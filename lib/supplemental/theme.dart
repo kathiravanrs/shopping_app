@@ -17,18 +17,18 @@ ThemeData buildShrineTheme() {
     textSelectionTheme: const TextSelectionThemeData(
       selectionColor: kShrinePink100,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      border: CutCornersBorder(),
-      focusedBorder: CutCornersBorder(
-        borderSide: BorderSide(
-          width: 2.0,
-          color: kShrineBrown900,
-        ),
-      ),
-      floatingLabelStyle: TextStyle(
-        color: kShrineBrown900,
-      ),
-    ),
+    // inputDecorationTheme: const InputDecorationTheme(
+    //   border: CutCornersBorder(),
+    //   focusedBorder: CutCornersBorder(
+    //     borderSide: BorderSide(
+    //       width: 2.0,
+    //       color: kShrineBrown900,
+    //     ),
+    //   ),
+    //   floatingLabelStyle: TextStyle(
+    //     color: kShrineBrown900,
+    //   ),
+    // ),
   );
 }
 
