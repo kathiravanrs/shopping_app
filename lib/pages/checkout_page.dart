@@ -2,25 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../supplemental/constants.dart';
 import '../supplemental/theme.dart';
+import '../supplemental/user_details.dart';
 
 class CheckOutPage extends StatelessWidget {
   const CheckOutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double amount = 129.875;
-    String name = "First Last",
-        addLine = "470 72nd St",
-        phone = "646 797 1447",
-        city = "Brooklyn",
-        state = "New York";
-    int zip = 11209;
-
     var shippingInfo = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          name,
+          firstName,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Text(addLine + ", \n" + city + ", " + state),

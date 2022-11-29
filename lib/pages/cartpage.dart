@@ -123,16 +123,17 @@ class _CartPageState extends State<CartPage> {
           Text("Your cart contains ${cartItems.length} items",
               style: const TextStyle(fontSize: 24)),
           const Line(),
-          Container(
-            height: MediaQuery.of(context).size.height / 2,
-            color: kShrinePink50,
-            child: Padding(
-              padding: const EdgeInsets.all(kDefaultPaddin),
-              child: ListView.builder(
-                  itemCount: cartItems.length,
-                  itemBuilder: (context, index) {
-                    return CartItem(product: cartItems[index], quantity: 1);
-                  }),
+          Expanded(
+            child: Container(
+              color: kShrinePink50,
+              child: Padding(
+                padding: const EdgeInsets.all(kDefaultPaddin),
+                child: ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      return CartItem(product: cartItems[index], quantity: 1);
+                    }),
+              ),
             ),
           ),
           const Line(),
@@ -147,13 +148,6 @@ class _CartPageState extends State<CartPage> {
             alignment: Alignment.centerRight,
             child: Text(
               "Subtotal: ${getSubTotal().toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              "Shipping: ${getShipping().toStringAsFixed(2)}",
               style: const TextStyle(fontSize: 16),
             ),
           ),
