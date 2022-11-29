@@ -26,10 +26,38 @@ class _CartPageState extends State<CartPage> {
         description: "A red shirt - it is pretty red!",
         price: 29.99,
         imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
+    Product(
+        id: "p1",
+        title: "Red Shirt",
+        description: "A red shirt - it is pretty red!",
+        price: 29.99,
+        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
   ];
 
   double getSubTotal() {
-    return 100;
+    double sum = 0;
+    for (Product product in cartItems) {
+      sum = sum + product.price;
+    }
+    return sum;
   }
 
   double getShipping() {
@@ -37,7 +65,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   double getTax() {
-    return getSubTotal() * 0.08875;
+    return (getSubTotal() * 0.08875);
   }
 
   double getTotal() {
@@ -110,19 +138,31 @@ class _CartPageState extends State<CartPage> {
           const Line(),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Total: \$ ${getTotal()}", style: const TextStyle(fontSize: 30)),
+            child: Text(
+              "Total: \$ ${getTotal().toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 30),
+            ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Subtotal: ${getSubTotal()}", style: const TextStyle(fontSize: 16)),
+            child: Text(
+              "Subtotal: ${getSubTotal().toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Shipping: ${getShipping()}", style: const TextStyle(fontSize: 16)),
+            child: Text(
+              "Shipping: ${getShipping().toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text("Tax: ${getTax()}", style: const TextStyle(fontSize: 16)),
+            child: Text(
+              "Tax: ${getTax().toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
           const Line(),
           Row(

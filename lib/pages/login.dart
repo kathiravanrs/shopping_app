@@ -107,7 +107,6 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     child: const Text('LOGIN'),
                     onPressed: () {
-                      // register();
                       login(emailController.text, passwordController.text, context);
                     },
                     style: ElevatedButton.styleFrom(
