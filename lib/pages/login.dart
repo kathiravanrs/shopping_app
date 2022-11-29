@@ -18,41 +18,47 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var modal = Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Container(
-        height: 200,
-        color: kShrinePink50,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                width: 300,
-                height: 50,
-                child: TextField(
-                  controller: resetPasswordController,
-                  decoration: const InputDecoration(hintText: "Enter your email"),
-                ),
-              ),
-              ElevatedButton(
-                child: const Text('Reset Password'),
-                onPressed: () async {
-                  await FirebaseAuth.instance
-                      .sendPasswordResetEmail(email: resetPasswordController.text);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
+    var resetPassDialog = AlertDialog(
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: kDefaultPaddin, vertical: kDefaultPaddin / 2),
+      // titlePadding: EdgeInsets.only(bottom: kDefaultPaddin),
+      title: const Text("Reset Password"),
+      content: TextField(
+        controller: resetPasswordController,
+        decoration: const InputDecoration(
+          hintText: "Enter your email",
         ),
       ),
+      actions: [
+        TextButton(
+          child: const Text('CANCEL'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Theme.of(context).colorScheme.secondary,
+            shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7.0)),
+            ),
+          ),
+        ),
+        ElevatedButton(
+          child: const Text('SUBMIT'),
+          onPressed: () async {
+            await FirebaseAuth.instance.sendPasswordResetEmail(email: resetPasswordController.text);
+            resetPasswordController.clear();
+            Navigator.pop(context);
+
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text("Password Reset Email Sent")));
+          },
+        ),
+      ],
     );
 
     loginCheck(context);
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(kDefaultPaddin),
           child: Column(
@@ -113,26 +119,21 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              Expanded(child: Container()),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: TextButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (context) {
-                            return modal;
-                          });
-                      // showDialog(context: context, builder: (context){
-                      //
-                      // });
-                    },
-                    child: const Text(
-                      "Forgot Password",
-                      style: TextStyle(color: kShrineBrown900, fontSize: 12),
-                    )),
-              )
+              const SizedBox(
+                height: 15,
+              ),
+              TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return resetPassDialog;
+                        });
+                  },
+                  child: const Text(
+                    "Forgot Password",
+                    style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                  ))
             ],
           ),
         ),
