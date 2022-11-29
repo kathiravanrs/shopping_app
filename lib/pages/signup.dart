@@ -147,11 +147,10 @@ class _SignupPageState extends State<SignupPage> {
                 ElevatedButton(
                   child: const Text('SIGNUP'),
                   onPressed: () {
-                    // Navigator.pushNamed(context, '/signupSecond');
                     register();
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 8.0,
+                    elevation: 1.0,
                     shape: const BeveledRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
                     ),

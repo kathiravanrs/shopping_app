@@ -32,42 +32,36 @@ class SearchTab extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                "Shop by Categories",
+                "CATEGORIES",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
             ),
           ),
           Flexible(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                  itemCount: categories.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: kDefaultPaddin,
-                    crossAxisSpacing: kDefaultPaddin,
-                    childAspectRatio:
-                        MediaQuery.of(context).size.height / (MediaQuery.of(context).size.width),
-                  ),
-                  itemBuilder: (context, index) {
-                    return TextButton(
-                      style: TextButton.styleFrom(
-                          foregroundColor: kShrineBrown900, backgroundColor: kShrinePink100),
-                      child: Text(
-                        categories[index].toUpperCase(),
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                      onPressed: () {},
-                    );
-                  },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                itemCount: categories.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: kDefaultPaddin,
+                  crossAxisSpacing: kDefaultPaddin,
+                  childAspectRatio:
+                      MediaQuery.of(context).size.height / (MediaQuery.of(context).size.width),
                 ),
+                itemBuilder: (context, index) {
+                  return TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: kShrineBrown900, backgroundColor: kShrinePink100),
+                    child: Text(
+                      categories[index].toUpperCase(),
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    onPressed: () {},
+                  );
+                },
               ),
             ),
           )

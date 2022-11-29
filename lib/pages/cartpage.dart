@@ -144,7 +144,9 @@ class _CartPageState extends State<CartPage> {
                 child: TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/checkout');
+                  },
                   child: const Text("Checkout"),
                 ),
               ),
