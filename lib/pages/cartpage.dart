@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/constants.dart';
 import 'package:shrine/widgets/cart_item.dart';
 
+import '../data/product_data.dart';
 import '../model/product.dart';
 import '../supplemental/theme.dart';
 
@@ -13,45 +14,6 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  var cartItems = [
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-    Product(
-        id: "p1",
-        title: "Red Shirt",
-        description: "A red shirt - it is pretty red!",
-        price: 29.99,
-        imageUrl: "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg"),
-  ];
-
   double getSubTotal() {
     double sum = 0;
     for (Product product in cartItems) {

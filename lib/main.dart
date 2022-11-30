@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shrine/pages/account_page.dart';
 import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/checkout_screen.dart';
+import 'package:shrine/pages/favourites_page.dart';
 import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
 import 'package:shrine/supplemental/theme.dart';
@@ -20,6 +23,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
   runApp(const ShrineApp());
 }
 
@@ -33,16 +37,26 @@ class ShrineApp extends StatefulWidget {
 class _ShrineAppState extends State<ShrineApp> {
   @override
   Widget build(BuildContext context) {
+    var loginRoute = '/login';
+    var signupRoute = '/signup';
+    var homePageRoute = '/start';
+    var cartRoute = '/cart';
+    var checkoutRoute = '/checkout';
+    var accountRoute = '/account';
+    var favouriteRoute = '/favourites';
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Shrine',
-      initialRoute: '/login',
+      initialRoute: loginRoute,
       routes: {
-        '/login': (BuildContext context) => const LoginPage(),
-        '/signup': (BuildContext context) => const SignupPage(),
-        '/start': (BuildContext context) => const HomePage(),
-        '/cart': (BuildContext context) => const CartPage(),
-        '/checkout': (BuildContext context) => const CheckOutPage(),
+        loginRoute: (BuildContext context) => const LoginPage(),
+        signupRoute: (BuildContext context) => const SignupPage(),
+        homePageRoute: (BuildContext context) => const HomePage(),
+        cartRoute: (BuildContext context) => const CartPage(),
+        checkoutRoute: (BuildContext context) => const CheckOutPage(),
+        accountRoute: (BuildContext context) => const AccountPage(),
+        favouriteRoute: (BuildContext context) => const Favourites(),
       },
       theme: buildShrineTheme(),
     );

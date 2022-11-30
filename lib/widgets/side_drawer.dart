@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../data/user_details.dart';
 import '../supplemental/auth_methods.dart';
 import '../supplemental/constants.dart';
-import '../supplemental/user_details.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({
@@ -23,11 +23,15 @@ class SideDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Account'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/account');
+            },
           ),
           ListTile(
             title: const Text('Favourites'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/favourites');
+            },
           ),
           ListTile(
             title: const Text('SIGN OUT'),

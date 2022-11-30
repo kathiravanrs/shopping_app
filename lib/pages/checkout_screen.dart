@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../supplemental/user_details.dart';
+import '../data/user_details.dart';
 import 'checkout_page.dart';
 
 class CheckOutPage extends StatelessWidget {
