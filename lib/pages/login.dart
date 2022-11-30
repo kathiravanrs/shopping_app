@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     var resetPassDialog = AlertDialog(
       contentPadding:
-          const EdgeInsets.symmetric(horizontal: kDefaultPaddin, vertical: kDefaultPaddin / 2),
+          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
       // titlePadding: EdgeInsets.only(bottom: kDefaultPaddin),
       title: const Text("Reset Password"),
       content: TextField(
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(kDefaultPaddin),
+          padding: const EdgeInsets.all(kDefaultPadding),
           child: Column(
             children: <Widget>[
               Column(

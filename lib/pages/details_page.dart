@@ -36,7 +36,7 @@ class DetailsScreen extends StatelessWidget {
           icon: const Icon(Icons.add_shopping_cart),
           onPressed: () {},
         ),
-        const SizedBox(width: kDefaultPaddin / 2)
+        const SizedBox(width: kDefaultPadding / 2)
       ],
     );
   }

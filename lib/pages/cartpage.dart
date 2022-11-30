@@ -115,7 +115,7 @@ class _CartPageState extends State<CartPage> {
     );
 
     Widget body = Padding(
-      padding: const EdgeInsets.all(kDefaultPaddin),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -124,9 +124,9 @@ class _CartPageState extends State<CartPage> {
           const Line(),
           Expanded(
             child: Container(
-              color: kShrinePink50,
+              color: kShrinePink25,
               child: Padding(
-                padding: const EdgeInsets.all(kDefaultPaddin),
+                padding: const EdgeInsets.all(kDefaultPadding),
                 child: ListView.builder(
                     itemCount: cartItems.length,
                     itemBuilder: (context, index) {

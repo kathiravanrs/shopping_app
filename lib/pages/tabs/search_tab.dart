@@ -22,7 +22,7 @@ class SearchTab extends StatelessWidget {
     categories.sort();
 
     var search = Padding(
-      padding: const EdgeInsets.all(kDefaultPaddin),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Column(
         children: [
           const TextField(
@@ -46,8 +46,8 @@ class SearchTab extends StatelessWidget {
                 itemCount: categories.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: kDefaultPaddin,
-                  crossAxisSpacing: kDefaultPaddin,
+                  mainAxisSpacing: kDefaultPadding,
+                  crossAxisSpacing: kDefaultPadding,
                   childAspectRatio:
                       MediaQuery.of(context).size.height / (MediaQuery.of(context).size.width),
                 ),

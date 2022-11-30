@@ -247,25 +247,6 @@ class CheckoutPage extends StatelessWidget {
               ),
             ),
           ),
-          // expandedHeight: _expHeight,
-          // flexibleSpace: FlexibleSpaceBar(
-          //   centerTitle: true,
-          //   background: Padding(
-          //     padding: const EdgeInsets.fromLTRB(16.0, 80, 16.0, 0),
-          //     child: Column(
-          //       children: [
-          //         const SizedBox(
-          //           height: 30,
-          //         ),
-          //         Column(
-          //           children: _priceItems
-          //               .map((priceItem) => _PriceListItem(priceItem: priceItem))
-          //               .toList(),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -649,7 +630,7 @@ class CardPayButtonState extends State<CardPayButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: color,
+        primary: kShrineBrown900,
         minimumSize: const Size(double.infinity, 50),
       ),
       onPressed: (status == CardPayButtonStatus.ready) ? () => widget.onPressed() : () => {},

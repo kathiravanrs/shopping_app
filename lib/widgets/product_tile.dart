@@ -18,7 +18,7 @@ class ProductTile extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(kDefaultPaddin),
+              padding: const EdgeInsets.all(kDefaultPadding),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
@@ -30,7 +30,7 @@ class ProductTile extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
+            padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 4),
             child: Text(
               product.title,
               style: const TextStyle(color: kTextLightColor),

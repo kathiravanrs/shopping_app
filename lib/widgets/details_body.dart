@@ -22,8 +22,8 @@ class DetailsBody extends StatelessWidget {
                   margin: EdgeInsets.only(top: size.height * 0.3),
                   padding: EdgeInsets.only(
                     top: size.height * 0.12,
-                    left: kDefaultPaddin,
-                    right: kDefaultPaddin,
+                    left: kDefaultPadding,
+                    right: kDefaultPadding,
                   ),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -37,13 +37,13 @@ class DetailsBody extends StatelessWidget {
                       ColorAndSize(
                         product: product,
                       ),
-                      const SizedBox(height: kDefaultPaddin / 2),
+                      const SizedBox(height: kDefaultPadding / 2),
                       Description(
                         product,
                       ),
-                      const SizedBox(height: kDefaultPaddin / 2),
+                      const SizedBox(height: kDefaultPadding / 2),
                       const CounterWithFavBtn(),
-                      const SizedBox(height: kDefaultPaddin / 2),
+                      const SizedBox(height: kDefaultPadding / 2),
                       AddToCart(product)
                     ],
                   ),
@@ -64,7 +64,7 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
       child: Text(
         product.description,
         style: const TextStyle(height: 1.5),
@@ -124,7 +124,7 @@ class _CartCounterState extends State<CartCounter> {
           },
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2),
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
           child: Text(
             // if our item is less  then 10 then  it shows 01 02 like that
             numOfItems.toString().padLeft(2, "0"),
@@ -166,7 +166,7 @@ class ProductTitleWithImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -181,7 +181,7 @@ class ProductTitleWithImage extends StatelessWidget {
                 .headline4
                 ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: kDefaultPaddin),
+          const SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
               RichText(
@@ -198,7 +198,7 @@ class ProductTitleWithImage extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: kDefaultPaddin),
+              const SizedBox(width: kDefaultPadding),
               Expanded(
                 child: Hero(
                   tag: product.id,
@@ -281,8 +281,8 @@ class ColorDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: kDefaultPaddin / 4,
-        right: kDefaultPaddin / 2,
+        top: kDefaultPadding / 4,
+        right: kDefaultPadding / 2,
       ),
       padding: const EdgeInsets.all(2.5),
       height: 24,
@@ -309,11 +309,11 @@ class AddToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
       child: Row(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(right: kDefaultPaddin),
+            margin: const EdgeInsets.only(right: kDefaultPadding),
             height: 50,
             width: 58,
             decoration: BoxDecoration(

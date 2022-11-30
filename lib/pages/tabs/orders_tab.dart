@@ -8,7 +8,7 @@ class OrdersTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var orders = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Column(
         children: const [
           TextField(),

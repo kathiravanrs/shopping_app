@@ -15,7 +15,7 @@ class HomeTab extends StatelessWidget {
     List<Product> products = [];
 
     var home = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: FutureBuilder(
         future: FirebaseDatabase.instance.ref("products").get(),
         builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
@@ -71,8 +71,8 @@ class ProductGrid extends StatelessWidget {
       itemCount: products.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: kDefaultPaddin,
-        crossAxisSpacing: kDefaultPaddin,
+        mainAxisSpacing: kDefaultPadding,
+        crossAxisSpacing: kDefaultPadding,
         childAspectRatio: 0.75,
       ),
       itemBuilder: (context, index) {

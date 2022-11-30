@@ -14,7 +14,6 @@ class CartItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Line(),
           Row(
             key: ValueKey(product.id),
             children: [
