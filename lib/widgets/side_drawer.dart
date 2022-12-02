@@ -24,13 +24,13 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Account'),
             onTap: () {
-              Navigator.pushNamed(context, '/account');
+              Navigator.pushNamed(context, accountRoute);
             },
           ),
           ListTile(
             title: const Text('Favourites'),
             onTap: () {
-              Navigator.pushNamed(context, '/favourites');
+              Navigator.pushNamed(context, favouriteRoute);
             },
           ),
           ListTile(

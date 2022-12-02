@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+var loginRoute = '/login';
+var signupRoute = '/signup';
+var homePageRoute = '/start';
+var cartRoute = '/cart';
+var checkoutRoute = '/checkout';
+var accountRoute = '/account';
+var favouriteRoute = '/favourites';
+
 const kTextColor = Color(0xFF535353);
 const kTextLightColor = Color(0xFFACACAC);
 

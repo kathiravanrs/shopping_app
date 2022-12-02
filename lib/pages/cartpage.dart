@@ -62,7 +62,8 @@ class _CartPageState extends State<CartPage> {
     var cartAppBar = AppBar(
       elevation: 0.0,
       titleSpacing: 0.0,
-      title: const Center(child: Text("CART")),
+      centerTitle: true,
+      title: const Text("CART"),
       actions: <Widget>[
         IconButton(
           icon: const Icon(
@@ -140,7 +141,7 @@ class _CartPageState extends State<CartPage> {
                   style: TextButton.styleFrom(
                       backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/checkout');
+                    Navigator.pushNamed(context, checkoutRoute);
                   },
                   child: const Text("Checkout"),
                 ),

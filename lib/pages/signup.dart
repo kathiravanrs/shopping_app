@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shrine/supplemental/constants.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
         }).then((value) {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text("New User Registered!")));
-          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
         });
       }).catchError((err) {
         if (kDebugMode) {
@@ -135,7 +136,7 @@ class _SignupPageState extends State<SignupPage> {
                 TextButton(
                   child: const Text('Back to login'),
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                    Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.secondary,

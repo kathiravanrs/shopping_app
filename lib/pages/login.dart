@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                     child: const Text('SIGN UP'),
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, '/signup', (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(context, signupRoute, (route) => false);
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.secondary,

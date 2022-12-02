@@ -36,9 +36,8 @@ class _HomePageState extends State<HomePage> {
       ),
       elevation: 0.0,
       titleSpacing: 0.0,
-      title: const Center(
-        child: Text("SHRINE"),
-      ),
+      centerTitle: true,
+      title: const Text("SHRINE"),
       actions: <Widget>[
         IconButton(
           icon: const Icon(
@@ -46,7 +45,7 @@ class _HomePageState extends State<HomePage> {
             semanticLabel: 'shopping cart',
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/cart');
+            Navigator.pushNamed(context, cartRoute);
           },
         ),
       ],
