@@ -52,7 +52,7 @@ class _CartItemState extends State<CartItem> {
                                   style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
@@ -74,6 +74,7 @@ class _CartItemState extends State<CartItem> {
                 onPressed: () {
                   setState(() {
                     widget.quantity++;
+                    // addToCart(widget.product);
                   });
                 },
               ),
