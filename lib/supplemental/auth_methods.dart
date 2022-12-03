@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrine/supplemental/constants.dart';
 
+import '../data/user_details.dart';
+
 register(String email, String pass, BuildContext context) async {
   FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pass).then((value) {
     return {
@@ -17,6 +19,7 @@ register(String email, String pass, BuildContext context) async {
 loginCheck(BuildContext context) async {
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user != null) {
+      userID = user.uid;
       if (kDebugMode) {
         print(user.uid);
       }

@@ -157,7 +157,7 @@ class CheckoutPage extends StatelessWidget {
     final double _initHeight = _expHeight - (_collapsedAppBarHeight + 30.0);
 
     // create a ScrollController to listen to whether or not the appbar is open
-    final ScrollController _scrollController = ScrollController(initialScrollOffset: _initHeight);
+    final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
 
     // create a key to modify the details text based on appbar expanded status
     final GlobalKey<_StatefullWrapperState> textKey = GlobalKey<_StatefullWrapperState>();
@@ -190,35 +190,17 @@ class CheckoutPage extends StatelessWidget {
       slivers: [
         SliverAppBar(
           snap: false,
-          pinned: false,
+          // pinned: false,
           floating: false,
           backgroundColor: Colors.grey.shade50,
           collapsedHeight: _collapsedAppBarHeight,
           // set to false to prevent undesired back arrow
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              SizedBox(
-                width: 40,
-                child: (onBack != null)
-                    ? IconButton(
-                        onPressed: () => onBack!(),
-                        icon: const Icon(
-                          Icons.keyboard_arrow_left_outlined,
-                          color: Colors.black,
-                        ))
-                    : null,
-              ),
-              Expanded(
-                  child: Text(
-                payToName.length < 16 ? '$payToName Checkout' : payToName,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 26, color: Colors.black),
-              )),
-              const SizedBox(
-                width: 40,
-              ),
-            ],
+          // automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            payToName.length < 16 ? '$payToName Checkout' : payToName,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 26, color: Colors.black),
           ),
           bottom: PreferredSize(
             preferredSize: const Size(120.0, 32.0),
@@ -239,10 +221,10 @@ class CheckoutPage extends StatelessWidget {
                     style: const TextStyle(
                         color: kShrineBrown900, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  _StatefullWrapper(
-                    key: textKey,
-                    initChild: textWhileClosed,
-                  ),
+                  // _StatefullWrapper(
+                  //   key: textKey,
+                  //   initChild: textWhileClosed,
+                  // ),
                 ],
               ),
             ),

@@ -43,7 +43,12 @@ class _CartPageState extends State<CartPage> {
       ),
       actions: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                cartItems.clear();
+              });
+              Navigator.pop(context);
+            },
             child: const Text(
               "YES",
               style: TextStyle(color: kShrineBrown900),
@@ -90,11 +95,15 @@ class _CartPageState extends State<CartPage> {
               color: kShrinePink25,
               child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
-                child: ListView.builder(
-                    itemCount: cartItems.length,
-                    itemBuilder: (context, index) {
-                      return CartItem(product: cartItems[index], quantity: 1);
-                    }),
+                child: ListView.separated(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) {
+                    return CartItem(product: cartItems[index], quantity: 1);
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Line();
+                  },
+                ),
               ),
             ),
           ),
@@ -110,6 +119,13 @@ class _CartPageState extends State<CartPage> {
             alignment: Alignment.centerRight,
             child: Text(
               "Subtotal: ${getSubTotal().toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "Shipping: ${getShipping().toStringAsFixed(2)}",
               style: const TextStyle(fontSize: 16),
             ),
           ),

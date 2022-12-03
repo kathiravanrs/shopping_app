@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/model/product.dart';
-import 'package:shrine/supplemental/theme.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({Key? key, required this.product, required this.quantity}) : super(key: key);
+class CartItem extends StatefulWidget {
+  CartItem({Key? key, required this.product, required this.quantity}) : super(key: key);
   final Product product;
-  final int quantity;
+  int quantity;
 
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,11 +19,15 @@ class CartItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
-            key: ValueKey(product.id),
+            key: ValueKey(widget.product.id),
             children: [
               IconButton(
                 icon: const Icon(Icons.remove_circle_outline),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    if (widget.quantity > 0) widget.quantity--;
+                  });
+                },
               ),
               Expanded(
                 child: Column(
@@ -28,7 +36,7 @@ class CartItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
-                          product.imageUrl,
+                          widget.product.imageUrl,
                           fit: BoxFit.cover,
                           width: 75.0,
                           height: 75.0,
@@ -38,17 +46,20 @@ class CartItem extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Center(
+                                child: Text(
+                                  widget.product.title,
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
-                                    child: Text('Quantity: $quantity'),
+                                    child: Text('Quantity: ${widget.quantity}'),
                                   ),
-                                  Text('x ${(product.price)}'),
+                                  Text('x ${(widget.product.price)}'),
                                 ],
-                              ),
-                              Text(
-                                product.title,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -58,9 +69,16 @@ class CartItem extends StatelessWidget {
                   ],
                 ),
               ),
+              IconButton(
+                icon: const Icon(Icons.add_circle_outline),
+                onPressed: () {
+                  setState(() {
+                    widget.quantity++;
+                  });
+                },
+              ),
             ],
           ),
-          const Line()
         ],
       ),
     );
