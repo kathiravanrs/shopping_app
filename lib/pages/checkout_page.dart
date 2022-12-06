@@ -375,7 +375,7 @@ class CheckoutPage extends StatelessWidget {
                       payBtnKey: payBtnKey,
                       displayTestData: displayTestData,
                     ),
-                    footer ?? const SizedBox(height: 120),
+                    // footer ?? const SizedBox(height: 120),
                   ],
                 ),
               ),

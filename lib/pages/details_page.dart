@@ -61,23 +61,29 @@ class CounterWithFavBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          CartCounter(product: product),
-          FavoriteButton(
-            iconSize: 36,
-            valueChanged: (_isFavorite) {
-              favItems.add(product);
-              if (kDebugMode) {
-                print(favItems);
-              }
-            },
-            isFavorite: favItems.contains(product),
-          )
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
+        return true;
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            CartCounter(product: product),
+            FavoriteButton(
+              iconSize: 36,
+              valueChanged: (_isFavorite) {
+                favItems.add(product);
+                if (kDebugMode) {
+                  print(favItems);
+                }
+              },
+              isFavorite: favItems.contains(product),
+            )
+          ],
+        ),
       ),
     );
   }
