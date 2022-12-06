@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/widgets/cart_item.dart';
 
 import '../data/product_data.dart';
@@ -46,7 +47,7 @@ class _CartPageState extends State<CartPage> {
         TextButton(
             onPressed: () {
               setState(() {
-                cartItems.clear();
+                clearCart();
               });
               Navigator.pop(context);
             },

@@ -60,6 +60,7 @@ class DetailsScreen extends StatelessWidget {
 
 class CounterWithFavBtn extends StatelessWidget {
   final Product product;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -88,6 +89,7 @@ class CounterWithFavBtn extends StatelessWidget {
 
 class CartCounter extends StatefulWidget {
   final Product product;
+
   const CartCounter({Key? key, required this.product}) : super(key: key);
 
   @override
@@ -99,36 +101,48 @@ class _CartCounterState extends State<CartCounter> {
   Widget build(BuildContext context) {
     int numOfItemsInCart = cartItems[widget.product] ?? 0;
 
-    return Row(
-      children: <Widget>[
-        OutlinedButton(
-          child: const Icon(Icons.remove),
-          onPressed: () {
-            if (numOfItemsInCart >= 1) {
+    if (numOfItemsInCart == 0) {
+      return ElevatedButton(
+        onPressed: () {
+          setState(() {
+            addToCart(widget.product);
+            print(cartItems);
+          });
+        },
+        child: const Center(
+          child: Text("Add to Cart"),
+        ),
+      );
+    } else {
+      return Row(
+        children: <Widget>[
+          OutlinedButton(
+            child: const Icon(Icons.remove),
+            onPressed: () {
               setState(() {
-                numOfItemsInCart--;
                 removeFromCart(widget.product);
+                print(cartItems);
               });
-            }
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
-          child: Text(
-            numOfItemsInCart.toString().padLeft(2, "0"),
-            style: Theme.of(context).textTheme.headline6,
+            },
           ),
-        ),
-        OutlinedButton(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+            child: Text(
+              numOfItemsInCart.toString().padLeft(2, "0"),
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          OutlinedButton(
             child: const Icon(Icons.add),
             onPressed: () {
               setState(() {
-                numOfItemsInCart++;
-                // cartItems.add(widget.product);
                 addToCart(widget.product);
+                print(cartItems);
               });
-            }),
-      ],
-    );
+            },
+          ),
+        ],
+      );
+    }
   }
 }

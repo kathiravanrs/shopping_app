@@ -43,13 +43,21 @@ removeFromCart(Product product) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
   final snap = await ref.get();
   int quantity = int.parse(((snap.child("quantity").value) ?? 0).toString());
+  print(quantity);
   if (quantity > 1) {
-    await ref.set({"quantity": quantity - 1});
-    cartItems.update(product, (value) => value - 1);
+    ref.set({"quantity": quantity - 1}).then((value) {
+      cartItems.update(product, (value) => quantity - 1);
+    });
   } else {
-    await ref.remove();
-    cartItems.remove(product);
+    await ref.remove().then((value) {
+      cartItems.remove(product);
+    });
   }
+}
+
+clearCart() async {
+  cartItems.clear();
+  await FirebaseDatabase.instance.ref("cart/$userID").remove();
 }
 
 getCartItems() async {
@@ -79,5 +87,5 @@ Product getProductFromID(String ID) {
       title: "No Such Product",
       description: "description",
       price: 0.00,
-      imageUrl: "imageUrl");
+      imageUrl: "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png");
 }
