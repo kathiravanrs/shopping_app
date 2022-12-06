@@ -2,7 +2,7 @@ import '../model/product.dart';
 
 List<Product> products = [];
 
-List<Product> cartItems = [];
+Map<Product, int> cartItems = {};
 
 List<Product> favItems = [];
 

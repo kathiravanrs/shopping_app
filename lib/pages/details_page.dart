@@ -95,19 +95,19 @@ class CartCounter extends StatefulWidget {
 }
 
 class _CartCounterState extends State<CartCounter> {
-  int numOfItems = 1;
-
   @override
   Widget build(BuildContext context) {
+    int numOfItemsInCart = cartItems[widget.product] ?? 0;
+
     return Row(
       children: <Widget>[
         OutlinedButton(
           child: const Icon(Icons.remove),
           onPressed: () {
-            if (numOfItems > 1) {
+            if (numOfItemsInCart >= 1) {
               setState(() {
-                numOfItems--;
-                cartItems.remove(widget.product);
+                numOfItemsInCart--;
+                removeFromCart(widget.product);
               });
             }
           },
@@ -115,7 +115,7 @@ class _CartCounterState extends State<CartCounter> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
           child: Text(
-            numOfItems.toString().padLeft(2, "0"),
+            numOfItemsInCart.toString().padLeft(2, "0"),
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
@@ -123,7 +123,7 @@ class _CartCounterState extends State<CartCounter> {
             child: const Icon(Icons.add),
             onPressed: () {
               setState(() {
-                numOfItems++;
+                numOfItemsInCart++;
                 // cartItems.add(widget.product);
                 addToCart(widget.product);
               });

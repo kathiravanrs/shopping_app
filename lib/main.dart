@@ -8,6 +8,7 @@ import 'package:shrine/pages/favourites_page.dart';
 import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/supplemental/theme.dart';
 
 import 'pages/login.dart';
@@ -38,6 +39,8 @@ class ShrineApp extends StatefulWidget {
 class _ShrineAppState extends State<ShrineApp> {
   @override
   Widget build(BuildContext context) {
+    getProducts();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Shrine',

@@ -16,8 +16,8 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   double getSubTotal() {
     double sum = 0;
-    for (Product product in cartItems) {
-      sum = sum + product.price;
+    for (Product p in cartItems.keys) {
+      sum = sum + p.price * cartItems[p]!;
     }
     return sum;
   }
@@ -36,6 +36,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> cartProducts = cartItems.keys.toList();
     var showClearCartDialog = AlertDialog(
       title: const Text(
         "Empty your cart?",
@@ -98,7 +99,8 @@ class _CartPageState extends State<CartPage> {
                 child: ListView.separated(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
-                    return CartItem(product: cartItems[index], quantity: 1);
+                    return CartItem(
+                        product: cartProducts[index], quantity: cartItems[cartProducts[index]]!);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Line();

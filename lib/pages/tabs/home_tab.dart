@@ -20,7 +20,6 @@ class HomeTab extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
           Widget widget;
           products.clear();
-
           if (snapshot.connectionState == ConnectionState.done) {
             var snaps = snapshot.data?.children;
             for (DataSnapshot snap in snaps!) {
