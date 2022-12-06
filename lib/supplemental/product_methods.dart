@@ -15,13 +15,7 @@ getProducts() async {
       final title = snap.child("title").value!.toString();
       final image = snap.child("imageURL").value!.toString();
       products.add(
-        Product(
-          id: key,
-          title: title,
-          description: desc,
-          price: price,
-          imageUrl: image,
-        ),
+        Product(id: key, title: title, description: desc, price: price, imageUrl: image),
       );
     }
     if (kDebugMode) {
@@ -66,6 +60,7 @@ clearCart() async {
 getCartItems() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
   ref.get().then((value) {
+    cartItems.clear();
     for (DataSnapshot snap in value.children) {
       Product product = getProductFromID(snap.key ?? "");
       int count = int.parse(snap.child("quantity").value!.toString());

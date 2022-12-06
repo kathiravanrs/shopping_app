@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/model/product.dart';
 
+import '../pages/details_page.dart';
+
 class CartItem extends StatefulWidget {
   CartItem({Key? key, required this.product, required this.quantity}) : super(key: key);
   final Product product;
@@ -14,21 +16,30 @@ class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsScreen(
+              product: widget.product,
+            ),
+          ),
+        );
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
-            key: ValueKey(widget.product.id),
+            key: ValueKey(widget.product.toString()),
             children: [
-              IconButton(
-                icon: const Icon(Icons.remove_circle_outline),
-                onPressed: () {
-                  setState(() {
-                    if (widget.quantity > 0) widget.quantity--;
-                  });
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.remove_circle_outline),
+              //   onPressed: () {
+              //     setState(() {
+              //       removeFromCart(widget.product);
+              //     });
+              //   },
+              // ),
               Expanded(
                 child: Column(
                   children: [
@@ -46,13 +57,11 @@ class _CartItemState extends State<CartItem> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Center(
-                                child: Text(
-                                  widget.product.title,
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                ),
+                              Text(
+                                widget.product.title,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 5),
                               Row(
                                 children: [
                                   Expanded(
@@ -69,15 +78,14 @@ class _CartItemState extends State<CartItem> {
                   ],
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.add_circle_outline),
-                onPressed: () {
-                  setState(() {
-                    widget.quantity++;
-                    // addToCart(widget.product);
-                  });
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.add_circle_outline),
+              //   onPressed: () {
+              //     setState(() {
+              //       addToCart(widget.product);
+              //     });
+              //   },
+              // ),
             ],
           ),
         ],

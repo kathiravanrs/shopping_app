@@ -24,6 +24,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   double getShipping() {
+    if (getSubTotal() == 0) return 0;
     return 21;
   }
 
@@ -51,18 +52,12 @@ class _CartPageState extends State<CartPage> {
               });
               Navigator.pop(context);
             },
-            child: const Text(
-              "YES",
-              style: TextStyle(color: kShrineBrown900),
-            )),
+            child: const Text("YES", style: TextStyle(color: kShrineBrown900))),
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              "NO",
-              style: TextStyle(color: kShrineBrown900),
-            )),
+            child: const Text("NO", style: TextStyle(color: kShrineBrown900))),
       ],
     );
 
@@ -101,7 +96,9 @@ class _CartPageState extends State<CartPage> {
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     return CartItem(
-                        product: cartProducts[index], quantity: cartItems[cartProducts[index]]!);
+                        key: Key(cartProducts[index].toString()),
+                        product: cartProducts[index],
+                        quantity: cartItems[cartProducts[index]]!);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Line();
@@ -113,30 +110,78 @@ class _CartPageState extends State<CartPage> {
           const Line(),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Total: \$ ${getTotal().toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 30),
+            child: SizedBox(
+              width: 175,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Total:",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Text(
+                    getTotal().toStringAsFixed(2),
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                ],
+              ),
             ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Subtotal: ${getSubTotal().toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 16),
+            child: SizedBox(
+              width: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Subtotal:",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    getSubTotal().toStringAsFixed(2),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Shipping: ${getShipping().toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 16),
+            child: SizedBox(
+              width: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Shipping:",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    getShipping().toStringAsFixed(2),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Tax: ${getTax().toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 16),
+            child: SizedBox(
+              width: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Tax:",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    getTax().toStringAsFixed(2),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
           const Line(),

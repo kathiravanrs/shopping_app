@@ -100,44 +100,58 @@ class _CartCounterState extends State<CartCounter> {
     int numOfItemsInCart = cartItems[widget.product] ?? 0;
 
     if (numOfItemsInCart == 0) {
-      return ElevatedButton(
-        onPressed: () {
-          setState(() {
-            addToCart(widget.product);
-            print(cartItems);
-          });
-        },
-        child: const Center(
-          child: Text("Add to Cart"),
+      return SizedBox(
+        width: 200,
+        child: TextButton(
+          style: TextButton.styleFrom(
+              backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
+          onPressed: () {
+            setState(() {
+              addToCart(widget.product);
+            });
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text("Item added to cart!")));
+          },
+          child: const Center(
+            child: Text("Add to Cart"),
+          ),
         ),
       );
     } else {
-      return Row(
-        children: <Widget>[
-          OutlinedButton(
-            child: const Icon(Icons.remove),
-            onPressed: () {
-              setState(() {
-                removeFromCart(widget.product);
-              });
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
-            child: Text(
-              numOfItemsInCart.toString().padLeft(2, "0"),
-              style: Theme.of(context).textTheme.headline6,
+      return SizedBox(
+        width: 200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            OutlinedButton(
+              child: const Icon(Icons.remove),
+              onPressed: () {
+                setState(() {
+                  removeFromCart(widget.product);
+                });
+                if (numOfItemsInCart == 1) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(const SnackBar(content: Text("Item removed from cart!")));
+                }
+              },
             ),
-          ),
-          OutlinedButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              setState(() {
-                addToCart(widget.product);
-              });
-            },
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+              child: Text(
+                numOfItemsInCart.toString().padLeft(2, "0"),
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            OutlinedButton(
+              child: const Icon(Icons.add),
+              onPressed: () {
+                setState(() {
+                  addToCart(widget.product);
+                });
+              },
+            ),
+          ],
+        ),
       );
     }
   }
