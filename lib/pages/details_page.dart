@@ -49,9 +49,7 @@ class DetailsScreen extends StatelessWidget {
       title: Text(product.title),
       actions: [
         IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, cartRoute);
-            },
+            onPressed: () => Navigator.pushNamed(context, cartRoute),
             icon: const Icon(Icons.shopping_bag))
       ],
     );
@@ -121,7 +119,6 @@ class _CartCounterState extends State<CartCounter> {
             onPressed: () {
               setState(() {
                 removeFromCart(widget.product);
-                print(cartItems);
               });
             },
           ),
@@ -137,7 +134,6 @@ class _CartCounterState extends State<CartCounter> {
             onPressed: () {
               setState(() {
                 addToCart(widget.product);
-                print(cartItems);
               });
             },
           ),

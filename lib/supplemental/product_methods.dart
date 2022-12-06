@@ -40,18 +40,21 @@ addToCart(Product product) async {
 }
 
 removeFromCart(Product product) async {
+  int prevCount = cartItems[product] ?? 0;
+  if (prevCount > 1) {
+    cartItems[product] = (cartItems[product] ?? 0) - 1;
+  } else {
+    cartItems.remove(product);
+  }
+
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
   final snap = await ref.get();
   int quantity = int.parse(((snap.child("quantity").value) ?? 0).toString());
   print(quantity);
   if (quantity > 1) {
-    ref.set({"quantity": quantity - 1}).then((value) {
-      cartItems.update(product, (value) => quantity - 1);
-    });
+    await ref.set({"quantity": quantity - 1});
   } else {
-    await ref.remove().then((value) {
-      cartItems.remove(product);
-    });
+    await ref.remove();
   }
 }
 
