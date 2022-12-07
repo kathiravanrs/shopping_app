@@ -15,29 +15,34 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  double getSubTotal() {
+  getSubTotal() {
     double sum = 0;
     for (Product p in cartItems.keys) {
       sum = sum + p.price * cartItems[p]!;
     }
-    return sum;
+    subTotal = sum;
   }
 
-  double getShipping() {
-    if (getSubTotal() == 0) return 0;
-    return 21;
+  getShipping() {
+    if (subTotal == 0) shipping = 0;
+    shipping = 21;
   }
 
-  double getTax() {
-    return (getSubTotal() * 0.08875);
+  getTax() {
+    tax = subTotal * 0.08875;
   }
 
-  double getTotal() {
-    return getShipping() + getSubTotal() + getTax();
+  getTotal() {
+    total = subTotal + tax + shipping;
   }
 
   @override
   Widget build(BuildContext context) {
+    getSubTotal();
+    getShipping();
+    getTax();
+    getTotal();
+
     List<Product> cartProducts = cartItems.keys.toList();
     var showClearCartDialog = AlertDialog(
       title: const Text(
@@ -120,7 +125,7 @@ class _CartPageState extends State<CartPage> {
                     style: TextStyle(fontSize: 30),
                   ),
                   Text(
-                    getTotal().toStringAsFixed(2),
+                    total.toStringAsFixed(2),
                     style: const TextStyle(fontSize: 30),
                   ),
                 ],
@@ -139,7 +144,7 @@ class _CartPageState extends State<CartPage> {
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    getSubTotal().toStringAsFixed(2),
+                    subTotal.toStringAsFixed(2),
                     style: const TextStyle(fontSize: 16),
                   ),
                 ],
@@ -158,7 +163,7 @@ class _CartPageState extends State<CartPage> {
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    getShipping().toStringAsFixed(2),
+                    shipping.toStringAsFixed(2),
                     style: const TextStyle(fontSize: 16),
                   ),
                 ],
@@ -177,7 +182,7 @@ class _CartPageState extends State<CartPage> {
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    getTax().toStringAsFixed(2),
+                    tax.toStringAsFixed(2),
                     style: const TextStyle(fontSize: 16),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shrine/data/product_data.dart';
 
 import '../data/user_details.dart';
 import 'checkout_page.dart';
@@ -29,6 +30,7 @@ class CheckOutPage extends StatelessWidget {
         initEmail: email,
         initBuyerName: firstName + " " + lastName,
         initPhone: phone,
+        totalPrice: total,
       ),
     );
   }

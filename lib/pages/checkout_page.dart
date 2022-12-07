@@ -26,13 +26,16 @@ class CheckoutPage extends StatelessWidget {
       this.formKey,
       this.cashPrice,
       this.displayTestData = false,
-      this.footer})
+      this.footer,
+      required this.totalPrice})
       : assert(priceItems.length <= 10),
         super(key: key);
 
   /// The list of items with prices [PriceItem]'s to be shown within the
   /// drop down banner on the checkout page
   final List<PriceItem> priceItems;
+
+  final double totalPrice;
 
   /// If you are providing a cash option at a discount, provide its price
   /// ex: 12.99
@@ -217,7 +220,7 @@ class CheckoutPage extends StatelessWidget {
                 children: [
                   const Text('Charge Amount '),
                   Text(
-                    '\$$_priceString',
+                    '\$${totalPrice.toStringAsFixed(2)}',
                     style: const TextStyle(
                         color: kShrineBrown900, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
