@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shrine/data/product_data.dart';
+import 'package:shrine/model/order.dart';
 import 'package:shrine/widgets/order_item.dart';
 
 class OrdersTab extends StatelessWidget {
@@ -6,6 +8,21 @@ class OrdersTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrderItem("imgUrl", [], DateTime.now(), DateTime.now(), true, "orderID");
+    Order order = Order(
+        address: "470 72nd St",
+        orderDate: DateTime.now(),
+        deliveryDate: DateTime.now(),
+        name: "Kathiravan Sekar",
+        isDelivered: true,
+        orderID: "OrderID",
+        products: cartItems);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        OrderItem(order: order),
+        OrderItem(order: order),
+      ],
+    );
   }
 }

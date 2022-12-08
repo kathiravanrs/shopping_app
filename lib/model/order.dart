@@ -1,10 +1,20 @@
 import 'package:shrine/model/product.dart';
 
 class Order {
-  List<Product> products;
+  String orderID;
+  Map<Product, int> products;
   String name;
-  DateTime dateTime;
+  DateTime orderDate;
+  DateTime deliveryDate;
   String address;
+  bool isDelivered;
 
-  Order(this.products, this.name, this.dateTime, this.address);
+  Order(
+      {required this.deliveryDate,
+      required this.orderID,
+      required this.products,
+      required this.name,
+      required this.orderDate,
+      required this.address,
+      required this.isDelivered});
 }

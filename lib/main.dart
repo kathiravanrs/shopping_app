@@ -25,7 +25,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // FirebaseDatabase.instance.setPersistenceEnabled(true);
   runApp(const ShrineApp());
 }
 

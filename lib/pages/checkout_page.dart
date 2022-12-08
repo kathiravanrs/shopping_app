@@ -175,7 +175,6 @@ class CheckoutPage extends StatelessWidget {
       style: TextStyle(fontSize: 12.0),
     );
 
-    // add the listener to the scroll controller mentioned above
     _scrollController.addListener(() {
       final bool result = (_scrollController.offset <= (2 * _initHeight / 3));
       if (result != _isOpen) {
@@ -224,10 +223,6 @@ class CheckoutPage extends StatelessWidget {
                     style: const TextStyle(
                         color: kShrineBrown900, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  // _StatefullWrapper(
-                  //   key: textKey,
-                  //   initChild: textWhileClosed,
-                  // ),
                 ],
               ),
             ),

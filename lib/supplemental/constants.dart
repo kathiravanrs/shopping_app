@@ -12,7 +12,7 @@ const kTextColor = Color(0xFF535353);
 const kTextLightColor = Color(0xFFACACAC);
 
 const kDefaultPadding = 20.0;
-const kShrinePink25 = Color(0x80FEEAE6);
+const kShrinePink25 = Color(0xFFFAEFED);
 
 const kShrinePink50 = Color(0xFFFEEAE6);
 const kShrinePink100 = Color(0xFFFEDBD0);
