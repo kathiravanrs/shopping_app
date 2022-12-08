@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 
 import '../data/user_details.dart';
 import 'checkout_page.dart';
@@ -22,8 +23,10 @@ class CheckOutPage extends StatelessWidget {
         payToName: '',
         displayNativePay: false,
         onCardPay: (results) {
+          // placeOrder(results);
+          getOrders();
           if (kDebugMode) {
-            print('Credit card form submitted with results: $results');
+            print('Credit card form submitted with results: ${results.email}');
           }
         },
         onBack: () => Navigator.of(context).pop(),

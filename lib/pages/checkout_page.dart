@@ -62,7 +62,7 @@ class CheckoutPage extends StatelessWidget {
   /// option. Can be left null if Cash option is not to be displayed
   final Function? onCashPay;
 
-  /// Provide a function that recieves [CardFormResults] as a parameter that is
+  /// Provide a function that receives [CardFormResults] as a parameter that is
   /// to be trigger once the user completes the credit card form and presses
   /// pay
   final Function(CardFormResults) onCardPay;

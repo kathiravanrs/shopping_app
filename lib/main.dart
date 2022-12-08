@@ -6,12 +6,12 @@ import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/checkout_screen.dart';
 import 'package:shrine/pages/favourites_page.dart';
 import 'package:shrine/pages/homepage.dart';
-import 'package:shrine/pages/signup.dart';
+import 'package:shrine/pages/signup_page.dart';
 import 'package:shrine/supplemental/constants.dart';
 import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/supplemental/theme.dart';
 
-import 'pages/login.dart';
+import 'pages/login_page.dart';
 import 'supplemental/firebase_options.dart';
 
 Future<void> main() async {

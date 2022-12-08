@@ -46,8 +46,8 @@ class OrderItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    order.products.keys.toList()[0].title.toUpperCase() +
-                                        " AND ${order.products.length} OTHER ITEMS",
+                                    order.productsAndCount.keys.toList()[0].title.toUpperCase() +
+                                        " AND ${order.productsAndCount.length} OTHER ITEMS",
                                     style: const TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 5),

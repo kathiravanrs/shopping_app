@@ -32,14 +32,6 @@ class _CartItemState extends State<CartItem> {
           Row(
             key: ValueKey(widget.product.toString()),
             children: [
-              // IconButton(
-              //   icon: const Icon(Icons.remove_circle_outline),
-              //   onPressed: () {
-              //     setState(() {
-              //       removeFromCart(widget.product);
-              //     });
-              //   },
-              // ),
               Expanded(
                 child: Column(
                   children: [
@@ -78,14 +70,6 @@ class _CartItemState extends State<CartItem> {
                   ],
                 ),
               ),
-              // IconButton(
-              //   icon: const Icon(Icons.add_circle_outline),
-              //   onPressed: () {
-              //     setState(() {
-              //       addToCart(widget.product);
-              //     });
-              //   },
-              // ),
             ],
           ),
         ],
