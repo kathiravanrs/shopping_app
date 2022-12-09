@@ -24,10 +24,11 @@ class _CartPageState extends State<CartPage> {
   }
 
   getShipping() {
-    if (subTotal == 0)
+    if (subTotal == 0) {
       shipping = 0;
-    else
+    } else {
       shipping = 21;
+    }
   }
 
   getTax() {

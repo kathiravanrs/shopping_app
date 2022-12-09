@@ -16,10 +16,13 @@ class OrderItem extends StatelessWidget {
         order.productsAndCount.keys.toList().first.title.toUpperCase();
 
     int count = 0;
-    for (int i in order.productsAndCount.values) count += i;
-    if (count > 1)
+    for (int i in order.productsAndCount.values) {
+      count += i;
+    }
+    if (count > 1) {
       orderTitle =
           orderTitle + " AND " + (count - 1).toString() + " OTHER ITEMS";
+    }
 
     return GestureDetector(
       onTap: () {},
