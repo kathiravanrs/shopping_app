@@ -12,6 +12,15 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String orderTitle =
+        order.productsAndCount.keys.toList().first.title.toUpperCase();
+
+    int count = 0;
+    for (int i in order.productsAndCount.values) count += i;
+    if (count > 1)
+      orderTitle =
+          orderTitle + " AND " + (count - 1).toString() + " OTHER ITEMS";
+
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -47,12 +56,7 @@ class OrderItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  order.productsAndCount.keys
-                                          .toList()
-                                          .first
-                                          .title
-                                          .toUpperCase() +
-                                      " AND ${order.productsAndCount.length} OTHER ITEMS",
+                                  orderTitle,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -60,7 +64,7 @@ class OrderItem extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Expanded(
-                                      child: Text('Order placed: '),
+                                      child: Text('Ordered on: '),
                                     ),
                                     Text(DateFormat("MMM dd")
                                         .format(order.orderDate)),
@@ -78,8 +82,10 @@ class OrderItem extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 Center(
                                   child: Text(
-                                    "Order Total: ${order.totalOrderCost}",
-                                    style: const TextStyle(fontSize: 8),
+                                    "Total: ${order.totalOrderCost.toStringAsFixed(2)}",
+                                    style: const TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 )
                               ],
