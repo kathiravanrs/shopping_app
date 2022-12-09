@@ -39,6 +39,7 @@ class _ShrineAppState extends State<ShrineApp> {
   @override
   Widget build(BuildContext context) {
     getProducts();
+    getOrders();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

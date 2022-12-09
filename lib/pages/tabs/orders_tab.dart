@@ -22,8 +22,8 @@ class OrdersTab extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        OrderItem(order: order),
-        OrderItem(order: order),
+        OrderItem(order: orders[0]),
+        // OrderItem(order: order),
       ],
     );
   }

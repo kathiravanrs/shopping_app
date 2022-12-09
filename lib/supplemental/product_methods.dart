@@ -75,9 +75,9 @@ getCartItems() async {
   });
 }
 
-Product getProductFromID(String ID) {
+Product getProductFromID(String id) {
   for (Product product in products) {
-    if (product.id == ID) return product;
+    if (product.id == id) return product;
   }
   return Product(
       id: "-1",
