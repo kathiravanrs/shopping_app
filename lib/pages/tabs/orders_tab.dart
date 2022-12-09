@@ -8,21 +8,23 @@ class OrdersTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Order order = Order(
-        totalOrderCost: 500,
-        deliveryAddress: "470 72nd St",
-        orderDate: DateTime.now(),
-        deliveryDate: DateTime.now(),
-        buyer: "Kathiravan Sekar",
-        orderStatus: "Delivered",
-        orderID: "OrderID",
-        productsAndCount: cartItems,
-        cardUsed: 'xxxx xxxx xxxx 1234');
+    // Order order = Order(
+    //   totalOrderCost: 500,
+    //   deliveryAddress: "470 72nd St",
+    //   orderDate: DateTime.now(),
+    //   deliveryDate: DateTime.now(),
+    //   buyer: "Kathiravan Sekar",
+    //   orderStatus: "Delivered",
+    //   orderID: "OrderID",
+    //   productsAndCount: cartItems,
+    //   cardUsed: 'xxxx xxxx xxxx 1234',
+    // );
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         OrderItem(order: orders[0]),
+        OrderItem(order: orders[1]),
         // OrderItem(order: order),
       ],
     );

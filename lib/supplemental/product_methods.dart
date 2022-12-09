@@ -18,7 +18,12 @@ getProducts() async {
       final title = snap.child("title").value!.toString();
       final image = snap.child("imageURL").value!.toString();
       products.add(
-        Product(id: key, title: title, description: desc, price: price, imageUrl: image),
+        Product(
+            id: key,
+            title: title,
+            description: desc,
+            price: price,
+            imageUrl: image),
       );
     }
     if (kDebugMode) {
@@ -30,7 +35,8 @@ getProducts() async {
 
 addToCart(Product product) async {
   cartItems.update(product, (value) => value + 1, ifAbsent: () => 1);
-  DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
   final snap = await ref.get();
   int quantity = int.parse(((snap.child("quantity").value) ?? 0).toString());
   await ref.set({"quantity": quantity + 1});
@@ -44,7 +50,8 @@ removeFromCart(Product product) async {
     cartItems.remove(product);
   }
 
-  DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
   final snap = await ref.get();
   int quantity = int.parse(((snap.child("quantity").value) ?? 0).toString());
   print(quantity);
@@ -84,11 +91,13 @@ Product getProductFromID(String id) {
       title: "No Such Product",
       description: "description",
       price: 0.00,
-      imageUrl: "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png");
+      imageUrl:
+          "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png");
 }
 
 placeOrder(CardFormResults cardFormResults) async {
-  DatabaseReference ref = FirebaseDatabase.instance.ref("orders/$userID").push();
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("orders/$userID").push();
   Map<String, int> cartProductCount = {};
   for (Product product in cartItems.keys) {
     cartProductCount.putIfAbsent(product.id, () => cartItems[product] ?? 0);
@@ -103,7 +112,10 @@ placeOrder(CardFormResults cardFormResults) async {
     "deliveryAddress": "470 72nd St",
     "amount": 850,
     "order date": DateTime.now().millisecondsSinceEpoch.toString(),
-    "delivery date": DateTime.now().add(const Duration(days: 4)).millisecondsSinceEpoch.toString(),
+    "delivery date": DateTime.now()
+        .add(const Duration(days: 4))
+        .millisecondsSinceEpoch
+        .toString(),
   });
 }
 
@@ -118,31 +130,32 @@ getOrders() async {
       Map<Product, int> productCount = {};
       for (DataSnapshot productPair in snap.child("products").children) {
         String productID = productPair.key.toString();
-        print(productID);
+        // print(productID);
         productCount.putIfAbsent(getProductFromID(productID),
             () => int.parse(productPair.child(productID).value.toString()));
       }
-      print(productCount);
+      // print(productCount);
       String orderID = snap.child("id").value.toString();
       String cardUsed = snap.child("card").value.toString();
       String orderStatus = snap.child("status").value.toString();
       String buyer = snap.child("buyer").value.toString();
       String deliveryAddress = snap.child("deliveryAddress").value.toString();
-      int deliveryDate = int.parse(snap.child("delivery date").value.toString());
+      int deliveryDate =
+          int.parse(snap.child("delivery date").value.toString());
       int orderDate = int.parse(snap.child("order date").value.toString());
       double orderCost = double.parse(snap.child("amount").value.toString());
-      print(DateTime.fromMillisecondsSinceEpoch(deliveryDate));
 
       Order order = Order(
-          orderID: orderID,
-          cardUsed: cardUsed,
-          orderStatus: orderStatus,
-          buyer: buyer,
-          deliveryAddress: deliveryAddress,
-          deliveryDate: DateTime.fromMillisecondsSinceEpoch(deliveryDate),
-          orderDate: DateTime.fromMillisecondsSinceEpoch(orderDate),
-          productsAndCount: productCount,
-          totalOrderCost: orderCost);
+        orderID: orderID,
+        cardUsed: cardUsed,
+        orderStatus: orderStatus,
+        buyer: buyer,
+        deliveryAddress: deliveryAddress,
+        deliveryDate: DateTime.fromMillisecondsSinceEpoch(deliveryDate),
+        orderDate: DateTime.fromMillisecondsSinceEpoch(orderDate),
+        productsAndCount: productCount,
+        totalOrderCost: orderCost,
+      );
 
       orders.add(order);
     }
