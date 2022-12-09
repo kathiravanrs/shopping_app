@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shrine/data/product_data.dart';
 import 'package:shrine/pages/account_page.dart';
 import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/checkout_screen.dart';
@@ -38,9 +39,6 @@ class ShrineApp extends StatefulWidget {
 class _ShrineAppState extends State<ShrineApp> {
   @override
   Widget build(BuildContext context) {
-    getProducts();
-    getOrders();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Shrine',

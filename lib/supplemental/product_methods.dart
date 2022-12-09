@@ -1,14 +1,16 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
 import 'package:shrine/data/user_details.dart';
 import 'package:shrine/pages/checkout_page.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/widgets/cart_item.dart';
 
 import '../model/order.dart';
 import '../model/product.dart';
 
-getProducts() async {
+Future<List<Product>> getProducts() async {
   FirebaseDatabase.instance.ref("products").get().then((snapshot) {
     var snaps = snapshot.children;
     for (DataSnapshot snap in snaps) {
@@ -17,23 +19,24 @@ getProducts() async {
       final desc = snap.child("desc").value!.toString();
       final title = snap.child("title").value!.toString();
       final image = snap.child("imageURL").value!.toString();
-      products.add(
-        Product(
-            id: key,
-            title: title,
-            description: desc,
-            price: price,
-            imageUrl: image),
-      );
+      Product p = Product(
+          id: key,
+          title: title,
+          description: desc,
+          price: price,
+          imageUrl: image);
+      products.firstWhere((element) => element.id == key, orElse: () {
+        products.add(p);
+        return p;
+      });
     }
-    if (kDebugMode) {
-      print(products.toString());
-    }
-    getCartItems();
   });
+  await getCartItems();
+  await getOrders();
+  return products;
 }
 
-addToCart(Product product) async {
+Future<void> addToCart(Product product) async {
   cartItems.update(product, (value) => value + 1, ifAbsent: () => 1);
   DatabaseReference ref =
       FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
@@ -42,7 +45,7 @@ addToCart(Product product) async {
   await ref.set({"quantity": quantity + 1});
 }
 
-removeFromCart(Product product) async {
+Future<void> removeFromCart(Product product) async {
   int prevCount = cartItems[product] ?? 0;
   if (prevCount > 1) {
     cartItems[product] = (cartItems[product] ?? 0) - 1;
@@ -54,7 +57,9 @@ removeFromCart(Product product) async {
       FirebaseDatabase.instance.ref("cart/$userID/${product.id}");
   final snap = await ref.get();
   int quantity = int.parse(((snap.child("quantity").value) ?? 0).toString());
-  print(quantity);
+  if (kDebugMode) {
+    print(quantity);
+  }
   if (quantity > 1) {
     await ref.set({"quantity": quantity - 1});
   } else {
@@ -62,12 +67,12 @@ removeFromCart(Product product) async {
   }
 }
 
-clearCart() async {
+Future<void> clearCart() async {
   cartItems.clear();
   await FirebaseDatabase.instance.ref("cart/$userID").remove();
 }
 
-getCartItems() async {
+Future<Map<Product, int>> getCartItems() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
   ref.get().then((value) {
     cartItems.clear();
@@ -75,11 +80,9 @@ getCartItems() async {
       Product product = getProductFromID(snap.key ?? "");
       int count = int.parse(snap.child("quantity").value!.toString());
       cartItems.putIfAbsent(product, () => count);
-      if (kDebugMode) {
-        print(products.toString() + " -->" + count.toString() + "\n");
-      }
     }
   });
+  return cartItems;
 }
 
 Product getProductFromID(String id) {
@@ -110,23 +113,21 @@ placeOrder(CardFormResults cardFormResults) async {
     "products": cartProductCount,
     "card": cardFormResults.cardNumber,
     "deliveryAddress": "470 72nd St",
-    "amount": 850,
+    "amount": total,
     "order date": DateTime.now().millisecondsSinceEpoch.toString(),
     "delivery date": DateTime.now()
         .add(const Duration(days: 4))
         .millisecondsSinceEpoch
         .toString(),
+  }).then((value) {
+    clearCart();
   });
+  return false;
 }
 
-getOrders() async {
+Future<List<Order>> getOrders() async {
   FirebaseDatabase.instance.ref("orders/$userID").get().then((value) {
     for (DataSnapshot snap in value.children) {
-      // for (DataSnapshot snap in order.children) {
-      //   if (kDebugMode) {
-      //     print(snap.key);
-      //   }
-      // }
       Map<Product, int> productCount = {};
       for (DataSnapshot productPair in snap.child("products").children) {
         String productID = productPair.key.toString();
@@ -156,8 +157,11 @@ getOrders() async {
         productsAndCount: productCount,
         totalOrderCost: orderCost,
       );
-
-      orders.add(order);
+      orders.firstWhere((element) => element.orderID == orderID, orElse: () {
+        orders.add(order);
+        return order;
+      });
     }
   });
+  return orders;
 }

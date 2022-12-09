@@ -23,11 +23,11 @@ class CheckOutPage extends StatelessWidget {
         payToName: '',
         displayNativePay: false,
         onCardPay: (results) {
-          // placeOrder(results);
-          getOrders();
+          placeOrder(results);
           if (kDebugMode) {
             print('Credit card form submitted with results: ${results.email}');
           }
+          Navigator.pop(context);
         },
         onBack: () => Navigator.of(context).pop(),
         initEmail: email,

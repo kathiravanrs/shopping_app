@@ -1,32 +1,40 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
-import 'package:shrine/model/order.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/widgets/order_item.dart';
+
+import '../../model/order.dart';
+import '../../supplemental/constants.dart';
 
 class OrdersTab extends StatelessWidget {
   const OrdersTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Order order = Order(
-    //   totalOrderCost: 500,
-    //   deliveryAddress: "470 72nd St",
-    //   orderDate: DateTime.now(),
-    //   deliveryDate: DateTime.now(),
-    //   buyer: "Kathiravan Sekar",
-    //   orderStatus: "Delivered",
-    //   orderID: "OrderID",
-    //   productsAndCount: cartItems,
-    //   cardUsed: 'xxxx xxxx xxxx 1234',
-    // );
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        OrderItem(order: orders[0]),
-        OrderItem(order: orders[1]),
-        // OrderItem(order: order),
-      ],
+    if (kDebugMode) {
+      print(orders);
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+      child: FutureBuilder(
+        future: getOrders(),
+        builder: (BuildContext context, AsyncSnapshot<List<Order>> snapshot) {
+          Widget widget;
+          if (snapshot.connectionState == ConnectionState.done) {
+            print(orders);
+            widget = ListView.builder(
+              itemCount: orders.length,
+              itemBuilder: (context, index) {
+                return OrderItem(order: orders[index]);
+              },
+            );
+          } else {
+            widget = const Center(child: CircularProgressIndicator());
+          }
+          return widget;
+        },
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 
 import '../../data/product_data.dart';
 import '../../model/product.dart';
@@ -13,46 +14,21 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var home = Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: FutureBuilder(
-        future: FirebaseDatabase.instance.ref("products").get(),
-        builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+        future: getProducts(),
+        builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           Widget widget;
-          products.clear();
           if (snapshot.connectionState == ConnectionState.done) {
-            var snaps = snapshot.data?.children;
-            for (DataSnapshot snap in snaps!) {
-              final key = snap.key!;
-              final price = double.parse(snap.child("price").value!.toString());
-              final desc = snap.child("desc").value!.toString();
-              final title = snap.child("title").value!.toString();
-              final image = snap.child("imageURL").value!.toString();
-              products.add(
-                Product(
-                  id: key,
-                  title: title,
-                  description: desc,
-                  price: price,
-                  imageUrl: image,
-                ),
-              );
-            }
-            if (kDebugMode) {
-              print(products.toString());
-            }
             widget = ProductGrid(products: products);
           } else {
-            widget = const Center(
-              child: CircularProgressIndicator(),
-            );
+            widget = const Center(child: CircularProgressIndicator());
           }
           return widget;
         },
       ),
     );
-
-    return home;
   }
 }
 

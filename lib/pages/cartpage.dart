@@ -24,8 +24,10 @@ class _CartPageState extends State<CartPage> {
   }
 
   getShipping() {
-    if (subTotal == 0) shipping = 0;
-    shipping = 21;
+    if (subTotal == 0)
+      shipping = 0;
+    else
+      shipping = 21;
   }
 
   getTax() {
@@ -197,7 +199,8 @@ class _CartPageState extends State<CartPage> {
                 width: 150,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                      backgroundColor: kShrinePink50, foregroundColor: kShrineBrown900),
+                      backgroundColor: kShrinePink50,
+                      foregroundColor: kShrineBrown900),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -208,9 +211,16 @@ class _CartPageState extends State<CartPage> {
                 width: 150,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                      backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
+                      backgroundColor: kShrinePink300,
+                      foregroundColor: kShrineBrown900),
                   onPressed: () {
-                    Navigator.pushNamed(context, checkoutRoute);
+                    if (total != 0) {
+                      Navigator.pushNamed(context, checkoutRoute);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content:
+                              Text("Add at least one product to checkout!")));
+                    }
                   },
                   child: const Text("Checkout"),
                 ),
