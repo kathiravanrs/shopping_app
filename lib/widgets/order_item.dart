@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shrine/data/product_data.dart';
+import 'package:shrine/pages/order_confirmation_page.dart';
 import 'package:shrine/supplemental/constants.dart';
 
 import '../model/order.dart';
@@ -16,16 +17,26 @@ class OrderItem extends StatelessWidget {
         order.productsAndCount.keys.toList().first.title.toUpperCase();
 
     int count = 0;
+
     for (int i in order.productsAndCount.values) {
       count += i;
     }
+
     if (count > 1) {
       orderTitle =
           orderTitle + " AND " + (count - 1).toString() + " OTHER ITEMS";
     }
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return OrderConfirmationWindow(
+                order: order,
+              );
+            });
+      },
       child: Card(
         elevation: 2,
         color: kShrinePink25,
