@@ -26,10 +26,10 @@ class ProductTile extends StatelessWidget {
               ),
               child: Hero(
                 tag: product.id,
-                child: Image.network(product.imageUrl,
-                    errorBuilder: (context, exception, stackTrace) {
-                  return const Center(child: Text('Image Coming Soon'));
-                }),
+                child: FadeInImage.assetNetwork(
+                  image: product.imageUrl,
+                  placeholder: 'assets/images/Loading_icon.gif',
+                ),
               ),
             ),
           ),

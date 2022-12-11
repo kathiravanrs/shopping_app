@@ -39,12 +39,15 @@ class _CartItemState extends State<CartItem> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          widget.product.imageUrl,
-                          fit: BoxFit.cover,
-                          width: 75.0,
-                          height: 75.0,
-                        ),
+                        Image.network(widget.product.imageUrl,
+                            fit: BoxFit.cover,
+                            width: 75.0,
+                            height: 75.0, errorBuilder: (ctx, obj, trc) {
+                          return const SizedBox(
+                              height: 75,
+                              width: 75,
+                              child: Text("Image coming soon"));
+                        }),
                         const SizedBox(width: 4.0),
                         Expanded(
                           child: Column(

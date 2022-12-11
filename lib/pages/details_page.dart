@@ -19,24 +19,39 @@ class DetailsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: buildAppBar(context),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              child: Column(
-                children: <Widget>[
-                  Hero(
-                    tag: product.id,
-                    child: Image.network(product.imageUrl, height: screenHeight / 3),
-                  ),
-                  const SizedBox(height: kDefaultPadding / 2),
-                  Text(product.description),
-                  const SizedBox(height: kDefaultPadding / 2),
-                  CounterWithFavBtn(product: product),
-                  const SizedBox(height: kDefaultPadding / 2),
-                ],
-              ),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: kDefaultPadding),
+                      child: Hero(
+                        tag: product.id,
+                        child: Image.network(product.imageUrl,
+                            height: screenHeight / 3,
+                            errorBuilder: (ctx, obj, trc) {
+                          return Container(
+                              decoration: BoxDecoration(border: Border.all()),
+                              height: screenHeight / 3,
+                              child: const Center(
+                                  child: Text("Image coming soon")));
+                        }),
+                      ),
+                    ),
+                    const SizedBox(height: kDefaultPadding / 2),
+                    Text(product.description),
+                    const SizedBox(height: kDefaultPadding / 2),
+                    CounterWithFavBtn(product: product),
+                    const SizedBox(height: kDefaultPadding / 2),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -63,27 +78,25 @@ class CounterWithFavBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, homePageRoute, (route) => false);
         return true;
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            CartCounter(product: product),
-            FavoriteButton(
-              iconSize: 36,
-              valueChanged: (_isFavorite) {
-                favItems.add(product);
-                if (kDebugMode) {
-                  print(favItems);
-                }
-              },
-              isFavorite: favItems.contains(product),
-            )
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          CartCounter(product: product),
+          FavoriteButton(
+            iconSize: 36,
+            valueChanged: (_isFavorite) {
+              favItems.add(product);
+              if (kDebugMode) {
+                print(favItems);
+              }
+            },
+            isFavorite: favItems.contains(product),
+          )
+        ],
       ),
     );
   }
@@ -110,13 +123,14 @@ class _CartCounterState extends State<CartCounter> {
         width: 200,
         child: TextButton(
           style: TextButton.styleFrom(
-              backgroundColor: kShrinePink300, foregroundColor: kShrineBrown900),
+              backgroundColor: kShrinePink300,
+              foregroundColor: kShrineBrown900),
           onPressed: () {
             setState(() {
               addToCart(widget.product);
             });
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Item added to cart!")));
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Item added to cart!")));
           },
           child: const Center(
             child: Text("Add to Cart"),
@@ -136,13 +150,14 @@ class _CartCounterState extends State<CartCounter> {
                   removeFromCart(widget.product);
                 });
                 if (numOfItemsInCart == 1) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(content: Text("Item removed from cart!")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Item removed from cart!")));
                 }
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
               child: Text(
                 numOfItemsInCart.toString().padLeft(2, "0"),
                 style: Theme.of(context).textTheme.headline6,

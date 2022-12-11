@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/product_methods.dart';
 
-import '../../data/product_data.dart';
 import '../../model/product.dart';
 import '../../supplemental/constants.dart';
 import '../../widgets/product_tile.dart';
@@ -23,8 +22,6 @@ class _HomeTabState extends State<HomeTab> {
         future: getProducts(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.hasData) {
-            print("finished");
-            print(snapshot.data);
             return ProductGrid(products: snapshot.data!);
           }
           return const Center(child: CircularProgressIndicator());
