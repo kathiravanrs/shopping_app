@@ -4,7 +4,8 @@ import 'package:shrine/model/product.dart';
 import '../pages/details_page.dart';
 
 class CartItem extends StatefulWidget {
-  const CartItem({Key? key, required this.product, required this.quantity}) : super(key: key);
+  const CartItem({Key? key, required this.product, required this.quantity})
+      : super(key: key);
   final Product product;
   final int quantity;
 
@@ -51,7 +52,8 @@ class _CartItemState extends State<CartItem> {
                             children: [
                               Text(
                                 widget.product.title,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 5),
                               Row(

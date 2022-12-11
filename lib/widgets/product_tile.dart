@@ -7,7 +7,8 @@ class ProductTile extends StatelessWidget {
   final Product product;
   final VoidCallback press;
 
-  const ProductTile({required this.product, required this.press, Key? key}) : super(key: key);
+  const ProductTile({required this.product, required this.press, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,10 @@ class ProductTile extends StatelessWidget {
               ),
               child: Hero(
                 tag: product.id,
-                child: Image.network(product.imageUrl),
+                child: Image.network(product.imageUrl,
+                    errorBuilder: (context, exception, stackTrace) {
+                  return const Center(child: Text('Image Coming Soon'));
+                }),
               ),
             ),
           ),

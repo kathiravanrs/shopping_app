@@ -11,7 +11,8 @@ import '../model/order.dart';
 import '../model/product.dart';
 
 Future<List<Product>> getProducts() async {
-  FirebaseDatabase.instance.ref("products").get().then((snapshot) {
+  if (products.isNotEmpty) return products;
+  await FirebaseDatabase.instance.ref("products").get().then((snapshot) {
     var snaps = snapshot.children;
     for (DataSnapshot snap in snaps) {
       final key = snap.key!;
@@ -31,8 +32,6 @@ Future<List<Product>> getProducts() async {
       });
     }
   });
-  await getCartItems();
-  await getOrders();
   return products;
 }
 
@@ -74,7 +73,7 @@ Future<void> clearCart() async {
 
 Future<Map<Product, int>> getCartItems() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
-  ref.get().then((value) {
+  await ref.get().then((value) {
     cartItems.clear();
     for (DataSnapshot snap in value.children) {
       Product product = getProductFromID(snap.key ?? "");
@@ -105,7 +104,7 @@ placeOrder(CardFormResults cardFormResults) async {
   for (Product product in cartItems.keys) {
     cartProductCount.putIfAbsent(product.id, () => cartItems[product] ?? 0);
   }
-  ref.set({
+  await ref.set({
     "status": "Delivered",
     "id": getRandomString(10),
     "email": cardFormResults.email,
@@ -126,7 +125,7 @@ placeOrder(CardFormResults cardFormResults) async {
 }
 
 Future<List<Order>> getOrders() async {
-  FirebaseDatabase.instance.ref("orders/$userID").get().then((value) {
+  await FirebaseDatabase.instance.ref("orders/$userID").get().then((value) {
     for (DataSnapshot snap in value.children) {
       Map<Product, int> productCount = {};
       for (DataSnapshot productPair in snap.child("products").children) {
