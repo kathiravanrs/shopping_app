@@ -24,7 +24,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   getShipping() {
-    if (subTotal == 0) {
+    if (subTotal == 0 || subTotal > 75) {
       shipping = 0;
     } else {
       shipping = 21;
@@ -119,7 +119,7 @@ class _CartPageState extends State<CartPage> {
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
-              width: 175,
+              width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -138,7 +138,7 @@ class _CartPageState extends State<CartPage> {
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
-              width: 150,
+              width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -157,7 +157,7 @@ class _CartPageState extends State<CartPage> {
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
-              width: 150,
+              width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -176,7 +176,7 @@ class _CartPageState extends State<CartPage> {
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
-              width: 150,
+              width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
