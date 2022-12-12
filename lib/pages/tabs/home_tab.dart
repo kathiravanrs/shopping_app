@@ -3,8 +3,14 @@ import 'package:shrine/supplemental/product_methods.dart';
 
 import '../../model/product.dart';
 import '../../supplemental/constants.dart';
-import '../../widgets/product_tile.dart';
-import '../details_page.dart';
+import '../../widgets/product_grid.dart';
+
+enum SortBy {
+  alphabetical,
+  alphabeticalReverse,
+  priceHighToLow,
+  priceLowToHigh
+}
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -14,57 +20,185 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  double priceMin = 0;
+  double priceMax = 100000;
+
+  SortBy sortBy = SortBy.priceLowToHigh;
+
+  List<Product> filter(List<Product> p, double min, double max) {
+    return p
+        .where((element) => element.price <= max && element.price >= min)
+        .toList();
+  }
+
+  List<Product> customSort(List<Product> p, SortBy sortBy) {
+    if (sortBy == SortBy.alphabetical) {
+      p.sort((a, b) => a.title.compareTo(b.title));
+    } else if (sortBy == SortBy.alphabeticalReverse) {
+      p.sort((a, b) => b.title.compareTo(a.title));
+    } else if (sortBy == SortBy.priceLowToHigh) {
+      p.sort((a, b) => a.price.compareTo(b.price));
+    } else if (sortBy == SortBy.priceHighToLow) {
+      p.sort((a, b) => b.price.compareTo(a.price));
+    }
+    return p;
+  }
+
+  final minController = TextEditingController();
+  final maxController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
-      child: FutureBuilder(
-        future: getProducts(),
-        builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
-          if (snapshot.hasData) {
-            snapshot.data?.sort((a, b) => a.title.compareTo(b.title));
-            return ProductGrid(products: snapshot.data!);
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+    var filterDialog = AlertDialog(
+      title: Center(child: Text("Filter price".toUpperCase())),
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            child: TextField(
+                keyboardType: TextInputType.number,
+                controller: minController,
+                decoration: const InputDecoration(
+                  hintText: "Minimum",
+                )),
+          ),
+          const SizedBox(width: 30),
+          const Text("TO"),
+          const SizedBox(width: 30),
+          SizedBox(
+            width: 100,
+            child: TextField(
+                keyboardType: TextInputType.number,
+                controller: maxController,
+                decoration: const InputDecoration(
+                  hintText: "Maximum",
+                )),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          child: const Text('CLEAR'),
+          onPressed: () {
+            setState(() {
+              priceMin = 0;
+              priceMax = 100000;
+            });
+            minController.clear();
+            maxController.clear();
+            Navigator.pop(context);
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Theme.of(context).colorScheme.secondary,
+            shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7.0)),
+            ),
+          ),
+        ),
+        ElevatedButton(
+          child: const Text('APPLY'),
+          onPressed: () {
+            setState(() {
+              priceMin = double.parse(minController.text);
+              priceMax = double.parse(maxController.text);
+            });
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+    var sortDialog = AlertDialog(
+      title: Center(child: Text("SORT BY: ".toUpperCase())),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          RadioListTile<SortBy>(
+            title: const Text('Alphabetical'),
+            value: SortBy.alphabetical,
+            groupValue: sortBy,
+            onChanged: (SortBy? value) {
+              setState(() {
+                sortBy = value!;
+              });
+              Navigator.pop(context);
+            },
+          ),
+          RadioListTile<SortBy>(
+            title: const Text('Alphabetical Reverse'),
+            value: SortBy.alphabeticalReverse,
+            groupValue: sortBy,
+            onChanged: (SortBy? value) {
+              setState(() {
+                sortBy = value!;
+              });
+              Navigator.pop(context);
+            },
+          ),
+          RadioListTile<SortBy>(
+            title: const Text('Price: Low to High'),
+            value: SortBy.priceLowToHigh,
+            groupValue: sortBy,
+            onChanged: (SortBy? value) {
+              setState(() {
+                sortBy = value!;
+              });
+              Navigator.pop(context);
+            },
+          ),
+          RadioListTile<SortBy>(
+            title: const Text('Price High To Low'),
+            value: SortBy.priceHighToLow,
+            groupValue: sortBy,
+            onChanged: (SortBy? value) {
+              setState(() {
+                sortBy = value!;
+              });
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
     );
-  }
-}
 
-class ProductGrid extends StatelessWidget {
-  const ProductGrid({
-    Key? key,
-    required this.products,
-  }) : super(key: key);
-
-  final List<Product> products;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: products.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: kDefaultPadding,
-        crossAxisSpacing: kDefaultPadding,
-        childAspectRatio: 0.75,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context, builder: (ctx) => filterDialog);
+                  },
+                  child: const Icon(Icons.filter_alt)),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (ctx) => sortDialog);
+                  },
+                  child: const Icon(Icons.sort)),
+            ],
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: getProducts(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Product>> snapshot) {
+                if (snapshot.hasData) {
+                  List<Product> products = snapshot.data!;
+                  products = customSort(products, sortBy);
+                  products = filter(products, priceMin, priceMax);
+                  return ProductGrid(products: products);
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+          ),
+        ],
       ),
-      itemBuilder: (context, index) {
-        return ProductTile(
-          product: products[index],
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailsScreen(
-                  product: products[index],
-                ),
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
-import 'package:shrine/pages/tabs/home_tab.dart';
 import 'package:shrine/supplemental/theme.dart';
 
 import '../../supplemental/constants.dart';
+import '../../widgets/product_grid.dart';
 
 class SearchTab extends StatefulWidget {
   const SearchTab({Key? key}) : super(key: key);
@@ -47,7 +47,7 @@ class _SearchTabState extends State<SearchTab> {
     categories.sort();
 
     var categoryGrid = Visibility(
-      visible: selectedCategory.isEmpty,
+      visible: selectedCategory.isEmpty && query.isEmpty,
       child: Flexible(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
