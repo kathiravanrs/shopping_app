@@ -1,3 +1,5 @@
+import 'package:shrine/model/review.dart';
+
 import '../model/order.dart';
 import '../model/product.dart';
 
@@ -8,6 +10,8 @@ Map<Product, int> cartItems = {};
 List<Product> favItems = [];
 
 List<Order> orders = [];
+
+List<Review> reviews = [];
 
 double subTotal = 0;
 double tax = 0;
