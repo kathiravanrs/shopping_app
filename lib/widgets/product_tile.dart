@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/model/product.dart';
 
@@ -26,9 +27,12 @@ class ProductTile extends StatelessWidget {
               ),
               child: Hero(
                 tag: product.id,
-                child: FadeInImage.assetNetwork(
-                  image: product.imageUrl,
-                  placeholder: 'assets/images/Loading_icon.gif',
+                child: CachedNetworkImage(
+                  height: 150,
+                  width: 150,
+                  imageUrl: product.imageUrl,
+                  placeholder: (context, url) =>
+                      Image.asset('assets/images/Loading_icon.gif'),
                 ),
               ),
             ),

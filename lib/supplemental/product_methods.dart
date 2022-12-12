@@ -20,11 +20,14 @@ Future<List<Product>> getProducts() async {
       final desc = snap.child("desc").value!.toString();
       final title = snap.child("title").value!.toString();
       final image = snap.child("imageURL").value!.toString();
+      final category = snap.child("category").value!.toString();
+
       Product p = Product(
           id: key,
           title: title,
           description: desc,
           price: price,
+          category: category,
           imageUrl: image);
       products.firstWhere((element) => element.id == key, orElse: () {
         products.add(p);
@@ -94,7 +97,8 @@ Product getProductFromID(String id) {
       description: "description",
       price: 0.00,
       imageUrl:
-          "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png");
+          "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png",
+      category: 'Not Available');
 }
 
 placeOrder(CardFormResults cardFormResults) async {

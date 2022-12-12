@@ -17,11 +17,12 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: FutureBuilder(
         future: getProducts(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.hasData) {
+            snapshot.data?.sort((a, b) => a.title.compareTo(b.title));
             return ProductGrid(products: snapshot.data!);
           }
           return const Center(child: CircularProgressIndicator());
