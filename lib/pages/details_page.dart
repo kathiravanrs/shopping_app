@@ -43,6 +43,14 @@ class DetailsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: kDefaultPadding / 2),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "\$" + product.price.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 28),
+                        )),
+                    const SizedBox(height: kDefaultPadding / 2),
                     Text(product.description),
                     const SizedBox(height: kDefaultPadding / 2),
                     CounterWithFavBtn(product: product),

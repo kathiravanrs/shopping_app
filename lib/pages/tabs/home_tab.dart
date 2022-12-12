@@ -20,8 +20,8 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  double priceMin = 0;
-  double priceMax = 100000;
+  double priceMin = double.negativeInfinity;
+  double priceMax = double.infinity;
 
   SortBy sortBy = SortBy.priceLowToHigh;
 
@@ -49,6 +49,22 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
+    String sortText = "A to Z";
+    if (sortBy == SortBy.alphabeticalReverse) sortText = "Z to A";
+    if (sortBy == SortBy.priceLowToHigh) sortText = "Low to High";
+    if (sortBy == SortBy.priceHighToLow) sortText = "High to Low";
+
+    String filterText = "No Price Range Set";
+    if (priceMin == double.negativeInfinity && priceMax != double.infinity) {
+      filterText = "Below \$$priceMax";
+    }
+    if (priceMin != double.negativeInfinity && priceMax == double.infinity) {
+      filterText = "Above \$$priceMin";
+    }
+    if (priceMin != double.negativeInfinity && priceMax != double.infinity) {
+      filterText = "\$$priceMin to \$$priceMax";
+    }
+
     var filterDialog = AlertDialog(
       title: Center(child: Text("Filter price".toUpperCase())),
       content: Row(
@@ -79,11 +95,11 @@ class _HomeTabState extends State<HomeTab> {
       ),
       actions: [
         TextButton(
-          child: const Text('CLEAR'),
+          child: const Text('RESET'),
           onPressed: () {
             setState(() {
-              priceMin = 0;
-              priceMax = 100000;
+              priceMin = double.negativeInfinity;
+              priceMax = double.infinity;
             });
             minController.clear();
             maxController.clear();
@@ -100,21 +116,30 @@ class _HomeTabState extends State<HomeTab> {
           child: const Text('APPLY'),
           onPressed: () {
             setState(() {
-              priceMin = double.parse(minController.text);
-              priceMax = double.parse(maxController.text);
+              if (minController.text.isEmpty) {
+                priceMin = double.negativeInfinity;
+              } else {
+                priceMin = double.parse(minController.text);
+              }
+              if (maxController.text.isEmpty) {
+                priceMax = double.infinity;
+              } else {
+                priceMax = double.parse(maxController.text);
+              }
             });
             Navigator.pop(context);
           },
         ),
       ],
     );
+
     var sortDialog = AlertDialog(
       title: Center(child: Text("SORT BY: ".toUpperCase())),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           RadioListTile<SortBy>(
-            title: const Text('Alphabetical'),
+            title: const Text('Name: A -> Z'),
             value: SortBy.alphabetical,
             groupValue: sortBy,
             onChanged: (SortBy? value) {
@@ -125,7 +150,7 @@ class _HomeTabState extends State<HomeTab> {
             },
           ),
           RadioListTile<SortBy>(
-            title: const Text('Alphabetical Reverse'),
+            title: const Text('Name: Z -> A'),
             value: SortBy.alphabeticalReverse,
             groupValue: sortBy,
             onChanged: (SortBy? value) {
@@ -166,20 +191,38 @@ class _HomeTabState extends State<HomeTab> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                   onPressed: () {
                     showDialog(
                         context: context, builder: (ctx) => filterDialog);
                   },
-                  child: const Icon(Icons.filter_alt)),
+                  child: Row(
+                    children: [
+                      Text(filterText),
+                      const SizedBox(width: 10),
+                      const Icon(Icons.filter_alt),
+                    ],
+                  )),
               const SizedBox(width: 10),
               ElevatedButton(
                   onPressed: () {
                     showDialog(context: context, builder: (ctx) => sortDialog);
                   },
-                  child: const Icon(Icons.sort)),
+                  child: Row(
+                    children: [
+                      Text(sortText),
+                      const SizedBox(width: 10),
+                      if (sortBy == SortBy.alphabetical ||
+                          sortBy == SortBy.priceLowToHigh)
+                        Transform.scale(
+                            scaleY: -1, child: const Icon(Icons.sort)),
+                      if (sortBy == SortBy.alphabeticalReverse ||
+                          sortBy == SortBy.priceHighToLow)
+                        const Icon(Icons.sort),
+                    ],
+                  )),
             ],
           ),
           Expanded(

@@ -19,9 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var resetPassDialog = AlertDialog(
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
-      // titlePadding: EdgeInsets.only(bottom: kDefaultPaddin),
+      contentPadding: const EdgeInsets.symmetric(
+          horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
       title: const Text("Reset Password"),
       content: TextField(
         controller: resetPasswordController,
@@ -45,12 +44,13 @@ class _LoginPageState extends State<LoginPage> {
         ElevatedButton(
           child: const Text('SUBMIT'),
           onPressed: () async {
-            await FirebaseAuth.instance.sendPasswordResetEmail(email: resetPasswordController.text);
+            await FirebaseAuth.instance
+                .sendPasswordResetEmail(email: resetPasswordController.text);
             resetPasswordController.clear();
             Navigator.pop(context);
 
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Password Reset Email Sent")));
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Password Reset Email Sent")));
           },
         ),
       ],
@@ -95,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                     child: const Text('SIGN UP'),
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, signupRoute, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, signupRoute, (route) => false);
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.secondary,
@@ -107,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     child: const Text('LOGIN'),
                     onPressed: () {
-                      login(emailController.text, passwordController.text, context);
+                      login(emailController.text, passwordController.text,
+                          context);
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 2.0,
