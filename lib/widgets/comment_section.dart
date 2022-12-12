@@ -11,10 +11,10 @@ class CommentArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (reviews.isEmpty) {
-      return Container(child: Text("No Reviews Yet!"));
+      return const Text("No Reviews Yet!");
     }
     return Container(
-      height: 250,
+      height: 200,
       decoration: BoxDecoration(border: Border.all()),
       child: ListView.builder(
         shrinkWrap: true,
