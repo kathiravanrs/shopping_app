@@ -8,6 +8,17 @@ class Favourites extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (favItems.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Favourites"),
+        ),
+        body: const Padding(
+          padding: EdgeInsets.all(kDefaultPadding),
+          child: Center(child: Text("You do not have any favourite items yet")),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("Favourites"),
