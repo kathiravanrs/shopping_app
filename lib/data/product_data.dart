@@ -13,6 +13,8 @@ List<Order> orders = [];
 
 List<Review> reviews = [];
 
+List<Product> prevOrder = [];
+
 double subTotal = 0;
 double tax = 0;
 double shipping = 0;
