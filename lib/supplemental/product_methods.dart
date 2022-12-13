@@ -33,6 +33,9 @@ Future<List<Product>> getProducts() async {
       });
     }
   });
+  getCartItems();
+  getFavItems();
+  getOrders();
   return products;
 }
 
@@ -73,6 +76,7 @@ Future<void> clearCart() async {
 }
 
 Future<Map<Product, int>> getCartItems() async {
+  if (cartItems.isNotEmpty) return cartItems;
   DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
   await ref.get().then((value) {
     cartItems.clear();
@@ -185,7 +189,10 @@ Future<List<Product>> getFavItems() async {
   await ref.get().then((value) {
     for (DataSnapshot snap in value.children) {
       Product product = getProductFromID(snap.key ?? "");
-      favItems.add(product);
+      favItems.firstWhere((element) => element.id == product.id, orElse: () {
+        favItems.add(product);
+        return product;
+      });
     }
   });
   return favItems;

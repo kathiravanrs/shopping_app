@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shrine/data/product_data.dart';
 import 'package:shrine/pages/account_page.dart';
 import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/checkout_screen.dart';
@@ -9,7 +8,6 @@ import 'package:shrine/pages/favourites_page.dart';
 import 'package:shrine/pages/homepage.dart';
 import 'package:shrine/pages/signup_page.dart';
 import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/supplemental/theme.dart';
 
 import 'pages/login_page.dart';
@@ -25,7 +23,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(const ShrineApp());
 }
 

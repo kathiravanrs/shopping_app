@@ -98,21 +98,29 @@ class _CartPageState extends State<CartPage> {
           Expanded(
             child: Container(
               color: kShrinePink25,
-              child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
-                child: ListView.separated(
-                  itemCount: cartItems.length,
-                  itemBuilder: (context, index) {
-                    return CartItem(
-                        key: Key(cartProducts[index].toString()),
-                        product: cartProducts[index],
-                        quantity: cartItems[cartProducts[index]]!);
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Line();
-                  },
-                ),
-              ),
+              child: FutureBuilder(
+                  future: getCartItems(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<Map<Product, int>> snapshot) {
+                    if (snapshot.hasData) {
+                      return Padding(
+                        padding: const EdgeInsets.all(kDefaultPadding),
+                        child: ListView.separated(
+                          itemCount: cartItems.length,
+                          itemBuilder: (context, index) {
+                            return CartItem(
+                                key: Key(cartProducts[index].toString()),
+                                product: cartProducts[index],
+                                quantity: cartItems[cartProducts[index]]!);
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Line();
+                          },
+                        ),
+                      );
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  }),
             ),
           ),
           const Line(),

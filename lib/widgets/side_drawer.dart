@@ -24,18 +24,22 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Account'),
             onTap: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, accountRoute);
             },
           ),
           ListTile(
             title: const Text('Favourites'),
             onTap: () {
+              Navigator.pop(context);
+
               Navigator.pushNamed(context, favouriteRoute);
             },
           ),
           ListTile(
             title: const Text('SIGN OUT'),
             onTap: () {
+              Navigator.pop(context);
               logout(context);
             },
           ),
