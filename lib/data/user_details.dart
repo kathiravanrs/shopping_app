@@ -1,10 +1,13 @@
-double amount = 129.875;
-String userID = "",
-    firstName = "Kathiravan",
-    lastName = "Sekar",
-    email = "kathiravanrs@gmail.com",
-    addLine = "470 72nd St",
-    phone = "6467971447",
-    city = "Brooklyn",
-    state = "New York";
-int zip = 11209;
+import 'package:shrine/model/address.dart';
+
+String userID = "userID",
+    firstName = "firstName",
+    lastName = "lastName",
+    email = "email@email.com",
+    address = "address",
+    phone = "phone",
+    city = "city",
+    state = "state";
+int zip = 12345;
+
+List<Address> addresses = [];

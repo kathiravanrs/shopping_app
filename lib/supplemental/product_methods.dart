@@ -38,6 +38,7 @@ Future<List<Product>> getProducts() async {
   getFavItems();
   getOrders();
   getReviews();
+  getUserData();
   return products;
 }
 
@@ -144,7 +145,7 @@ Future<List<Order>> getOrders() async {
           return int.parse(productPair.child(productID).value.toString());
         });
       }
-      // print(productCount);
+
       String orderID = snap.child("id").value.toString();
       String cardUsed = snap.child("card").value.toString();
       String orderStatus = snap.child("status").value.toString();
@@ -242,4 +243,13 @@ Future<List<Review>> getReviews() async {
     }
   });
   return reviews;
+}
+
+Future<void> getUserData() async {
+  await FirebaseDatabase.instance.ref("users/$userID").get().then((snapshot) {
+    firstName = snapshot.child("firstName").value.toString();
+    lastName = snapshot.child("lastName").value.toString();
+    email = snapshot.child("email").value.toString();
+    phone = snapshot.child("phone").value.toString();
+  });
 }
