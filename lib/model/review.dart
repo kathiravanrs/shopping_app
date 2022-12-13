@@ -3,7 +3,7 @@ class Review {
   final String comment;
   final String userName;
   final String productID;
-  final DateTime commentDate;
+  final String commentDate;
 
   Review({
     required this.commentDate,

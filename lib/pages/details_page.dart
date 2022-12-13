@@ -36,7 +36,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               suffixIcon: IconButton(
                   onPressed: () {
                     Review review = Review(
-                      commentDate: DateTime.now(),
+                      commentDate:
+                          DateTime.now().millisecondsSinceEpoch.toString(),
                       productID: widget.product.id,
                       commentID: getRandomString(10),
                       comment: reviewController.text,
