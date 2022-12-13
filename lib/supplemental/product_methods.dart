@@ -1,11 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
 import 'package:shrine/data/user_details.dart';
 import 'package:shrine/pages/checkout_page.dart';
 import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/widgets/cart_item.dart';
 
 import '../model/order.dart';
 import '../model/product.dart';
@@ -167,4 +165,29 @@ Future<List<Order>> getOrders() async {
     }
   });
   return orders;
+}
+
+Future<void> toggleFav(Product product) async {
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("favourites/$userID/${product.id}");
+  // final snap = await ref.get();
+  if (favItems.contains(product)) {
+    await ref.remove();
+  } else {
+    await ref.set({"fav": 1});
+    favItems.add(product);
+  }
+}
+
+Future<Map<Product, int>> getFavItems() async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
+  await ref.get().then((value) {
+    cartItems.clear();
+    for (DataSnapshot snap in value.children) {
+      Product product = getProductFromID(snap.key ?? "");
+      int count = int.parse(snap.child("quantity").value!.toString());
+      cartItems.putIfAbsent(product, () => count);
+    }
+  });
+  return cartItems;
 }
