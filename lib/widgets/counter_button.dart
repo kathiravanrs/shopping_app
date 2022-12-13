@@ -27,10 +27,6 @@ class CounterWithFavBtn extends StatelessWidget {
             iconSize: 36,
             valueChanged: (_isFavorite) {
               toggleFav(product);
-              favItems.add(product);
-              if (kDebugMode) {
-                print(favItems);
-              }
             },
             isFavorite: favItems.contains(product),
           )

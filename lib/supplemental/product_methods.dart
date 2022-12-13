@@ -170,24 +170,23 @@ Future<List<Order>> getOrders() async {
 Future<void> toggleFav(Product product) async {
   DatabaseReference ref =
       FirebaseDatabase.instance.ref("favourites/$userID/${product.id}");
-  // final snap = await ref.get();
   if (favItems.contains(product)) {
     await ref.remove();
+    favItems.remove(product);
   } else {
     await ref.set({"fav": 1});
     favItems.add(product);
   }
 }
 
-Future<Map<Product, int>> getFavItems() async {
-  DatabaseReference ref = FirebaseDatabase.instance.ref("cart/$userID");
+Future<List<Product>> getFavItems() async {
+  if (favItems.isNotEmpty) return favItems;
+  DatabaseReference ref = FirebaseDatabase.instance.ref("favourites/$userID");
   await ref.get().then((value) {
-    cartItems.clear();
     for (DataSnapshot snap in value.children) {
       Product product = getProductFromID(snap.key ?? "");
-      int count = int.parse(snap.child("quantity").value!.toString());
-      cartItems.putIfAbsent(product, () => count);
+      favItems.add(product);
     }
   });
-  return cartItems;
+  return favItems;
 }
