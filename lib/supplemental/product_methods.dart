@@ -218,24 +218,27 @@ Future<List<Review>> getReviews() async {
   if (reviews.isNotEmpty) return reviews;
   await FirebaseDatabase.instance.ref("reviews").get().then((snapshot) {
     var snaps = snapshot.children;
-    for (DataSnapshot snap in snaps) {
-      final productID = snap.key!;
-      final comment = snap.child("comment").value!.toString();
-      final commentID = snap.child("commentID").value!.toString();
-      final user = snap.child("user").value!.toString();
-      final date = (snap.child("date").value!.toString());
+    for (DataSnapshot s in snaps) {
+      final productID = s.key!;
+      for (DataSnapshot snap in s.children) {
+        final comment = snap.child("comment").value!.toString();
+        final commentID = snap.child("commentID").value!.toString();
+        final user = snap.child("user").value!.toString();
+        final date = (snap.child("date").value!.toString());
 
-      Review review = Review(
-          commentDate: (date),
+        Review review = Review(
+          commentDate: date,
           productID: productID,
           commentID: commentID,
           comment: comment,
-          userName: user);
-      reviews.firstWhere((element) => element.commentID == commentID,
-          orElse: () {
-        reviews.add(review);
-        return review;
-      });
+          userName: user,
+        );
+        reviews.firstWhere((element) => element.commentID == commentID,
+            orElse: () {
+          reviews.add(review);
+          return review;
+        });
+      }
     }
   });
   return reviews;
