@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shrine/data/product_data.dart';
 import 'package:shrine/data/user_details.dart';
+import 'package:shrine/model/review.dart';
 import 'package:shrine/pages/checkout_page.dart';
 import 'package:shrine/supplemental/constants.dart';
 
@@ -137,8 +138,10 @@ Future<List<Order>> getOrders() async {
       for (DataSnapshot productPair in snap.child("products").children) {
         String productID = productPair.key.toString();
         // print(productID);
-        productCount.putIfAbsent(getProductFromID(productID),
-            () => int.parse(productPair.child(productID).value.toString()));
+        productCount.putIfAbsent(getProductFromID(productID), () {
+          prevOrder.add(getProductFromID(productID));
+          return int.parse(productPair.child(productID).value.toString());
+        });
       }
       // print(productCount);
       String orderID = snap.child("id").value.toString();
@@ -196,4 +199,16 @@ Future<List<Product>> getFavItems() async {
     }
   });
   return favItems;
+}
+
+Future<void> addReview(Review review) async {
+  reviews.add(review);
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("reviews/${review.productID}").push();
+  await ref.set({
+    "date": review.commentDate.toString(),
+    "comment": review.comment,
+    "user": review.userName,
+    "commentID": review.commentID
+  });
 }
