@@ -6,6 +6,7 @@ import 'package:shrine/model/review.dart';
 import 'package:shrine/pages/checkout_page.dart';
 import 'package:shrine/supplemental/constants.dart';
 
+import '../model/address.dart';
 import '../model/order.dart';
 import '../model/product.dart';
 
@@ -39,6 +40,7 @@ Future<List<Product>> getProducts() async {
   getOrders();
   getReviews();
   getUserData();
+  getAddress();
   return products;
 }
 
@@ -252,4 +254,56 @@ Future<void> getUserData() async {
     email = snapshot.child("email").value.toString();
     phone = snapshot.child("phone").value.toString();
   });
+}
+
+Future<void> saveAddress(Address address) async {
+  addresses.add(address);
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref("users/$userID/address").push();
+  await ref.set({
+    "addressID": address.addID,
+    "fName": address.firstName,
+    "lName": address.lastName,
+    "street": address.streetAddress,
+    "city": address.city,
+    "state": address.state,
+    "zip": address.zip,
+    "phone": address.phone
+  });
+}
+
+Future<List<Address>> getAddress() async {
+  if (reviews.isNotEmpty) return addresses;
+  await FirebaseDatabase.instance
+      .ref("users/$userID/address")
+      .get()
+      .then((snapshot) {
+    var snaps = snapshot.children;
+    for (DataSnapshot snap in snaps) {
+      final id = snap.child("addressID").value!.toString();
+
+      final firstName = snap.child("fName").value!.toString();
+      final lastName = snap.child("lName").value!.toString();
+      final streetAddress = snap.child("street").value!.toString();
+      final city = (snap.child("city").value!.toString());
+      final state = (snap.child("state").value!.toString());
+      final zip = (snap.child("zip").value!.toString());
+      final phone = (snap.child("phone").value!.toString());
+
+      Address address = Address(
+          addID: id,
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: city,
+          state: state,
+          zip: int.parse(zip),
+          phone: phone);
+      addresses.firstWhere((element) => element.addID == id, orElse: () {
+        addresses.add(address);
+        return address;
+      });
+    }
+  });
+  return addresses;
 }

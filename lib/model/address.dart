@@ -1,4 +1,5 @@
 class Address {
+  String addID;
   String firstName;
   String lastName;
   String streetAddress;
@@ -8,6 +9,7 @@ class Address {
   String phone;
 
   Address({
+    required this.addID,
     required this.firstName,
     required this.lastName,
     required this.streetAddress,
@@ -16,4 +18,9 @@ class Address {
     required this.zip,
     required this.phone,
   });
+
+  @override
+  String toString() {
+    return 'Address{addID: $addID, firstName: $firstName, lastName: $lastName, streetAddress: $streetAddress, city: $city, state: $state, zip: $zip, phone: $phone}';
+  }
 }

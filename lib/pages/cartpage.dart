@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shrine/model/address.dart';
 import 'package:shrine/supplemental/constants.dart';
 import 'package:shrine/supplemental/product_methods.dart';
+import 'package:shrine/widgets/address_item.dart';
 import 'package:shrine/widgets/cart_item.dart';
 
 import '../data/product_data.dart';
@@ -242,10 +244,10 @@ class _CartPageState extends State<CartPage> {
       ],
     );
 
-    var addAddress = AlertDialog(
+    var addAddressDialog = AlertDialog(
       title: Center(child: Text("Add New Address".toUpperCase())),
       content: SizedBox(
-        height: 300,
+        height: 350,
         width: 300,
         child: Column(
           children: [
@@ -266,7 +268,7 @@ class _CartPageState extends State<CartPage> {
                 const SizedBox(width: 5),
                 Expanded(
                   child: TextField(
-                    controller: addressFirstName,
+                    controller: addressLastName,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text(
@@ -280,7 +282,7 @@ class _CartPageState extends State<CartPage> {
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: addressFirstName,
+              controller: addressStreet,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text(
@@ -293,7 +295,7 @@ class _CartPageState extends State<CartPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: addressFirstName,
+                    controller: addressCity,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text(
@@ -306,7 +308,7 @@ class _CartPageState extends State<CartPage> {
                 const SizedBox(width: 5),
                 Expanded(
                   child: TextField(
-                    controller: addressFirstName,
+                    controller: addressState,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text(
@@ -324,7 +326,7 @@ class _CartPageState extends State<CartPage> {
                 Expanded(
                   flex: 1,
                   child: TextField(
-                    controller: addressFirstName,
+                    controller: addressZIP,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text(
@@ -338,7 +340,7 @@ class _CartPageState extends State<CartPage> {
                 Expanded(
                   flex: 2,
                   child: TextField(
-                    controller: addressFirstName,
+                    controller: addressPhone,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text(
@@ -350,37 +352,95 @@ class _CartPageState extends State<CartPage> {
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-
-    var addressPicker = AlertDialog(
-      title: Center(child: Text("Pick Address".toUpperCase())),
-      content: SizedBox(
-        height: 300,
-        width: 300,
-        child: Column(
-          children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: addresses.length,
-                itemBuilder: (ctx, index) {
-                  return Text("$firstName $lastName");
-                }),
-            TextButton(
+            const SizedBox(height: 5),
+            Center(
+              child: TextButton(
                 style: TextButton.styleFrom(
+                    minimumSize: const Size.fromHeight(20),
                     backgroundColor: kShrinePink50,
                     foregroundColor: kShrineBrown900),
                 onPressed: () {
-                  showDialog(context: context, builder: (ctx) => addAddress);
+                  if (addressFirstName.text.isEmpty ||
+                      addressLastName.text.isEmpty ||
+                      addressStreet.text.isEmpty ||
+                      addressCity.text.isEmpty ||
+                      addressState.text.isEmpty ||
+                      addressZIP.text.isEmpty ||
+                      addressPhone.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Fill All Fields To Add")));
+                  } else {
+                    Address address = Address(
+                        addID: getRandomString(10),
+                        firstName: addressFirstName.text,
+                        lastName: addressLastName.text,
+                        streetAddress: addressStreet.text,
+                        city: addressCity.text,
+                        state: addressState.text,
+                        zip: int.parse(addressZIP.text),
+                        phone: addressPhone.text);
+                    saveAddress(address);
+                    setState(() {
+                      chosenAddress = addresses.length - 1;
+                    });
+                    Navigator.pop(context);
+                  }
                 },
-                child: const Text("Add New Address")),
+                child: const Text("Save"),
+              ),
+            )
           ],
         ),
       ),
     );
 
+    var addressPickerDialog = StatefulBuilder(
+      builder: ((context, setState) {
+        return AlertDialog(
+          title: Center(child: Text("Pick Address".toUpperCase())),
+          content: SizedBox(
+            height: 350,
+            width: 300,
+            child: Column(
+              children: [
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: addresses.length,
+                    itemBuilder: (ctx, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            chosenAddress = index;
+                            selectedAddress = addresses[chosenAddress];
+                          });
+                        },
+                        child: AddressItem(
+                          address: addresses[index],
+                          isSelected: chosenAddress == index,
+                        ),
+                      );
+                    }),
+                TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: kShrinePink50,
+                        foregroundColor: kShrineBrown900),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context, builder: (ctx) => addAddressDialog);
+                    },
+                    child: const Text("Add New Address")),
+              ],
+            ),
+          ),
+        );
+      }),
+    );
+
+    String shipToText = "Add Address";
+    if (addresses.isNotEmpty) {
+      shipToText = selectedAddress.firstName;
+    }
     var addressRow = Row(
       children: [
         const Expanded(child: Text("Pick a shipping address:")),
@@ -388,9 +448,9 @@ class _CartPageState extends State<CartPage> {
           style: TextButton.styleFrom(
               backgroundColor: kShrinePink50, foregroundColor: kShrineBrown900),
           onPressed: () {
-            showDialog(context: context, builder: (ctx) => addressPicker);
+            showDialog(context: context, builder: (ctx) => addressPickerDialog);
           },
-          child: const Text(""),
+          child: Text(shipToText),
         ),
       ],
     );

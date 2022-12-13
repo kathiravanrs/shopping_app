@@ -11,3 +11,5 @@ String userID = "userID",
 int zip = 12345;
 
 List<Address> addresses = [];
+
+Address selectedAddress = addresses.first;
