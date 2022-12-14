@@ -439,7 +439,7 @@ class _CartPageState extends State<CartPage> {
 
     String shipToText = "Add Address";
     if (addresses.isNotEmpty) {
-      shipToText = selectedAddress.firstName;
+      shipToText = selectedAddress.firstName + " " + selectedAddress.lastName;
     }
     var addressRow = Row(
       children: [

@@ -152,8 +152,8 @@ Future<List<Order>> getOrders() async {
       String orderID = snap.child("id").value.toString();
       String cardUsed = snap.child("card").value.toString();
       String orderStatus = snap.child("status").value.toString();
-      String buyer = snap.child("buyer").value.toString();
-      String deliveryAddress = snap.child("deliveryAddress").value.toString();
+      String deliveryAddressID =
+          snap.child("deliveryAddressID").value.toString();
       int deliveryDate =
           int.parse(snap.child("delivery date").value.toString());
       int orderDate = int.parse(snap.child("order date").value.toString());
@@ -163,8 +163,7 @@ Future<List<Order>> getOrders() async {
         orderID: orderID,
         cardUsed: cardUsed,
         orderStatus: orderStatus,
-        buyer: buyer,
-        deliveryAddress: deliveryAddress,
+        deliveryAddressID: deliveryAddressID,
         deliveryDate: DateTime.fromMillisecondsSinceEpoch(deliveryDate),
         orderDate: DateTime.fromMillisecondsSinceEpoch(orderDate),
         productsAndCount: productCount,

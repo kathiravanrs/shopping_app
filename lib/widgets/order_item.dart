@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shrine/pages/order_confirmation_page.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/widgets/order_confirmation_page.dart';
 
 import '../model/order.dart';
 

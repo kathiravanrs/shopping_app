@@ -4,10 +4,9 @@ class Order {
   double totalOrderCost;
   String orderID;
   Map<Product, int> productsAndCount;
-  String buyer;
   DateTime orderDate;
   DateTime deliveryDate;
-  String deliveryAddress;
+  String deliveryAddressID;
   String orderStatus;
   String cardUsed;
 
@@ -17,9 +16,8 @@ class Order {
     required this.deliveryDate,
     required this.orderID,
     required this.productsAndCount,
-    required this.buyer,
     required this.orderDate,
-    required this.deliveryAddress,
+    required this.deliveryAddressID,
     required this.orderStatus,
   });
 }
