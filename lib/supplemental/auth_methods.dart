@@ -3,11 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 
 import '../data/user_details.dart';
 
 register(String email, String pass, BuildContext context) async {
-  FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pass).then((value) {
+  FirebaseAuth.instance
+      .createUserWithEmailAndPassword(email: email, password: pass)
+      .then((value) {
     return {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("New User registered")),
@@ -23,9 +26,11 @@ loginCheck(BuildContext context) async {
       if (kDebugMode) {
         print(user.uid);
       }
-      Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, homePageRoute, (route) => false);
     }
   });
+  getProducts();
 }
 
 login(String email, String password, BuildContext context) async {
@@ -39,8 +44,10 @@ login(String email, String password, BuildContext context) async {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged In!")));
-      Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Logged In!")));
+      Navigator.pushNamedAndRemoveUntil(
+          context, homePageRoute, (route) => false);
     }).catchError((err) {
       if (kDebugMode) {
         print(err.message);
@@ -69,5 +76,6 @@ logout(BuildContext context) async {
   Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   sharedPreferences.setBool("LoggedIn", false);
-  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Logged Out!")));
+  ScaffoldMessenger.of(context)
+      .showSnackBar(const SnackBar(content: Text("Logged Out!")));
 }

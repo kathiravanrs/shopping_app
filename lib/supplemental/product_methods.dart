@@ -108,7 +108,7 @@ Product getProductFromID(String id) {
       category: 'Not Available');
 }
 
-placeOrder(CardFormResults cardFormResults) async {
+placeOrder(CardFormResults cardFormResults, Address address) async {
   DatabaseReference ref =
       FirebaseDatabase.instance.ref("orders/$userID").push();
   Map<String, int> cartProductCount = {};
@@ -116,6 +116,7 @@ placeOrder(CardFormResults cardFormResults) async {
     cartProductCount.putIfAbsent(product.id, () => cartItems[product] ?? 0);
   }
   await ref.set({
+    "addressID": address.addID,
     "status": "Delivered",
     "id": getRandomString(10),
     "email": cardFormResults.email,
@@ -306,4 +307,9 @@ Future<List<Address>> getAddress() async {
     }
   });
   return addresses;
+}
+
+Address getAddressFromID(String id) {
+  getAddress();
+  return addresses.firstWhere((element) => element.addID == id);
 }
