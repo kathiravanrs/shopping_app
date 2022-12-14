@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           )),
           Tab(
               icon: Icon(
-            Icons.shopping_bag,
+            Icons.receipt_long,
           )),
         ],
       ),
