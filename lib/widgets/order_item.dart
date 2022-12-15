@@ -76,31 +76,24 @@ class OrderItem extends StatelessWidget {
                         Row(
                           children: [
                             const Expanded(
-                              child: Text('Ordered on: '),
-                            ),
-                            Text(DateFormat("MMM dd").format(order.orderDate)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Text('Delivered on: '),
+                              child: Text('Expected Delivery on: '),
                             ),
                             Text(DateFormat("MMM dd")
                                 .format(order.deliveryDate)),
                           ],
                         ),
                         const SizedBox(height: 10),
-                        Center(
-                          child: Text(
-                            "Total: ${order.totalOrderCost.toStringAsFixed(2)}",
-                            style: const TextStyle(
-                                fontSize: 8, fontWeight: FontWeight.bold),
-                          ),
-                        )
                       ],
                     ),
                   ),
+                  const SizedBox(width: 10.0),
+                  Center(
+                    child: Text(
+                      "\$${order.totalOrderCost.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  )
                 ],
               ),
             ],
