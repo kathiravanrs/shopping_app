@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/data/product_data.dart';
 import 'package:shrine/supplemental/product_methods.dart';
+import 'package:shrine/supplemental/theme.dart';
 import 'package:shrine/widgets/order_item.dart';
 
 import '../../model/order.dart';
@@ -22,17 +23,33 @@ class OrdersTab extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<Order>> snapshot) {
           Widget widget;
           if (snapshot.connectionState == ConnectionState.done) {
-            print(orders);
-            widget = ListView.builder(
-              itemCount: orders.length,
-              itemBuilder: (context, index) {
-                return OrderItem(order: orders[index]);
-              },
-            );
+            if (orders.isEmpty) {
+              widget = const Expanded(
+                child: Center(
+                  child: Text("You haven't ordered anything"),
+                ),
+              );
+            } else {
+              widget = Expanded(
+                child: ListView.builder(
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    return OrderItem(order: orders[index]);
+                  },
+                ),
+              );
+            }
           } else {
             widget = const Center(child: CircularProgressIndicator());
           }
-          return widget;
+          return Column(
+            children: [
+              const SizedBox(height: kDefaultPadding),
+              const Text("PREVIOUS ORDERS"),
+              const Line(),
+              widget,
+            ],
+          );
         },
       ),
     );

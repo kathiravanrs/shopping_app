@@ -232,7 +232,12 @@ class _CartPageState extends State<CartPage> {
                 foregroundColor: kShrineBrown900),
             onPressed: () {
               if (total != 0) {
-                Navigator.pushNamed(context, checkoutRoute);
+                if (addresses.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Add address to continue")));
+                } else {
+                  Navigator.pushNamed(context, checkoutRoute);
+                }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Add at least one product to checkout!")));
