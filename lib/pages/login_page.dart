@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
       actions: [
         TextButton(
-          child: const Text('CANCEL'),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -40,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.all(Radius.circular(7.0)),
             ),
           ),
+          child: const Text('CANCEL'),
         ),
         ElevatedButton(
           child: const Text('SUBMIT'),
@@ -93,7 +93,6 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: MainAxisAlignment.end,
                 children: <Widget>[
                   TextButton(
-                    child: const Text('SIGN UP'),
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
                           context, signupRoute, (route) => false);
@@ -104,9 +103,9 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
                     ),
+                    child: const Text('SIGN UP'),
                   ),
                   ElevatedButton(
-                    child: const Text('LOGIN'),
                     onPressed: () {
                       login(emailController.text, passwordController.text,
                           context);
@@ -117,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
                     ),
+                    child: const Text('LOGIN'),
                   ),
                 ],
               ),

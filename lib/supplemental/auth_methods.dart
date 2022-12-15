@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/supplemental/product_methods.dart';
 
 import '../data/user_details.dart';
 
@@ -30,7 +29,6 @@ loginCheck(BuildContext context) async {
           context, homePageRoute, (route) => false);
     }
   });
-  getProducts();
 }
 
 login(String email, String password, BuildContext context) async {
@@ -74,8 +72,20 @@ login(String email, String password, BuildContext context) async {
 logout(BuildContext context) async {
   FirebaseAuth.instance.signOut();
   Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  sharedPreferences.setBool("LoggedIn", false);
+
   ScaffoldMessenger.of(context)
       .showSnackBar(const SnackBar(content: Text("Logged Out!")));
+}
+
+deleteUser(User user, BuildContext context) async {
+  await FirebaseDatabase.instance.ref("users/$userID").remove();
+  await FirebaseDatabase.instance.ref("favourites/$userID").remove();
+  await FirebaseDatabase.instance.ref("orders/$userID").remove();
+  await FirebaseDatabase.instance.ref("cart/$userID").remove();
+  await user.delete().then((value) {
+    Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text("Logged Out!")));
+  });
 }

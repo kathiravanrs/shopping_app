@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/data/user_details.dart';
+import 'package:shrine/supplemental/auth_methods.dart';
 
 import '../model/address.dart';
 import '../supplemental/constants.dart';
@@ -29,6 +32,7 @@ class _AccountPageState extends State<AccountPage> {
     final addressState = TextEditingController();
     final addressZIP = TextEditingController();
     final addressPhone = TextEditingController();
+    final passwordField = TextEditingController();
 
     var addAddressDialog = AlertDialog(
       title: Center(child: Text("Add New Address".toUpperCase())),
@@ -176,6 +180,7 @@ class _AccountPageState extends State<AccountPage> {
         ),
       ),
     );
+
     var addressPickerDialog = StatefulBuilder(
       builder: ((context, setState) {
         int chosenAddress = 0;
@@ -218,6 +223,115 @@ class _AccountPageState extends State<AccountPage> {
           ),
         );
       }),
+    );
+
+    var passDialogForUpdate = AlertDialog(
+      title: const Text("Enter Password"),
+      content: SizedBox(
+        height: 200,
+        width: 300,
+        child: Column(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: passwordField,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text(
+                      "Password",
+                      style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                    )),
+              ),
+            ),
+            TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: kShrinePink50,
+                    foregroundColor: kShrineBrown900),
+                onPressed: () async {
+                  User user = FirebaseAuth.instance.currentUser!;
+
+                  try {
+                    await user.reauthenticateWithCredential(
+                        EmailAuthProvider.credential(
+                            email: user.email!, password: passwordField.text));
+
+                    firstName = userFirstName.text;
+                    lastName = userLastName.text;
+                    email = userEmail.text;
+                    phone = userPhone.text;
+
+                    await user.updateEmail(email).then((value) {
+                      DatabaseReference ref =
+                          FirebaseDatabase.instance.ref("users");
+                      // DatabaseReference ref = r.push();
+                      ref.child(userID).set({
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "phone": phone,
+                        "email": email
+                      }).then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("User Details Saved!")));
+                        Navigator.pop(context);
+                      });
+                    }).onError((error, stackTrace) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Entered email ID already in use")));
+                    });
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == "wrong-password") {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Wrong Password")));
+                    }
+                  }
+                },
+                child: const Text("SUBMIT"))
+          ],
+        ),
+      ),
+    );
+    var passDialogForDeleteAccount = AlertDialog(
+      title: const Text("Enter Password"),
+      content: SizedBox(
+        height: 200,
+        width: 300,
+        child: Column(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: passwordField,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text(
+                      "Password",
+                      style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                    )),
+              ),
+            ),
+            TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: kShrinePink50,
+                    foregroundColor: kShrineBrown900),
+                onPressed: () async {
+                  User user = FirebaseAuth.instance.currentUser!;
+
+                  AuthCredential credential = EmailAuthProvider.credential(
+                      email: user.email!, password: passwordField.text);
+
+                  await user
+                      .reauthenticateWithCredential(credential)
+                      .then((value) async {
+                    deleteUser(user, context);
+                  }).onError((error, stackTrace) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Wrong Password")));
+                  });
+                },
+                child: const Text("SUBMIT"))
+          ],
+        ),
+      ),
     );
 
     return GestureDetector(
@@ -341,11 +455,31 @@ class _AccountPageState extends State<AccountPage> {
                       style: TextButton.styleFrom(
                           backgroundColor: kShrinePink300,
                           foregroundColor: kShrineBrown900),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return passDialogForUpdate;
+                            });
+                      },
                       child: const Text("Confirm"),
                     ),
                   ),
                 ],
+              ),
+              Expanded(child: Container()),
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: kShrineErrorRed,
+                    foregroundColor: Colors.white),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return passDialogForDeleteAccount;
+                      });
+                },
+                child: const Text("DELETE ACCOUNT"),
               ),
             ],
           ),

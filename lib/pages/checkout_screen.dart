@@ -22,8 +22,10 @@ class CheckOutPage extends StatelessWidget {
         width: 300,
         child: Column(
           children: [
-            LottieBuilder.asset("assets/images/orderConfirmed.json",
-                repeat: false),
+            LottieBuilder.asset(
+              "assets/images/orderConfirmed.json",
+              repeat: false,
+            ),
           ],
         ),
       ),
@@ -54,9 +56,7 @@ class CheckOutPage extends StatelessWidget {
         displayNativePay: false,
         onCardPay: (results) {
           placeOrder(results, selectedAddress);
-          // if (kDebugMode) {
-          //   print('Credit card form submitted with results: ${results.email}');
-          // }
+
           Navigator.pushNamedAndRemoveUntil(
               context, homePageRoute, (route) => false);
           showDialog(

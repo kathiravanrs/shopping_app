@@ -125,7 +125,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
     }
     if (widget.initPhone.isNotEmpty) {
       String text = widget.initPhone;
-      text = text.substring(0, 3) + '-' + text.substring(3, 6) + '-' + text.substring(6);
+      text =
+          '${text.substring(0, 3)}-${text.substring(3, 6)}-${text.substring(6)}';
       cPhone.text = text;
     }
     return Form(
@@ -140,13 +141,16 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 enabled: !widget.lockEmail,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value!.isNotEmpty && EmailSubmitRegexValidator().isValid(value)) return null;
+                  if (value!.isNotEmpty &&
+                      EmailSubmitRegexValidator().isValid(value)) return null;
                   return "Invalid";
                 },
                 decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                     prefixIcon: Text("Email"),
-                    prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
+                    prefixIconConstraints:
+                        BoxConstraints(minWidth: 0, minHeight: 0),
                     border: InputBorder.none),
               ),
             ),
@@ -175,17 +179,21 @@ class _CreditCardFormState extends State<CreditCardForm> {
               },
               inputFormatters: [
                 MaskedTextInputFormatter(
-                  mask: brand == CardBrand.amex ? 'xxxx xxxxxxx xxxx' : 'xxxx xxxx xxxx xxxx',
+                  mask: brand == CardBrand.amex
+                      ? 'xxxx xxxxxxx xxxx'
+                      : 'xxxx xxxx xxxx xxxx',
                   separator: ' ',
                 )
               ],
               decoration: const InputDecoration(
                 hintText: '1234 1234 1234 1234',
-                contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 border: InputBorder.none,
               ),
               onChanged: (input) {
-                CardBrand newBrand = CardTypeRegs.findBrand(input.replaceAll(' ', ''));
+                CardBrand newBrand =
+                    CardTypeRegs.findBrand(input.replaceAll(' ', ''));
                 if (brand != newBrand) {
                   setState(() {
                     brand = newBrand;
@@ -219,7 +227,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     ],
                     decoration: const InputDecoration(
                       hintText: 'MM / YY',
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                       border: InputBorder.none,
                     ),
                   ),
@@ -245,7 +254,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                     ],
                     decoration: const InputDecoration(
                       hintText: 'CVC',
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                       border: InputBorder.none,
                     ),
                   ),
@@ -273,14 +283,16 @@ class _CreditCardFormState extends State<CreditCardForm> {
               controller: cName,
               keyboardType: TextInputType.name,
               validator: (input) {
-                if (input!.isNotEmpty && CreditNameSubmitRegexValidator().isValid(input)) {
+                if (input!.isNotEmpty &&
+                    CreditNameSubmitRegexValidator().isValid(input)) {
                   return null;
                 } else {
                   return 'Enter a valid name';
                 }
               },
               decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 border: InputBorder.none,
               ),
             ),
@@ -299,13 +311,14 @@ class _CreditCardFormState extends State<CreditCardForm> {
               value: chosenCountryIndex,
               items: widget.countries
                   .map((e) => DropdownMenuItem(
-                        child: Text(e),
                         value: widget.countries.indexOf(e),
+                        child: Text(e),
                       ))
                   .toList(),
               // controller: cCountry,
               decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 border: InputBorder.none,
               ),
               onChanged: (widget.countries.length > 1)
@@ -336,7 +349,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
               ],
               decoration: const InputDecoration(
                 hintText: 'ZIP',
-                contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 border: InputBorder.none,
               ),
             ),
@@ -370,7 +384,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
               ],
               decoration: const InputDecoration(
                 // hintText: 'Phone',
-                contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 border: InputBorder.none,
               ),
             ),
@@ -408,9 +423,10 @@ enum CardBrand { n_a, visa, masterCard, discover, amex, diners, jcb, union }
 
 class CardTypeRegs {
   static final RegExp _visa = RegExp(r'^4[0-9]{0,}$');
-  static final RegExp _master = RegExp(r'^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$');
-  static final RegExp _discover =
-      RegExp(r'^(6011|65|64[4-9]|62212[6-9]|6221[3-9]|622[2-8]|6229[01]|62292[0-5])[0-9]{0,}$');
+  static final RegExp _master =
+      RegExp(r'^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$');
+  static final RegExp _discover = RegExp(
+      r'^(6011|65|64[4-9]|62212[6-9]|6221[3-9]|622[2-8]|6229[01]|62292[0-5])[0-9]{0,}$');
   static final RegExp _amex = RegExp(r'^3[47][0-9]{0,}$');
   static final RegExp _diners = RegExp(r'^3(?:0[0-59]{1}|[689])[0-9]{0,}$');
   static final RegExp _jcb = RegExp(r'^(?:2131|1800|35)[0-9]{0,}$');
@@ -429,7 +445,8 @@ class CardTypeRegs {
 }
 
 class _BrandsDisplay extends StatefulWidget {
-  const _BrandsDisplay({Key? key, this.brand = CardBrand.n_a}) : super(key: key);
+  const _BrandsDisplay({Key? key, this.brand = CardBrand.n_a})
+      : super(key: key);
   final CardBrand brand;
 
   @override

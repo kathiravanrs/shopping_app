@@ -72,8 +72,7 @@ class OrderConfirmationWindow extends StatelessWidget {
             const Line(),
             if (order.orderStatus.toLowerCase() == "delivered")
               Text(
-                "Order Delivered on " +
-                    DateFormat("MMM dd").format(order.orderDate),
+                "Order Delivered on ${DateFormat("MMM dd").format(order.orderDate)}",
               )
           ],
         ),
