@@ -6,6 +6,7 @@ import 'package:shrine/pages/cartpage.dart';
 import 'package:shrine/pages/checkout_screen.dart';
 import 'package:shrine/pages/favourites_page.dart';
 import 'package:shrine/pages/homepage.dart';
+import 'package:shrine/pages/seller_page.dart';
 import 'package:shrine/pages/signup_page.dart';
 import 'package:shrine/supplemental/constants.dart';
 import 'package:shrine/supplemental/theme.dart';
@@ -48,6 +49,7 @@ class _ShrineAppState extends State<ShrineApp> {
         checkoutRoute: (BuildContext context) => const CheckOutPage(),
         accountRoute: (BuildContext context) => const AccountPage(),
         favouriteRoute: (BuildContext context) => const Favourites(),
+        processOrderRoute: (BuildContext context) => const ProcessOrders(),
       },
       theme: buildShrineTheme(),
     );

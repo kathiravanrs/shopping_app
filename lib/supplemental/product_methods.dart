@@ -152,8 +152,7 @@ Future<List<Order>> getOrders() async {
       String orderID = snap.child("id").value.toString();
       String cardUsed = snap.child("card").value.toString();
       String orderStatus = snap.child("status").value.toString();
-      String deliveryAddressID =
-          snap.child("deliveryAddressID").value.toString();
+      String deliveryAddressID = snap.child("addressID").value.toString();
       int deliveryDate =
           int.parse(snap.child("delivery date").value.toString());
       int orderDate = int.parse(snap.child("order date").value.toString());
@@ -273,7 +272,7 @@ Future<void> saveAddress(Address address) async {
 }
 
 Future<List<Address>> getAddress() async {
-  if (reviews.isNotEmpty) return addresses;
+  if (addresses.isNotEmpty) return addresses;
   await FirebaseDatabase.instance
       .ref("users/$userID/address")
       .get()
@@ -305,10 +304,83 @@ Future<List<Address>> getAddress() async {
       });
     }
   });
+  getAllAddress();
   return addresses;
 }
 
 Address getAddressFromID(String id) {
   getAddress();
   return addresses.firstWhere((element) => element.addID == id);
+}
+
+Future<List<Address>> getAllAddress() async {
+  if (allAddresses.isNotEmpty) return allAddresses;
+  await FirebaseDatabase.instance.ref("users").get().then((snapshot) {
+    var users = snapshot.children;
+    for (DataSnapshot snap in users) {
+      var addresses = snap.child("address").children;
+      for (DataSnapshot addressF in addresses) {
+        final id = addressF.child("addressID").value!.toString();
+
+        final firstName = addressF.child("fName").value!.toString();
+        final lastName = addressF.child("lName").value!.toString();
+        final streetAddress = addressF.child("street").value!.toString();
+        final city = (addressF.child("city").value!.toString());
+        final state = (addressF.child("state").value!.toString());
+        final zip = (addressF.child("zip").value!.toString());
+        final phone = (addressF.child("phone").value!.toString());
+
+        Address address = Address(
+            addID: id,
+            firstName: firstName,
+            lastName: lastName,
+            streetAddress: streetAddress,
+            city: city,
+            state: state,
+            zip: int.parse(zip),
+            phone: phone);
+        allAddresses.firstWhere((element) => element.addID == id, orElse: () {
+          allAddresses.add(address);
+          return address;
+        });
+      }
+    }
+  });
+  print("all address $allAddresses");
+  return allAddresses;
+}
+
+Address getAddressFromAllID(String id) {
+  getAllAddress();
+  return allAddresses.firstWhere((element) => element.addID == id);
+}
+
+markOrderNotDelivered(Order order) async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref("orders");
+  await ref.get().then((value) async {
+    var userSnaps = value.children;
+    for (DataSnapshot userSnap in userSnaps) {
+      var orderSnaps = userSnap.children;
+      for (DataSnapshot orderSnap in orderSnaps) {
+        if (orderSnap.child("id").value.toString() == order.orderID) {
+          await orderSnap.ref.update({"status": "Not Delivered"});
+        }
+      }
+    }
+  });
+}
+
+markOrderDelivered(Order order) async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref("orders");
+  await ref.get().then((value) async {
+    var userSnaps = value.children;
+    for (DataSnapshot userSnap in userSnaps) {
+      var orderSnaps = userSnap.children;
+      for (DataSnapshot orderSnap in orderSnaps) {
+        if (orderSnap.child("id").value.toString() == order.orderID) {
+          await orderSnap.ref.update({"status": "Delivered"});
+        }
+      }
+    }
+  });
 }

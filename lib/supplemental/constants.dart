@@ -9,6 +9,7 @@ var cartRoute = '/cart';
 var checkoutRoute = '/checkout';
 var accountRoute = '/account';
 var favouriteRoute = '/favourites';
+var processOrderRoute = '/processOrder';
 
 const kTextColor = Color(0xFF535353);
 const kTextLightColor = Color(0xFFACACAC);
@@ -33,5 +34,5 @@ const kShrinePurple = Color(0xFF5D1049);
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
 
-String getRandomString(int length) => String.fromCharCodes(
-    Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));

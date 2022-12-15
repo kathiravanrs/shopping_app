@@ -29,18 +29,6 @@ class CheckOutPage extends StatelessWidget {
           ],
         ),
       ),
-      actions: [
-        TextButton(
-          style: TextButton.styleFrom(
-              minimumSize: const Size.fromHeight(20),
-              backgroundColor: kShrinePink300,
-              foregroundColor: kShrineBrown900),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text("OK"),
-        ),
-      ],
     );
 
     final List<PriceItem> priceItems = [

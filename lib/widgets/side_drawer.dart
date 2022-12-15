@@ -36,6 +36,15 @@ class SideDrawer extends StatelessWidget {
               Navigator.pushNamed(context, favouriteRoute);
             },
           ),
+          if (email == "admin@email.com")
+            ListTile(
+              title: const Text('Process Orders'),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, processOrderRoute);
+              },
+            ),
           ListTile(
             title: const Text('SIGN OUT'),
             onTap: () {

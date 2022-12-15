@@ -30,6 +30,7 @@ class OrdersTab extends StatelessWidget {
                 ),
               );
             } else {
+              orders.sort((a, b) => a.orderDate.compareTo(b.orderDate));
               widget = Expanded(
                 child: ListView.builder(
                   itemCount: orders.length,

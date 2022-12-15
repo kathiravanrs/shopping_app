@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shrine/supplemental/constants.dart';
+import 'package:shrine/supplemental/product_methods.dart';
 import 'package:shrine/widgets/order_confirmation_page.dart';
 
+import '../model/address.dart';
 import '../model/order.dart';
 
-class OrderItem extends StatelessWidget {
+class ProcessOrderItem extends StatelessWidget {
   final Order order;
 
-  const OrderItem({Key? key, required this.order}) : super(key: key);
+  const ProcessOrderItem({Key? key, required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Address deliveryAddress = getAddressFromAllID(order.deliveryAddressID);
     String orderTitle =
         order.productsAndCount.keys.toList().first.title.toUpperCase();
 
@@ -30,7 +33,7 @@ class OrderItem extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return OrderConfirmationWindow(
+              return OrderProcessWindow(
                 order: order,
               );
             });
@@ -75,13 +78,14 @@ class OrderItem extends StatelessWidget {
                         Row(
                           children: [
                             const Expanded(
-                              child: Text('Expected Delivery on: '),
+                              child: Text('Ordered on: '),
                             ),
-                            Text(DateFormat("MMM dd")
-                                .format(order.deliveryDate)),
+                            Text(DateFormat("MMM dd").format(order.orderDate)),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 5),
+                        Text(
+                            "Ship to ${deliveryAddress.firstName} ${deliveryAddress.lastName}")
                       ],
                     ),
                   ),
