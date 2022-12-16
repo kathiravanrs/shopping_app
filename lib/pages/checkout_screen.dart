@@ -14,9 +14,7 @@ class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderConfirmWidget = AlertDialog(
-      title: Center(
-        child: Text("Order Placed Successfully".toUpperCase()),
-      ),
+      title: const Center(child: Text("Order Placed Successfully")),
       content: SizedBox(
         height: 180,
         width: 300,

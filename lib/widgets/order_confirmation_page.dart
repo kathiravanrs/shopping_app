@@ -158,17 +158,19 @@ class _OrderProcessWindowState extends State<OrderProcessWindow> {
               Text(
                 "Delivery by ${DateFormat("MMM dd").format(widget.order.deliveryDate)}",
               ),
-            Line(),
+            const Line(),
             if (widget.order.orderStatus.toLowerCase() != "delivered")
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: kShrinePink300,
                     foregroundColor: kShrineBrown900),
                 onPressed: () {
-                  setState(() {
-                    markOrderDelivered(widget.order);
-                    getOrders();
-                  });
+                  setState(
+                    () {
+                      markOrderDelivered(widget.order);
+                      getOrders();
+                    },
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Order marked as delivered!")));
                 },
@@ -180,10 +182,12 @@ class _OrderProcessWindowState extends State<OrderProcessWindow> {
                     backgroundColor: kShrinePink300,
                     foregroundColor: kShrineBrown900),
                 onPressed: () {
-                  setState(() {
-                    markOrderNotDelivered(widget.order);
-                    getOrders();
-                  });
+                  setState(
+                    () {
+                      markOrderNotDelivered(widget.order);
+                      getOrders();
+                    },
+                  );
 
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Order marked as not delivered!")));
