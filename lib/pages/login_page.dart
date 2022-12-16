@@ -1,6 +1,6 @@
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 import '../supplemental/auth_methods.dart';
 
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   Image.asset('assets/diamond.png'),
                   const SizedBox(height: 16.0),
                   Text(
-                    'SHRINE',
+                    'ELECTRON AVENUE',
                     style: Theme.of(context).textTheme.headline5,
                   ),
                 ],
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: const Text(
                     "Forgot Password",
-                    style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                    style: TextStyle(color: kElectronBrown900, fontSize: 12),
                   ))
             ],
           ),

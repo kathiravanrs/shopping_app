@@ -1,9 +1,9 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/supplemental/product_methods.dart';
+import 'package:electron_avenue/supplemental/theme.dart';
+import 'package:electron_avenue/widgets/order_item.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/supplemental/product_methods.dart';
-import 'package:shrine/supplemental/theme.dart';
-import 'package:shrine/widgets/order_item.dart';
 
 import '../../model/order.dart';
 import '../../supplemental/constants.dart';

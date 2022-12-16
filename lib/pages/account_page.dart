@@ -1,8 +1,8 @@
+import 'package:electron_avenue/data/user_details.dart';
+import 'package:electron_avenue/supplemental/auth_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/user_details.dart';
-import 'package:shrine/supplemental/auth_methods.dart';
 
 import '../model/address.dart';
 import '../supplemental/constants.dart';
@@ -51,7 +51,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "First Name",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -64,7 +64,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "Last Name",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -77,7 +77,7 @@ class _AccountPageState extends State<AccountPage> {
                   border: OutlineInputBorder(),
                   label: Text(
                     "Street Address",
-                    style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                    style: TextStyle(color: kElectronBrown900, fontSize: 12),
                   )),
             ),
             const SizedBox(height: 5),
@@ -91,7 +91,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "City",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -104,7 +104,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "State",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -122,7 +122,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "ZIP",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -136,7 +136,7 @@ class _AccountPageState extends State<AccountPage> {
                         label: Text(
                           "Phone",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -147,8 +147,8 @@ class _AccountPageState extends State<AccountPage> {
               child: TextButton(
                 style: TextButton.styleFrom(
                     minimumSize: const Size.fromHeight(20),
-                    backgroundColor: kShrinePink50,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink50,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () {
                   if (addressFirstName.text.isEmpty ||
                       addressLastName.text.isEmpty ||
@@ -210,8 +210,8 @@ class _AccountPageState extends State<AccountPage> {
                     }),
                 TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: kShrinePink50,
-                        foregroundColor: kShrineBrown900),
+                        backgroundColor: kElectronPink50,
+                        foregroundColor: kElectronBrown900),
                     onPressed: () {
                       Navigator.pop(context);
                       showDialog(
@@ -239,14 +239,14 @@ class _AccountPageState extends State<AccountPage> {
                     border: OutlineInputBorder(),
                     label: Text(
                       "Password",
-                      style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                      style: TextStyle(color: kElectronBrown900, fontSize: 12),
                     )),
               ),
             ),
             TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: kShrinePink50,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink50,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () async {
                   User user = FirebaseAuth.instance.currentUser!;
 
@@ -305,14 +305,14 @@ class _AccountPageState extends State<AccountPage> {
                     border: OutlineInputBorder(),
                     label: Text(
                       "Password",
-                      style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                      style: TextStyle(color: kElectronBrown900, fontSize: 12),
                     )),
               ),
             ),
             TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: kShrinePink50,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink50,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () async {
                   User user = FirebaseAuth.instance.currentUser!;
 
@@ -362,7 +362,7 @@ class _AccountPageState extends State<AccountPage> {
                                       label: Text(
                                         "First Name",
                                         style: TextStyle(
-                                            color: kShrineBrown900,
+                                            color: kElectronBrown900,
                                             fontSize: 12),
                                       )),
                                 ),
@@ -376,7 +376,7 @@ class _AccountPageState extends State<AccountPage> {
                                       label: Text(
                                         "Last Name",
                                         style: TextStyle(
-                                            color: kShrineBrown900,
+                                            color: kElectronBrown900,
                                             fontSize: 12),
                                       )),
                                 ),
@@ -391,7 +391,7 @@ class _AccountPageState extends State<AccountPage> {
                                 label: Text(
                                   "Email Address",
                                   style: TextStyle(
-                                      color: kShrineBrown900, fontSize: 12),
+                                      color: kElectronBrown900, fontSize: 12),
                                 )),
                           ),
                           const SizedBox(height: 10),
@@ -406,7 +406,7 @@ class _AccountPageState extends State<AccountPage> {
                                       label: Text(
                                         "Country",
                                         style: TextStyle(
-                                            color: kShrineBrown900,
+                                            color: kElectronBrown900,
                                             fontSize: 12),
                                       )),
                                 ),
@@ -421,7 +421,7 @@ class _AccountPageState extends State<AccountPage> {
                                       label: Text(
                                         "Phone Number",
                                         style: TextStyle(
-                                            color: kShrineBrown900,
+                                            color: kElectronBrown900,
                                             fontSize: 12),
                                       )),
                                 ),
@@ -439,8 +439,8 @@ class _AccountPageState extends State<AccountPage> {
                   Expanded(
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: kShrinePink50,
-                          foregroundColor: kShrineBrown900),
+                          backgroundColor: kElectronPink50,
+                          foregroundColor: kElectronBrown900),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -453,8 +453,8 @@ class _AccountPageState extends State<AccountPage> {
                   Expanded(
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: kShrinePink300,
-                          foregroundColor: kShrineBrown900),
+                          backgroundColor: kElectronPink300,
+                          foregroundColor: kElectronBrown900),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -470,7 +470,7 @@ class _AccountPageState extends State<AccountPage> {
               Expanded(child: Container()),
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: kShrineErrorRed,
+                    backgroundColor: kElectronErrorRed,
                     foregroundColor: Colors.white),
                 onPressed: () {
                   showDialog(

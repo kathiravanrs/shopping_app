@@ -5,15 +5,15 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:electron_avenue/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shrine/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     // ignore: prefer_const_constructors
-    await tester.pumpWidget(ShrineApp());
+    await tester.pumpWidget(ElectronApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

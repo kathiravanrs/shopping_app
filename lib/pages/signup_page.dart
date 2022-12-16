@@ -1,8 +1,8 @@
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -29,8 +29,8 @@ class _SignupPageState extends State<SignupPage> {
     String phone = phoneController.text;
 
     if (confirmPass.compareTo(password) != 0) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Passwords doesn't match! Check again.")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Passwords doesn't match! Check again.")));
     } else {
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -43,9 +43,10 @@ class _SignupPageState extends State<SignupPage> {
           "phone": phone,
           "email": email
         }).then((value) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("New User Registered!")));
-          Navigator.pushNamedAndRemoveUntil(context, homePageRoute, (route) => false);
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("New User Registered!")));
+          Navigator.pushNamedAndRemoveUntil(
+              context, homePageRoute, (route) => false);
         });
       }).catchError((err) {
         if (kDebugMode) {
@@ -84,7 +85,7 @@ class _SignupPageState extends State<SignupPage> {
                 Image.asset('assets/diamond.png'),
                 const SizedBox(height: 16.0),
                 Text(
-                  'SHRINE',
+                  'ELECTRON AVENUE',
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ],
@@ -136,7 +137,8 @@ class _SignupPageState extends State<SignupPage> {
                 TextButton(
                   child: const Text('Back to login'),
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, loginRoute, (route) => false);
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.secondary,

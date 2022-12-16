@@ -1,8 +1,8 @@
+import 'package:electron_avenue/supplemental/constants.dart';
+import 'package:electron_avenue/supplemental/product_methods.dart';
+import 'package:electron_avenue/widgets/order_confirmation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/supplemental/product_methods.dart';
-import 'package:shrine/widgets/order_confirmation_page.dart';
 
 import '../model/address.dart';
 import '../model/order.dart';
@@ -40,7 +40,7 @@ class ProcessOrderItem extends StatelessWidget {
       },
       child: Card(
         elevation: 1,
-        color: kShrinePink25,
+        color: kElectronPink25,
         child: Padding(
           padding: const EdgeInsets.all(kDefaultPadding / 4),
           child: Column(
@@ -51,7 +51,7 @@ class ProcessOrderItem extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: kShrinePink400)),
+                        border: Border.all(color: kElectronPink400)),
                     child: Image.network(
                       order.productsAndCount.keys.toList().first.imageUrl,
                       fit: BoxFit.cover,

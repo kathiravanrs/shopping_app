@@ -17,7 +17,7 @@ class SideDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: kShrinePink50,
+              color: kElectronPink50,
             ),
             child: Center(child: Text('Greetings $firstName')),
           ),

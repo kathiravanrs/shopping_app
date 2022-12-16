@@ -1,6 +1,6 @@
+import 'package:electron_avenue/data/user_details.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/user_details.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 class CommentTile extends StatelessWidget {
   final String comment;

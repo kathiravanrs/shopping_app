@@ -1,9 +1,9 @@
+import 'package:electron_avenue/model/address.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
+import 'package:electron_avenue/supplemental/product_methods.dart';
+import 'package:electron_avenue/widgets/address_item.dart';
+import 'package:electron_avenue/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/model/address.dart';
-import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/supplemental/product_methods.dart';
-import 'package:shrine/widgets/address_item.dart';
-import 'package:shrine/widgets/cart_item.dart';
 
 import '../data/product_data.dart';
 import '../data/user_details.dart';
@@ -62,7 +62,7 @@ class _CartPageState extends State<CartPage> {
     var showClearCartDialog = AlertDialog(
       title: const Text(
         "Empty your cart?",
-        style: TextStyle(color: kShrineErrorRed),
+        style: TextStyle(color: kElectronErrorRed),
       ),
       actions: [
         TextButton(
@@ -72,12 +72,14 @@ class _CartPageState extends State<CartPage> {
               });
               Navigator.pop(context);
             },
-            child: const Text("YES", style: TextStyle(color: kShrineBrown900))),
+            child:
+                const Text("YES", style: TextStyle(color: kElectronBrown900))),
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text("NO", style: TextStyle(color: kShrineBrown900))),
+            child:
+                const Text("NO", style: TextStyle(color: kElectronBrown900))),
       ],
     );
 
@@ -101,7 +103,7 @@ class _CartPageState extends State<CartPage> {
 
     var itemRow = Expanded(
       child: Container(
-        color: kShrinePink25,
+        color: kElectronPink25,
         child: FutureBuilder(
             future: getCartItems(),
             builder: (BuildContext context,
@@ -216,8 +218,8 @@ class _CartPageState extends State<CartPage> {
           width: 150,
           child: TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: kShrinePink50,
-                foregroundColor: kShrineBrown900),
+                backgroundColor: kElectronPink50,
+                foregroundColor: kElectronBrown900),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -228,8 +230,8 @@ class _CartPageState extends State<CartPage> {
           width: 150,
           child: TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: kShrinePink300,
-                foregroundColor: kShrineBrown900),
+                backgroundColor: kElectronPink300,
+                foregroundColor: kElectronBrown900),
             onPressed: () {
               if (total != 0) {
                 if (addresses.isEmpty) {
@@ -266,7 +268,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "First Name",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -279,7 +281,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "Last Name",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -292,7 +294,7 @@ class _CartPageState extends State<CartPage> {
                   border: OutlineInputBorder(),
                   label: Text(
                     "Street Address",
-                    style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                    style: TextStyle(color: kElectronBrown900, fontSize: 12),
                   )),
             ),
             const SizedBox(height: 5),
@@ -306,7 +308,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "City",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -319,7 +321,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "State",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -337,7 +339,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "ZIP",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -351,7 +353,7 @@ class _CartPageState extends State<CartPage> {
                         label: Text(
                           "Phone",
                           style:
-                              TextStyle(color: kShrineBrown900, fontSize: 12),
+                              TextStyle(color: kElectronBrown900, fontSize: 12),
                         )),
                   ),
                 ),
@@ -362,8 +364,8 @@ class _CartPageState extends State<CartPage> {
               child: TextButton(
                 style: TextButton.styleFrom(
                     minimumSize: const Size.fromHeight(20),
-                    backgroundColor: kShrinePink50,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink50,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () {
                   if (addressFirstName.text.isEmpty ||
                       addressLastName.text.isEmpty ||
@@ -427,8 +429,8 @@ class _CartPageState extends State<CartPage> {
                     }),
                 TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: kShrinePink50,
-                        foregroundColor: kShrineBrown900),
+                        backgroundColor: kElectronPink50,
+                        foregroundColor: kElectronBrown900),
                     onPressed: () {
                       Navigator.pop(context);
                       showDialog(
@@ -451,7 +453,8 @@ class _CartPageState extends State<CartPage> {
         const Expanded(child: Text("Pick a shipping address:")),
         TextButton(
           style: TextButton.styleFrom(
-              backgroundColor: kShrinePink50, foregroundColor: kShrineBrown900),
+              backgroundColor: kElectronPink50,
+              foregroundColor: kElectronBrown900),
           onPressed: () {
             showDialog(context: context, builder: (ctx) => addressPickerDialog);
           },

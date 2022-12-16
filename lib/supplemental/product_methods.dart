@@ -1,10 +1,10 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/data/user_details.dart';
+import 'package:electron_avenue/model/review.dart';
+import 'package:electron_avenue/pages/checkout_page.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/data/user_details.dart';
-import 'package:shrine/model/review.dart';
-import 'package:shrine/pages/checkout_page.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 import '../model/address.dart';
 import '../model/order.dart';

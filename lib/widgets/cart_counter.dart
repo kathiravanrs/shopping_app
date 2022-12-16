@@ -24,8 +24,8 @@ class _CartCounterState extends State<CartCounter> {
         width: 200,
         child: TextButton(
           style: TextButton.styleFrom(
-              backgroundColor: kShrinePink300,
-              foregroundColor: kShrineBrown900),
+              backgroundColor: kElectronPink300,
+              foregroundColor: kElectronBrown900),
           onPressed: () {
             setState(() {
               addToCart(widget.product);

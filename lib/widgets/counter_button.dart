@@ -1,7 +1,7 @@
+import 'package:electron_avenue/supplemental/product_methods.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/product_methods.dart';
 
 import '../data/product_data.dart';
 import '../model/product.dart';

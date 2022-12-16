@@ -1,15 +1,15 @@
+import 'package:electron_avenue/pages/account_page.dart';
+import 'package:electron_avenue/pages/cartpage.dart';
+import 'package:electron_avenue/pages/checkout_screen.dart';
+import 'package:electron_avenue/pages/favourites_page.dart';
+import 'package:electron_avenue/pages/homepage.dart';
+import 'package:electron_avenue/pages/seller_page.dart';
+import 'package:electron_avenue/pages/signup_page.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
+import 'package:electron_avenue/supplemental/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shrine/pages/account_page.dart';
-import 'package:shrine/pages/cartpage.dart';
-import 'package:shrine/pages/checkout_screen.dart';
-import 'package:shrine/pages/favourites_page.dart';
-import 'package:shrine/pages/homepage.dart';
-import 'package:shrine/pages/seller_page.dart';
-import 'package:shrine/pages/signup_page.dart';
-import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/supplemental/theme.dart';
 
 import 'pages/login_page.dart';
 import 'supplemental/firebase_options.dart';
@@ -24,22 +24,22 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ShrineApp());
+  runApp(const ElectronApp());
 }
 
-class ShrineApp extends StatefulWidget {
-  const ShrineApp({Key? key}) : super(key: key);
+class ElectronApp extends StatefulWidget {
+  const ElectronApp({Key? key}) : super(key: key);
 
   @override
-  _ShrineAppState createState() => _ShrineAppState();
+  _ElectronAppState createState() => _ElectronAppState();
 }
 
-class _ShrineAppState extends State<ShrineApp> {
+class _ElectronAppState extends State<ElectronApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Shrine',
+      title: 'Electron Avenue',
       initialRoute: loginRoute,
       routes: {
         loginRoute: (BuildContext context) => const LoginPage(),
@@ -51,7 +51,7 @@ class _ShrineAppState extends State<ShrineApp> {
         favouriteRoute: (BuildContext context) => const Favourites(),
         processOrderRoute: (BuildContext context) => const ProcessOrders(),
       },
-      theme: buildShrineTheme(),
+      theme: buildElectronTheme(),
     );
   }
 }

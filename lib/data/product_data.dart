@@ -1,7 +1,6 @@
-import 'package:shrine/model/review.dart';
-
 import '../model/order.dart';
 import '../model/product.dart';
+import '../model/review.dart';
 
 List<Product> products = [];
 

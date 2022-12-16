@@ -1,7 +1,7 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
+import 'package:electron_avenue/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/widgets/product_grid.dart';
 
 class Favourites extends StatelessWidget {
   const Favourites({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
+import 'package:electron_avenue/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/widgets/product_tile.dart';
 
 import '../model/product.dart';
 import '../pages/details_page.dart';

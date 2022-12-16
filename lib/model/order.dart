@@ -1,4 +1,4 @@
-import 'package:shrine/model/product.dart';
+import 'package:electron_avenue/model/product.dart';
 
 class Order {
   double totalOrderCost;

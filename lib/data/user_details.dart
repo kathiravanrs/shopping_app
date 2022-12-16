@@ -1,4 +1,4 @@
-import 'package:shrine/model/address.dart';
+import 'package:electron_avenue/model/address.dart';
 
 String userID = "userID",
     firstName = "firstName",

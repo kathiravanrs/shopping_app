@@ -1,6 +1,6 @@
+import 'package:electron_avenue/widgets/order_summary_item.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shrine/widgets/order_summary_item.dart';
 
 import '../model/order.dart';
 import '../model/product.dart';
@@ -33,7 +33,7 @@ class OrderConfirmationWindow extends StatelessWidget {
                   style: const TextStyle(fontSize: 16)),
             ),
             Container(
-              color: kShrinePink25,
+              color: kElectronPink25,
               child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding / 2),
                 child: ListView.separated(
@@ -111,7 +111,7 @@ class _OrderProcessWindowState extends State<OrderProcessWindow> {
                   style: const TextStyle(fontSize: 16)),
             ),
             Container(
-              color: kShrinePink25,
+              color: kElectronPink25,
               child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding / 2),
                 child: ListView.separated(
@@ -162,8 +162,8 @@ class _OrderProcessWindowState extends State<OrderProcessWindow> {
             if (widget.order.orderStatus.toLowerCase() != "delivered")
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: kShrinePink300,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink300,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () {
                   setState(
                     () {
@@ -179,8 +179,8 @@ class _OrderProcessWindowState extends State<OrderProcessWindow> {
             else
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: kShrinePink300,
-                    foregroundColor: kShrineBrown900),
+                    backgroundColor: kElectronPink300,
+                    foregroundColor: kElectronBrown900),
                 onPressed: () {
                   setState(
                     () {

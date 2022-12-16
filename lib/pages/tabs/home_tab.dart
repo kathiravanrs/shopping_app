@@ -1,5 +1,5 @@
+import 'package:electron_avenue/supplemental/product_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/product_methods.dart';
 
 import '../../model/product.dart';
 import '../../supplemental/constants.dart';

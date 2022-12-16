@@ -1,7 +1,5 @@
+import 'package:electron_avenue/model/product.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/model/product.dart';
-
-import '../pages/details_page.dart';
 
 class OrderSummaryItem extends StatefulWidget {
   const OrderSummaryItem(

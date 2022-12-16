@@ -15,21 +15,21 @@ const kTextColor = Color(0xFF535353);
 const kTextLightColor = Color(0xFFACACAC);
 
 const kDefaultPadding = 20.0;
-const kShrinePink25 = Color(0xFFFAEFED);
+const kElectronPink25 = Color(0xFFFAEFED);
 
-const kShrinePink50 = Color(0xFFFEEAE6);
-const kShrinePink100 = Color(0xFFFEDBD0);
-const kShrinePink300 = Color(0xFFFBB8AC);
-const kShrinePink400 = Color(0xFFEAA4A4);
+const kElectronPink50 = Color(0xFFFEEAE6);
+const kElectronPink100 = Color(0xFFFEDBD0);
+const kElectronPink300 = Color(0xFFFBB8AC);
+const kElectronPink400 = Color(0xFFEAA4A4);
 
-const kShrineBrown900 = Color(0xFF442B2D);
+const kElectronBrown900 = Color(0xFF442B2D);
 
-const kShrineErrorRed = Color(0xFFC5032B);
+const kElectronErrorRed = Color(0xFFC5032B);
 
-const kShrineSurfaceWhite = Color(0xFFFFFBFA);
-const kShrineBackgroundWhite = Colors.white;
+const kElectronSurfaceWhite = Color(0xFFFFFBFA);
+const kElectronBackgroundWhite = Colors.white;
 
-const kShrinePurple = Color(0xFF5D1049);
+const kElectronPurple = Color(0xFF5D1049);
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();

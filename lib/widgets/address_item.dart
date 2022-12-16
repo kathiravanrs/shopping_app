@@ -1,5 +1,5 @@
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 import '../model/address.dart';
 
@@ -11,8 +11,8 @@ class AddressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bgColor = kShrinePink25;
-    if (isSelected) bgColor = kShrinePink100;
+    var bgColor = kElectronPink25;
+    if (isSelected) bgColor = kElectronPink100;
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding / 4),
       child: Container(

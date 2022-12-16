@@ -1,8 +1,8 @@
+import 'package:electron_avenue/pages/tabs/home_tab.dart';
+import 'package:electron_avenue/pages/tabs/search_tab.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
+import 'package:electron_avenue/widgets/side_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/pages/tabs/home_tab.dart';
-import 'package:shrine/pages/tabs/search_tab.dart';
-import 'package:shrine/supplemental/constants.dart';
-import 'package:shrine/widgets/side_drawer.dart';
 
 import 'tabs/orders_tab.dart';
 
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var homeAppBar = AppBar(
       bottom: const TabBar(
-        labelColor: kShrineBrown900,
+        labelColor: kElectronBrown900,
         tabs: [
           Tab(
               icon: Icon(
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       elevation: 0.0,
       titleSpacing: 0.0,
       centerTitle: true,
-      title: const Text("SHRINE"),
+      title: const Text("ELECTRON AVENUE"),
       actions: <Widget>[
         IconButton(
           icon: const Icon(

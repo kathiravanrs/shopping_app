@@ -1,5 +1,5 @@
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/credit_card_form.dart';
@@ -146,10 +146,12 @@ class CheckoutPage extends StatelessWidget {
     final List<PriceItem> _priceItems = priceItems;
 
     // add the final price as a line item
-    _priceItems.add(PriceItem(name: 'Total', quantity: 1, totalPriceCents: _priceCents));
+    _priceItems.add(
+        PriceItem(name: 'Total', quantity: 1, totalPriceCents: _priceCents));
 
     // convert the calculated total to a string
-    final String _priceString = (_priceCents.toDouble() / 100).toStringAsFixed(2);
+    final String _priceString =
+        (_priceCents.toDouble() / 100).toStringAsFixed(2);
 
     // calculate the height of the expanded appbar based on the total number
     // of line items to display.
@@ -160,10 +162,12 @@ class CheckoutPage extends StatelessWidget {
     final double _initHeight = _expHeight - (_collapsedAppBarHeight + 30.0);
 
     // create a ScrollController to listen to whether or not the appbar is open
-    final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
+    final ScrollController _scrollController =
+        ScrollController(initialScrollOffset: 0);
 
     // create a key to modify the details text based on appbar expanded status
-    final GlobalKey<_StatefullWrapperState> textKey = GlobalKey<_StatefullWrapperState>();
+    final GlobalKey<_StatefullWrapperState> textKey =
+        GlobalKey<_StatefullWrapperState>();
 
     // set the text that should be display based on the appbar status
     const Widget textWhileClosed = Text(
@@ -221,7 +225,9 @@ class CheckoutPage extends StatelessWidget {
                   Text(
                     '\$${totalPrice.toStringAsFixed(2)}',
                     style: const TextStyle(
-                        color: kShrineBrown900, fontSize: 24, fontWeight: FontWeight.bold),
+                        color: kElectronBrown900,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -262,7 +268,9 @@ class CheckoutPage extends StatelessWidget {
                               'Pay',
                               style: TextStyle(
                                   fontSize: 18,
-                                  fontWeight: isApple ? FontWeight.w500 : FontWeight.w400,
+                                  fontWeight: isApple
+                                      ? FontWeight.w500
+                                      : FontWeight.w400,
                                   color: Colors.white),
                             )
                           ],
@@ -310,13 +318,16 @@ class CheckoutPage extends StatelessWidget {
                               margin: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                               height: 32,
                               width: 32,
-                              child: Image.asset('assets/images/pay_option_cash.png'),
+                              child: Image.asset(
+                                  'assets/images/pay_option_cash.png'),
                             ),
                             Text(
                               'Cash',
                               style: TextStyle(
                                   fontSize: 18,
-                                  fontWeight: isApple ? FontWeight.w500 : FontWeight.w400,
+                                  fontWeight: isApple
+                                      ? FontWeight.w500
+                                      : FontWeight.w400,
                                   color: Colors.white),
                             )
                           ],
@@ -328,13 +339,16 @@ class CheckoutPage extends StatelessWidget {
                         child: Text(
                           'Discounted price of',
                           style: TextStyle(
-                              fontStyle: FontStyle.italic, color: Colors.grey, fontSize: 12),
+                              fontStyle: FontStyle.italic,
+                              color: Colors.grey,
+                              fontSize: 12),
                         ),
                       ),
                     if (_displayCashPrice)
                       Text(
                         '\$${cashPrice!.toStringAsFixed(2)}',
-                        style: const TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
+                        style: const TextStyle(
+                            fontStyle: FontStyle.italic, color: Colors.grey),
                       ),
                     if (_displayOrCard)
                       const SizedBox(
@@ -364,7 +378,8 @@ class CheckoutPage extends StatelessWidget {
                     ),
                     CreditCardForm(
                       formKey: formKey,
-                      onCardPay: (CardFormResults results) => onCardPay(results),
+                      onCardPay: (CardFormResults results) =>
+                          onCardPay(results),
                       displayEmail: displayEmail,
                       lockEmail: lockEmail,
                       initBuyerName: initBuyerName,
@@ -387,7 +402,8 @@ class CheckoutPage extends StatelessWidget {
 
 /// Private and simple class meant to wrap a stateless widget
 class _StatefullWrapper extends StatefulWidget {
-  const _StatefullWrapper({Key? key, required this.initChild}) : super(key: key);
+  const _StatefullWrapper({Key? key, required this.initChild})
+      : super(key: key);
   final Widget initChild;
 
   @override
@@ -569,11 +585,13 @@ class CardPayButtonState extends State<CardPayButton> {
 
   bool get shouldBeRed => status == CardPayButtonStatus.fail;
 
-  Color get color =>
-      shouldBeBlue ? Colors.blue.shade600 : (shouldBeRed ? Colors.red : Colors.green);
+  Color get color => shouldBeBlue
+      ? Colors.blue.shade600
+      : (shouldBeRed ? Colors.red : Colors.green);
 
   Widget get displayedWidget {
-    Widget w = Text('Pay', style: TextStyle(color: Colors.grey.shade200, fontSize: 20.0));
+    Widget w = Text('Pay',
+        style: TextStyle(color: Colors.grey.shade200, fontSize: 20.0));
 
     switch (status) {
       case CardPayButtonStatus.ready:
@@ -610,10 +628,12 @@ class CardPayButtonState extends State<CardPayButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: kShrineBrown900,
+        primary: kElectronBrown900,
         minimumSize: const Size(double.infinity, 50),
       ),
-      onPressed: (status == CardPayButtonStatus.ready) ? () => widget.onPressed() : () => {},
+      onPressed: (status == CardPayButtonStatus.ready)
+          ? () => widget.onPressed()
+          : () => {},
       child: displayedWidget,
     );
   }
@@ -679,7 +699,11 @@ class CheckoutPageFooter extends StatelessWidget {
   /// of service page. There is alos the ability to add a foot note that can be
   /// also be linked to a publicly accessible webpage.
   const CheckoutPageFooter(
-      {Key? key, required this.termsLink, required this.privacyLink, this.note, this.noteLink})
+      {Key? key,
+      required this.termsLink,
+      required this.privacyLink,
+      this.note,
+      this.noteLink})
       : super(key: key);
 
   /// url string to the expected publicly accessible webpage displaying your

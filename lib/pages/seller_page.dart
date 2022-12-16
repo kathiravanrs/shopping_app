@@ -1,5 +1,5 @@
+import 'package:electron_avenue/widgets/process_order_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/widgets/process_order_item.dart';
 
 import '../data/product_data.dart';
 import '../model/order.dart';

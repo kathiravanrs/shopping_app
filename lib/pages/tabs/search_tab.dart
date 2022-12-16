@@ -1,6 +1,6 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/supplemental/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/supplemental/theme.dart';
 
 import '../../supplemental/constants.dart';
 import '../../widgets/product_grid.dart';
@@ -63,8 +63,8 @@ class _SearchTabState extends State<SearchTab> {
             itemBuilder: (context, index) {
               return TextButton(
                 style: TextButton.styleFrom(
-                    foregroundColor: kShrineBrown900,
-                    backgroundColor: kShrinePink100),
+                    foregroundColor: kElectronBrown900,
+                    backgroundColor: kElectronPink100),
                 child: Text(
                   categories[index].toUpperCase(),
                   style: const TextStyle(fontSize: 18),

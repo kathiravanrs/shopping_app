@@ -1,8 +1,8 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 import '../data/user_details.dart';
 import '../supplemental/product_methods.dart';

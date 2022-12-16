@@ -1,8 +1,8 @@
+import 'package:electron_avenue/supplemental/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/supplemental/constants.dart';
 
 import '../data/user_details.dart';
 

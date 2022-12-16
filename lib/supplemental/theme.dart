@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-ThemeData buildShrineTheme() {
+ThemeData buildElectronTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     colorScheme: base.colorScheme.copyWith(
-      primary: kShrinePink100,
-      onPrimary: kShrineBrown900,
-      secondary: kShrineBrown900,
-      error: kShrineErrorRed,
+      primary: kElectronPink100,
+      onPrimary: kElectronBrown900,
+      secondary: kElectronBrown900,
+      error: kElectronErrorRed,
     ),
-    textTheme: _buildShrineTextTheme(base.textTheme),
+    textTheme: _buildElectronTextTheme(base.textTheme),
     textSelectionTheme: const TextSelectionThemeData(
-      selectionColor: kShrinePink100,
+      selectionColor: kElectronPink100,
     ),
     // inputDecorationTheme: const InputDecorationTheme(
     //   border: CutCornersBorder(),
@@ -32,7 +32,7 @@ ThemeData buildShrineTheme() {
   );
 }
 
-TextTheme _buildShrineTextTheme(TextTheme base) {
+TextTheme _buildElectronTextTheme(TextTheme base) {
   return base
       .copyWith(
         headline5: base.headline5!.copyWith(
@@ -52,8 +52,8 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
       )
       .apply(
         fontFamily: 'Rubik',
-        displayColor: kShrineBrown900,
-        bodyColor: kShrineBrown900,
+        displayColor: kElectronBrown900,
+        bodyColor: kElectronBrown900,
       );
 }
 
@@ -63,7 +63,10 @@ class CutCornersBorder extends OutlineInputBorder {
     BorderRadius borderRadius = const BorderRadius.all(Radius.circular(2.0)),
     this.cut = 7.0,
     double gapPadding = 2.0,
-  }) : super(borderSide: borderSide, borderRadius: borderRadius, gapPadding: gapPadding);
+  }) : super(
+            borderSide: borderSide,
+            borderRadius: borderRadius,
+            gapPadding: gapPadding);
 
   @override
   CutCornersBorder copyWith({
@@ -110,7 +113,8 @@ class CutCornersBorder extends OutlineInputBorder {
     return super.lerpTo(b, t);
   }
 
-  Path _notchedCornerPath(Rect center, [double start = 0.0, double extent = 0.0]) {
+  Path _notchedCornerPath(Rect center,
+      [double start = 0.0, double extent = 0.0]) {
     final Path path = Path();
     if (start > 0.0 || extent > 0.0) {
       path.relativeMoveTo(extent + start, center.top);
@@ -153,18 +157,20 @@ class CutCornersBorder extends OutlineInputBorder {
     if (gapStart == null || gapExtent <= 0.0 || gapPercentage == 0.0) {
       canvas.drawPath(_notchedCornerPath(outer.middleRect), paint);
     } else {
-      final double extent = lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage)!;
+      final double extent =
+          lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage)!;
       switch (textDirection!) {
         case TextDirection.rtl:
           {
-            final Path path =
-                _notchedCornerPath(outer.middleRect, gapStart + gapPadding - extent, extent);
+            final Path path = _notchedCornerPath(
+                outer.middleRect, gapStart + gapPadding - extent, extent);
             canvas.drawPath(path, paint);
             break;
           }
         case TextDirection.ltr:
           {
-            final Path path = _notchedCornerPath(outer.middleRect, gapStart - gapPadding, extent);
+            final Path path = _notchedCornerPath(
+                outer.middleRect, gapStart - gapPadding, extent);
             canvas.drawPath(path, paint);
             break;
           }
@@ -179,8 +185,9 @@ class Line extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: kDefaultPadding / 2),
-      child: Container(color: kShrineBrown900, height: 1),
+      padding: const EdgeInsets.symmetric(
+          horizontal: 0, vertical: kDefaultPadding / 2),
+      child: Container(color: kElectronBrown900, height: 1),
     );
   }
 }

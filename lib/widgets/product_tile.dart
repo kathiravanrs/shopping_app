@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:electron_avenue/model/product.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/model/product.dart';
 
 import '../supplemental/constants.dart';
 

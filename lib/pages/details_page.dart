@@ -1,9 +1,9 @@
+import 'package:electron_avenue/data/product_data.dart';
+import 'package:electron_avenue/data/user_details.dart';
+import 'package:electron_avenue/model/review.dart';
+import 'package:electron_avenue/supplemental/product_methods.dart';
+import 'package:electron_avenue/widgets/comment_section.dart';
 import 'package:flutter/material.dart';
-import 'package:shrine/data/product_data.dart';
-import 'package:shrine/data/user_details.dart';
-import 'package:shrine/model/review.dart';
-import 'package:shrine/supplemental/product_methods.dart';
-import 'package:shrine/widgets/comment_section.dart';
 
 import '../model/product.dart';
 import '../supplemental/constants.dart';
@@ -52,7 +52,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               border: const OutlineInputBorder(),
               label: const Text(
                 "Purchased recently. Add a review?",
-                style: TextStyle(color: kShrineBrown900, fontSize: 12),
+                style: TextStyle(color: kElectronBrown900, fontSize: 12),
               )),
         )
       ],
