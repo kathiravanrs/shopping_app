@@ -21,6 +21,8 @@ class Address {
 
   @override
   String toString() {
-    return 'Address{addID: $addID, firstName: $firstName, lastName: $lastName, streetAddress: $streetAddress, city: $city, state: $state, zip: $zip, phone: $phone}';
+    return 'Address{addID: $addID, firstName: $firstName, lastName:'
+        ' $lastName, streetAddress: $streetAddress, city: $city,'
+        ' state: $state, zip: $zip, phone: $phone}';
   }
 }
